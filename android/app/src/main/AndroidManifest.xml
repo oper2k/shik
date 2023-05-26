@@ -50,8 +50,11 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="shikmobileapp" android:host="shikmobileapp.com" />
             </intent-filter>
-
+        <activity android:name="com.vk.sdk.VKServiceActivity"
+    android:label="ServiceActivity"
+    android:theme="@style/VK.Transparent" />
         </activity>
+
 
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
