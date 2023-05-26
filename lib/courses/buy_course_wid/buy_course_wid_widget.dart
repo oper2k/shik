@@ -1,0 +1,87 @@
+import '/components/button_widget.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'buy_course_wid_model.dart';
+export 'buy_course_wid_model.dart';
+
+class BuyCourseWidWidget extends StatefulWidget {
+  const BuyCourseWidWidget({Key? key}) : super(key: key);
+
+  @override
+  _BuyCourseWidWidgetState createState() => _BuyCourseWidWidgetState();
+}
+
+class _BuyCourseWidWidgetState extends State<BuyCourseWidWidget> {
+  late BuyCourseWidModel _model;
+
+  @override
+  void setState(VoidCallback callback) {
+    super.setState(callback);
+    _model.onUpdate();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _model = createModel(context, () => BuyCourseWidModel());
+  }
+
+  @override
+  void dispose() {
+    _model.maybeDispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
+    return Container(
+      width: 327.0,
+      height: 248.0,
+      decoration: BoxDecoration(
+        color: FlutterFlowTheme.of(context).secondaryBackground,
+        image: DecorationImage(
+          fit: BoxFit.cover,
+          image: Image.asset(
+            'assets/images/Frame_11472.png',
+          ).image,
+        ),
+        borderRadius: BorderRadius.circular(12.0),
+      ),
+      child: Padding(
+        padding: EdgeInsetsDirectional.fromSTEB(22.0, 0.0, 22.0, 0.0),
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'Полный курс доступен \nтолько после покупки',
+              textAlign: TextAlign.center,
+              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                    fontFamily: 'Inter',
+                    fontSize: 24.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
+              child: wrapWithModel(
+                model: _model.buttonModel,
+                updateCallback: () => setState(() {}),
+                child: ButtonWidget(
+                  text: 'Купить курс',
+                  btnColor: Color(0xFFDEA5BA),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
