@@ -213,8 +213,6 @@ dynamic deserializeParam<T>(
       case ParamType.SupabaseRow:
         final data = json.decode(param) as Map<String, dynamic>;
         switch (T) {
-          case FeedNewsRow:
-            return FeedNewsRow(data);
           case ModulesRow:
             return ModulesRow(data);
           case TaskTextRow:
@@ -235,8 +233,12 @@ dynamic deserializeParam<T>(
             return FeedPlaylistsRow(data);
           case FeedQuizzesRow:
             return FeedQuizzesRow(data);
+          case FeedInterestingRow:
+            return FeedInterestingRow(data);
           case FeedFactsRow:
             return FeedFactsRow(data);
+          case FeedProfessionsRow:
+            return FeedProfessionsRow(data);
           case TaskVideoAudioRow:
             return TaskVideoAudioRow(data);
           case UsersRow:
@@ -245,6 +247,8 @@ dynamic deserializeParam<T>(
             return TaskMatchesRow(data);
           case CoursesRow:
             return CoursesRow(data);
+          case Feed5QuestionsRow:
+            return Feed5QuestionsRow(data);
           case MapRow:
             return MapRow(data);
           case TaskAudioImageRow:

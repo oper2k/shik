@@ -1,3 +1,4 @@
+import '/backend/supabase/supabase.dart';
 import '/components/back_button_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -8,7 +9,12 @@ import 'professions_model.dart';
 export 'professions_model.dart';
 
 class ProfessionsWidget extends StatefulWidget {
-  const ProfessionsWidget({Key? key}) : super(key: key);
+  const ProfessionsWidget({
+    Key? key,
+    required this.feedProfessionsRow,
+  }) : super(key: key);
+
+  final FeedProfessionsRow? feedProfessionsRow;
 
   @override
   _ProfessionsWidgetState createState() => _ProfessionsWidgetState();
@@ -53,8 +59,8 @@ class _ProfessionsWidgetState extends State<ProfessionsWidget> {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(0.0),
-                    child: Image.asset(
-                      'assets/images/Butterfl.jpg',
+                    child: Image.network(
+                      widget.feedProfessionsRow!.imageUrl!,
                       width: double.infinity,
                       height: double.infinity,
                       fit: BoxFit.cover,
@@ -139,7 +145,10 @@ class _ProfessionsWidgetState extends State<ProfessionsWidget> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
-                                'Колледж музыкально-театрального искусства имени Г.П. Вишневской обучает специальности «Театрально-декорационное искусство» по виду «Художественно-костюмерное оформление спектакля». Такую специальность реализует лишь небольшое количество учебных заведений, а потребность в выпускниках — большая.  Что изучают студенты?  Студенты получают глубокие знания по истории и композиции костюма, осваивают базовые и специальные технологические приемы изготовления театрального костюма, изучают особенности современного и исторического кроя костюма в создании сценического образа.  Где проходит практика?  Большое количество учебных часов отводится на профессиональную практику студентов. Чаще всего, базой практики становятся мастерские Большого театра, Музыкального театра имени К.С. Станиславского и Вл.И. Немировича-Данченко, Московского Художественного театра имени А.П. Чехова и других московских театров. ',
+                                valueOrDefault<String>(
+                                  widget.feedProfessionsRow?.content,
+                                  'Текст',
+                                ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(

@@ -30,6 +30,31 @@ List<LatLng>? combineMapLatLng(
   return latLngList;
 }
 
+int? mapGetIndex(
+  List<LatLng>? latLngList,
+  LatLng? latLng,
+) {
+  if (latLngList == null || latLng == null) {
+    return null;
+  }
+
+  double roundedLat = double.parse(latLng.latitude.toStringAsFixed(6));
+  double roundedLng = double.parse(latLng.longitude.toStringAsFixed(6));
+
+  for (int i = 0; i < latLngList.length; i++) {
+    double roundedListLat =
+        double.parse(latLngList[i].latitude.toStringAsFixed(6));
+    double roundedListLng =
+        double.parse(latLngList[i].longitude.toStringAsFixed(6));
+
+    if (roundedListLat == roundedLat && roundedListLng == roundedLng) {
+      return i;
+    }
+  }
+
+  return null;
+}
+
 int? findUserIndex(
   String? userId,
   List<String>? stringList,
@@ -47,4 +72,20 @@ bool? isStringInList(
   String? value,
 ) {
   return stringList!.contains(value!);
+}
+
+bool? textSearchInChild(
+  String? textSearchIn,
+  String? textSearchFor,
+) {
+  return textSearchIn!.toLowerCase().contains(textSearchFor!.toLowerCase());
+}
+
+int? substratOne(int? value) {
+  int result = value! - 1;
+  if (result < 0) {
+    return 0;
+  } else {
+    return result;
+  }
 }

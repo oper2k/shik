@@ -28,4 +28,7 @@ class ModulesRow extends SupabaseDataRow {
 
   String? get imageUrl => getField<String>('image_url');
   set imageUrl(String? value) => setField<String>('image_url', value);
+
+  String? get email => getField<String>('email');
+  set email(String? value) => setField<String>('email', value);
 }

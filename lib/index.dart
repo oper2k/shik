@@ -31,13 +31,33 @@ export '/registration/sign_in3/sign_in3_widget.dart' show SignIn3Widget;
 export '/registration/sign_in4/sign_in4_widget.dart' show SignIn4Widget;
 export '/registration/sign_in5/sign_in5_widget.dart' show SignIn5Widget;
 export '/route/route/route_widget.dart' show RouteWidget;
-export '/courses/courses/courses_widget.dart' show CoursesWidget;
+export '/courses/course_main/course_main_widget.dart' show CourseMainWidget;
 export '/courses/success_page/success_page_widget.dart' show SuccessPageWidget;
 export '/game/piano/piano_widget.dart' show PianoWidget;
-export '/courses/course/course_widget.dart' show CourseWidget;
-export '/courses/course_open/course_open_widget.dart' show CourseOpenWidget;
+export '/courses/course_list/course_list_widget.dart' show CourseListWidget;
 export '/courses/buy_course/buy_course_widget.dart' show BuyCourseWidget;
-export '/courses/video_closed/video_closed_widget.dart' show VideoClosedWidget;
-export '/courses/video_open_select/video_open_select_widget.dart'
-    show VideoOpenSelectWidget;
-export '/courses/video_open/video_open_widget.dart' show VideoOpenWidget;
+export '/courses/course_lesson/course_lesson_widget.dart'
+    show CourseLessonWidget;
+export '/news/playlist_full/playlist_full_widget.dart' show PlaylistFullWidget;
+export '/news/questions_full/questions_full_widget.dart'
+    show QuestionsFullWidget;
+export '/profile/not_authorized/not_authorized_widget.dart'
+    show NotAuthorizedWidget;
+export '/route/route1/route1_widget.dart' show Route1Widget;
+export '/route/route2/route2_widget.dart' show Route2Widget;
+export '/route/route2_end/route2_end_widget.dart' show Route2EndWidget;
+export '/route/route3/route3_widget.dart' show Route3Widget;
+export '/route/route3_words/route3_words_widget.dart' show Route3WordsWidget;
+export '/route/route3_draw/route3_draw_widget.dart' show Route3DrawWidget;
+export '/route/route3_words_indi/route3_words_indi_widget.dart'
+    show Route3WordsIndiWidget;
+export '/route/route3_words_indi_symbol/route3_words_indi_symbol_widget.dart'
+    show Route3WordsIndiSymbolWidget;
+export '/route/route3_bonus/route3_bonus_widget.dart' show Route3BonusWidget;
+export '/route/route5/route5_widget.dart' show Route5Widget;
+export '/route/route6/route6_widget.dart' show Route6Widget;
+export '/route/route6_text/route6_text_widget.dart' show Route6TextWidget;
+export '/route/route7_lite/route7_lite_widget.dart' show Route7LiteWidget;
+export '/route/route7_intermediate/route7_intermediate_widget.dart'
+    show Route7IntermediateWidget;
+export '/route/route7_hard/route7_hard_widget.dart' show Route7HardWidget;

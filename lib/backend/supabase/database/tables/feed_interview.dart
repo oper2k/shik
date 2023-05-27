@@ -24,8 +24,8 @@ class FeedInterviewRow extends SupabaseDataRow {
   String? get interviewHero => getField<String>('interview_hero');
   set interviewHero(String? value) => setField<String>('interview_hero', value);
 
-  String? get mainContent => getField<String>('main_content');
-  set mainContent(String? value) => setField<String>('main_content', value);
+  String? get introduction => getField<String>('introduction');
+  set introduction(String? value) => setField<String>('introduction', value);
 
   String? get speciality => getField<String>('speciality');
   set speciality(String? value) => setField<String>('speciality', value);
@@ -36,9 +36,8 @@ class FeedInterviewRow extends SupabaseDataRow {
   String? get imageUrl => getField<String>('image_url');
   set imageUrl(String? value) => setField<String>('image_url', value);
 
-  String? get additionalContent => getField<String>('additional_content');
-  set additionalContent(String? value) =>
-      setField<String>('additional_content', value);
+  String? get mainPart => getField<String>('main_part');
+  set mainPart(String? value) => setField<String>('main_part', value);
 
   String? get interviewUrl => getField<String>('interview_url');
   set interviewUrl(String? value) => setField<String>('interview_url', value);

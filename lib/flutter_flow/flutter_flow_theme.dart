@@ -244,9 +244,9 @@ class ThemeTypography extends Typography {
   String get titleLargeFamily => 'Inter';
   TextStyle get titleLarge => GoogleFonts.getFont(
         'Inter',
-        color: theme.primaryText,
-        fontWeight: FontWeight.w500,
-        fontSize: 22.0,
+        color: theme.black,
+        fontWeight: FontWeight.normal,
+        fontSize: 16.0,
       );
   String get titleMediumFamily => 'Inter';
   TextStyle get titleMedium => GoogleFonts.getFont(
@@ -323,7 +323,7 @@ class DarkModeTheme extends FlutterFlowTheme {
   late Color primaryBackground = const Color(0xFF404041);
   late Color secondaryBackground = const Color(0xFF76787A);
   late Color accent1 = const Color(0xFFEEEEEE);
-  late Color accent2 = const Color(0xFFE0E0E0);
+  late Color accent2 = const Color(0xFF757575);
   late Color accent3 = const Color(0xFF757575);
   late Color accent4 = const Color(0xFF616161);
   late Color success = const Color(0xFFA4CE57);

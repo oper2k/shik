@@ -79,7 +79,7 @@ class _AddFriendWidgetState extends State<AddFriendWidget> {
                   width: double.infinity,
                   height: 48.0,
                   decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    color: FlutterFlowTheme.of(context).white,
                     borderRadius: BorderRadius.circular(12.0),
                   ),
                   child: Padding(
@@ -90,10 +90,9 @@ class _AddFriendWidgetState extends State<AddFriendWidget> {
                       decoration: InputDecoration(
                         labelText: 'Егор',
                         labelStyle:
-                            FlutterFlowTheme.of(context).labelMedium.override(
-                                  fontFamily: 'DeeDee',
-                                  fontSize: 14.0,
-                                  useGoogleFonts: false,
+                            FlutterFlowTheme.of(context).titleLarge.override(
+                                  fontFamily: 'Inter',
+                                  color: FlutterFlowTheme.of(context).accent2,
                                 ),
                         hintStyle: FlutterFlowTheme.of(context).labelMedium,
                         enabledBorder: InputBorder.none,
@@ -102,13 +101,10 @@ class _AddFriendWidgetState extends State<AddFriendWidget> {
                         focusedErrorBorder: InputBorder.none,
                         prefixIcon: Icon(
                           FFIcons.kicSharpSearch1,
-                          color: FlutterFlowTheme.of(context).primaryText,
+                          color: FlutterFlowTheme.of(context).black,
                         ),
                       ),
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Inter',
-                            fontWeight: FontWeight.normal,
-                          ),
+                      style: FlutterFlowTheme.of(context).titleLarge,
                       validator:
                           _model.textControllerValidator.asValidator(context),
                     ),

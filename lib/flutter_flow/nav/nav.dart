@@ -129,12 +129,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Interesting',
           path: '/interesting',
-          builder: (context, params) => InterestingWidget(),
+          builder: (context, params) => InterestingWidget(
+            interestingRow: params.getParam<FeedInterestingRow>(
+                'interestingRow', ParamType.SupabaseRow),
+          ),
         ),
         FFRoute(
           name: 'Professions',
           path: '/professions',
-          builder: (context, params) => ProfessionsWidget(),
+          builder: (context, params) => ProfessionsWidget(
+            feedProfessionsRow: params.getParam<FeedProfessionsRow>(
+                'feedProfessionsRow', ParamType.SupabaseRow),
+          ),
         ),
         FFRoute(
           name: 'Playlist',
@@ -147,7 +153,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Questions',
           path: '/questions',
-          builder: (context, params) => QuestionsWidget(),
+          builder: (context, params) => QuestionsWidget(
+            feed5QuestionsRow: params.getParam<Feed5QuestionsRow>(
+                'feed5QuestionsRow', ParamType.SupabaseRow),
+          ),
         ),
         FFRoute(
           name: 'Qiuz',
@@ -250,14 +259,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => RouteWidget(),
         ),
         FFRoute(
-          name: 'Courses',
-          path: '/courses',
-          builder: (context, params) => CoursesWidget(),
+          name: 'CourseMain',
+          path: '/courseMain',
+          builder: (context, params) => CourseMainWidget(),
         ),
         FFRoute(
           name: 'SuccessPage',
           path: '/successPage',
-          builder: (context, params) => SuccessPageWidget(),
+          builder: (context, params) => SuccessPageWidget(
+            coursesRow: params.getParam<CoursesRow>(
+                'coursesRow', ParamType.SupabaseRow),
+          ),
         ),
         FFRoute(
           name: 'Piano',
@@ -265,34 +277,122 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => PianoWidget(),
         ),
         FFRoute(
-          name: 'Course',
-          path: '/course',
-          builder: (context, params) => CourseWidget(),
-        ),
-        FFRoute(
-          name: 'CourseOpen',
-          path: '/courseOpen',
-          builder: (context, params) => CourseOpenWidget(),
+          name: 'CourseList',
+          path: '/courseList',
+          builder: (context, params) => CourseListWidget(
+            coursesRow: params.getParam<CoursesRow>(
+                'coursesRow', ParamType.SupabaseRow),
+          ),
         ),
         FFRoute(
           name: 'BuyCourse',
           path: '/buyCourse',
-          builder: (context, params) => BuyCourseWidget(),
+          builder: (context, params) => BuyCourseWidget(
+            coursesRow: params.getParam<CoursesRow>(
+                'coursesRow', ParamType.SupabaseRow),
+          ),
         ),
         FFRoute(
-          name: 'VideoClosed',
-          path: '/videoClosed',
-          builder: (context, params) => VideoClosedWidget(),
+          name: 'CourseLesson',
+          path: '/courseLesson',
+          builder: (context, params) => CourseLessonWidget(
+            coursePurchased: params.getParam('coursePurchased', ParamType.bool),
+            coursesLessonsRowList: params.getParam<CoursesLessonsRow>(
+                'coursesLessonsRowList', ParamType.SupabaseRow, true),
+            coursesRow: params.getParam<CoursesRow>(
+                'coursesRow', ParamType.SupabaseRow),
+            initialIndex: params.getParam('initialIndex', ParamType.int),
+          ),
         ),
         FFRoute(
-          name: 'VideoOpenSelect',
-          path: '/videoOpenSelect',
-          builder: (context, params) => VideoOpenSelectWidget(),
+          name: 'PlaylistFull',
+          path: '/playlistFull',
+          builder: (context, params) => PlaylistFullWidget(),
         ),
         FFRoute(
-          name: 'VideoOpen',
-          path: '/videoOpen',
-          builder: (context, params) => VideoOpenWidget(),
+          name: 'QuestionsFull',
+          path: '/questionsFull',
+          builder: (context, params) => QuestionsFullWidget(),
+        ),
+        FFRoute(
+          name: 'NotAuthorized',
+          path: '/notAuthorized',
+          builder: (context, params) => NotAuthorizedWidget(),
+        ),
+        FFRoute(
+          name: 'Route1',
+          path: '/route1',
+          builder: (context, params) => Route1Widget(),
+        ),
+        FFRoute(
+          name: 'Route2',
+          path: '/route2',
+          builder: (context, params) => Route2Widget(),
+        ),
+        FFRoute(
+          name: 'Route2End',
+          path: '/route2End',
+          builder: (context, params) => Route2EndWidget(),
+        ),
+        FFRoute(
+          name: 'Route3',
+          path: '/route3',
+          builder: (context, params) => Route3Widget(),
+        ),
+        FFRoute(
+          name: 'Route3Words',
+          path: '/route3Words',
+          builder: (context, params) => Route3WordsWidget(),
+        ),
+        FFRoute(
+          name: 'Route3Draw',
+          path: '/route3Draw',
+          builder: (context, params) => Route3DrawWidget(),
+        ),
+        FFRoute(
+          name: 'Route3WordsIndi',
+          path: '/route3WordsIndi',
+          builder: (context, params) => Route3WordsIndiWidget(),
+        ),
+        FFRoute(
+          name: 'Route3WordsIndiSymbol',
+          path: '/route3WordsIndiSymbol',
+          builder: (context, params) => Route3WordsIndiSymbolWidget(),
+        ),
+        FFRoute(
+          name: 'Route3Bonus',
+          path: '/route3Bonus',
+          builder: (context, params) => Route3BonusWidget(),
+        ),
+        FFRoute(
+          name: 'Route5',
+          path: '/route5',
+          builder: (context, params) => Route5Widget(),
+        ),
+        FFRoute(
+          name: 'Route6',
+          path: '/route6',
+          builder: (context, params) => Route6Widget(),
+        ),
+        FFRoute(
+          name: 'Route6Text',
+          path: '/route6Text',
+          builder: (context, params) => Route6TextWidget(),
+        ),
+        FFRoute(
+          name: 'Route7Lite',
+          path: '/route7Lite',
+          builder: (context, params) => Route7LiteWidget(),
+        ),
+        FFRoute(
+          name: 'Route7Intermediate',
+          path: '/route7Intermediate',
+          builder: (context, params) => Route7IntermediateWidget(),
+        ),
+        FFRoute(
+          name: 'Route7Hard',
+          path: '/route7Hard',
+          builder: (context, params) => Route7HardWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
       urlPathStrategy: UrlPathStrategy.path,
@@ -479,9 +579,9 @@ class FFRoute {
               : builder(context, ffParams);
           final child = appStateNotifier.loading
               ? Container(
-                  color: FlutterFlowTheme.of(context).primaryBackground,
+                  color: Colors.transparent,
                   child: Image.asset(
-                    'assets/images/splash.jpg',
+                    'assets/images/splash.webp',
                     fit: BoxFit.cover,
                   ),
                 )

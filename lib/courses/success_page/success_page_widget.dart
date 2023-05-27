@@ -1,13 +1,21 @@
+import '/auth/supabase_auth/auth_util.dart';
+import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'success_page_model.dart';
 export 'success_page_model.dart';
 
 class SuccessPageWidget extends StatefulWidget {
-  const SuccessPageWidget({Key? key}) : super(key: key);
+  const SuccessPageWidget({
+    Key? key,
+    required this.coursesRow,
+  }) : super(key: key);
+
+  final CoursesRow? coursesRow;
 
   @override
   _SuccessPageWidgetState createState() => _SuccessPageWidgetState();
@@ -23,6 +31,25 @@ class _SuccessPageWidgetState extends State<SuccessPageWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => SuccessPageModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await UsersCoursesTable().insert({
+        'user_id': currentUserUid,
+        'course_id': widget.coursesRow?.id,
+      });
+      await Future.delayed(const Duration(milliseconds: 3000));
+
+      context.pushNamed(
+        'CourseList',
+        queryParams: {
+          'coursesRow': serializeParam(
+            widget.coursesRow,
+            ParamType.SupabaseRow,
+          ),
+        }.withoutNulls,
+      );
+    });
   }
 
   @override
@@ -92,13 +119,46 @@ class _SuccessPageWidgetState extends State<SuccessPageWidget> {
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                       child: Text(
-                        'Покупка успешна',
+                        'Тестовая покупка успешна',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Inter',
                               color: FlutterFlowTheme.of(context).primaryText,
                               fontSize: 16.0,
                               fontWeight: FontWeight.bold,
                             ),
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                      child: Text(
+                        'На ваш аккаунт открыт доступ',
+                        style: FlutterFlowTheme.of(context).bodySmall,
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed(
+                            'CourseList',
+                            queryParams: {
+                              'coursesRow': serializeParam(
+                                widget.coursesRow,
+                                ParamType.SupabaseRow,
+                              ),
+                            }.withoutNulls,
+                          );
+                        },
+                        child: Text(
+                          'Перейти к данному курсу',
+                          style: FlutterFlowTheme.of(context).bodySmall,
+                        ),
                       ),
                     ),
                   ],

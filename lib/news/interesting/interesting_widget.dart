@@ -1,3 +1,4 @@
+import '/backend/supabase/supabase.dart';
 import '/components/back_button_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -8,7 +9,12 @@ import 'interesting_model.dart';
 export 'interesting_model.dart';
 
 class InterestingWidget extends StatefulWidget {
-  const InterestingWidget({Key? key}) : super(key: key);
+  const InterestingWidget({
+    Key? key,
+    required this.interestingRow,
+  }) : super(key: key);
+
+  final FeedInterestingRow? interestingRow;
 
   @override
   _InterestingWidgetState createState() => _InterestingWidgetState();
@@ -53,8 +59,8 @@ class _InterestingWidgetState extends State<InterestingWidget> {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(0.0),
-                    child: Image.asset(
-                      'assets/images/Cat.jpg',
+                    child: Image.network(
+                      widget.interestingRow!.imageUrl!,
                       width: double.infinity,
                       fit: BoxFit.cover,
                     ),
@@ -136,9 +142,13 @@ class _InterestingWidgetState extends State<InterestingWidget> {
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                '1 марта отмечают Всемирный день кошек!  Многие музыканты, писатели, художники и другие деятели искусств были неравнодушны к кошкам, воспевали грациозность этих животных в искусстве и заботились о своих домашних питомцах.   Коты встречаются в творчестве поэта Иосифа Бродского: им посвящены не только стихотворения и оды, но и очерки, рисунки и зарисовки, продуманные до мелких деталей и сделанные наспех в порыве вдохновения. Кота Иосифа Бродского звали Миссисипи, а в детстве у него был кот по имени Оська. Бродский утверждал, что в кошачей кличке обязательно должен присутствовать звук «с».   Знаменитый абстракционист Василий Кандинский назвал своего кота… Васька!Мало кто знает, что в собрании Музея Гуггенхайма в Нью-Йорке хранится картина Кандинского с изображением кота – художник рисовал не только абстрактные картины. В доме композитора Дмитрия Шостаковича временами жили и собаки, и кошки. Говорят, первых он терпел, а вот вторых нежно любил.  В доме композитора Дмитрия Шостаковича временами жили и собаки, и кошки. Говорят, первых он терпел, а вот вторых нежно любил.   У Игоря Стравинского было целых три кота: Панчо, Челеста и Василий Васильевич. Про последнего один из друзей композитора рассказывал такую историю: «Кот Васька был очень избалованный. Когда Стравинские взяли ещё одного кота, Васька так расстроился и так ревновал, что не на шутку заболел, и Стравинские в конце концов (о ужас!) высадили второго кота в шестнадцати километрах от дома, привязав ему на шею записочку, в которой говорилось, что кота можно подобрать. Однако второй кот оказался не промах и нашёл дорогу обратно в дом Стравинских». ',
+                                valueOrDefault<String>(
+                                  widget.interestingRow?.content,
+                                  'Текст',
+                                ),
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(

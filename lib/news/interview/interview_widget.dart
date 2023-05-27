@@ -144,12 +144,12 @@ class _InterviewWidgetState extends State<InterviewWidget> {
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              if (widget.feedInterviewRow?.mainContent !=
+                              if (widget.feedInterviewRow?.introduction !=
                                       null &&
-                                  widget.feedInterviewRow?.mainContent != '')
+                                  widget.feedInterviewRow?.introduction != '')
                                 Text(
                                   valueOrDefault<String>(
-                                    widget.feedInterviewRow?.mainContent,
+                                    widget.feedInterviewRow?.introduction,
                                     'Основной текст',
                                   ),
                                   style: FlutterFlowTheme.of(context)
@@ -180,13 +180,11 @@ class _InterviewWidgetState extends State<InterviewWidget> {
                                         ),
                                   ),
                                 ),
-                              if (widget.feedInterviewRow?.additionalContent !=
-                                      null &&
-                                  widget.feedInterviewRow?.additionalContent !=
-                                      '')
+                              if (widget.feedInterviewRow?.mainPart != null &&
+                                  widget.feedInterviewRow?.mainPart != '')
                                 Text(
                                   valueOrDefault<String>(
-                                    widget.feedInterviewRow?.additionalContent,
+                                    widget.feedInterviewRow?.mainPart,
                                     'Дополнительный контент',
                                   ),
                                   style: FlutterFlowTheme.of(context)

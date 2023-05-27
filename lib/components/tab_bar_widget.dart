@@ -1,6 +1,7 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'tab_bar_model.dart';
@@ -64,7 +65,7 @@ class _TabBarWidgetState extends State<TabBarWidget> {
               color: FlutterFlowTheme.of(context).primaryBackground,
             ),
             child: Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(14.0, 14.0, 14.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(10.0, 14.0, 10.0, 0.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -79,6 +80,8 @@ class _TabBarWidgetState extends State<TabBarWidget> {
                         if (widget.activeTab == 1) {
                           return;
                         }
+
+                        HapticFeedback.selectionClick();
 
                         context.pushNamed(
                           'News',
@@ -135,6 +138,8 @@ class _TabBarWidgetState extends State<TabBarWidget> {
                           return;
                         }
 
+                        HapticFeedback.selectionClick();
+
                         context.pushNamed(
                           'MapPage',
                           extra: <String, dynamic>{
@@ -189,6 +194,8 @@ class _TabBarWidgetState extends State<TabBarWidget> {
                         if (widget.activeTab == 3) {
                           return;
                         }
+
+                        HapticFeedback.selectionClick();
 
                         context.pushNamed(
                           'Route',
@@ -245,8 +252,10 @@ class _TabBarWidgetState extends State<TabBarWidget> {
                           return;
                         }
 
+                        HapticFeedback.selectionClick();
+
                         context.pushNamed(
-                          'Piano',
+                          'CourseMain',
                           extra: <String, dynamic>{
                             kTransitionInfoKey: TransitionInfo(
                               hasTransition: true,
@@ -276,6 +285,68 @@ class _TabBarWidgetState extends State<TabBarWidget> {
                                   .override(
                                     fontFamily: 'Inter',
                                     color: widget.activeTab == 4
+                                        ? FlutterFlowTheme.of(context).primary
+                                        : FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                    fontSize: 11.0,
+                                    fontWeight: FontWeight.normal,
+                                    lineHeight: 1.4,
+                                  ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        if (widget.activeTab == 5) {
+                          return;
+                        }
+
+                        HapticFeedback.selectionClick();
+
+                        context.pushNamed(
+                          'Profile',
+                          extra: <String, dynamic>{
+                            kTransitionInfoKey: TransitionInfo(
+                              hasTransition: true,
+                              transitionType: PageTransitionType.fade,
+                              duration: Duration(milliseconds: 0),
+                            ),
+                          },
+                        );
+                      },
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 2.0, 0.0, 0.0),
+                            child: Icon(
+                              FFIcons.kphUser,
+                              color: widget.activeTab == 5
+                                  ? FlutterFlowTheme.of(context).primary
+                                  : FlutterFlowTheme.of(context).primaryText,
+                              size: 28.0,
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 6.0, 0.0, 0.0),
+                            child: Text(
+                              'Профиль',
+                              textAlign: TextAlign.center,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    color: widget.activeTab == 5
                                         ? FlutterFlowTheme.of(context).primary
                                         : FlutterFlowTheme.of(context)
                                             .primaryText,

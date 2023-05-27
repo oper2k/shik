@@ -60,8 +60,9 @@ class _FactsWidgetState extends State<FactsWidget> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(0.0),
                     child: Image.network(
-                      '',
+                      widget.feedFactsRow!.contentImageUrl!,
                       width: double.infinity,
+                      height: double.infinity,
                       fit: BoxFit.cover,
                     ),
                   ),

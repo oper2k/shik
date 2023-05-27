@@ -255,35 +255,52 @@ class _RateWidgetState extends State<RateWidget> {
                                                   padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           20.0, 0.0, 0.0, 0.0),
-                                                  child: Container(
-                                                    width: 50.0,
-                                                    height: 50.0,
-                                                    decoration: BoxDecoration(
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .secondaryBackground,
-                                                      shape: BoxShape.circle,
-                                                    ),
+                                                  child: InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      context
+                                                          .pushNamed('Profile');
+                                                    },
                                                     child: Container(
                                                       width: 50.0,
                                                       height: 50.0,
-                                                      clipBehavior:
-                                                          Clip.antiAlias,
                                                       decoration: BoxDecoration(
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .secondaryBackground,
                                                         shape: BoxShape.circle,
                                                       ),
-                                                      child: Image.network(
-                                                        valueOrDefault<String>(
-                                                          queryUsersUsersRowList
-                                                              .where((e) =>
-                                                                  e.id ==
-                                                                  currentUserUid)
-                                                              .toList()
-                                                              .first
-                                                              .photoUrl,
-                                                          '0',
+                                                      child: Container(
+                                                        width: 50.0,
+                                                        height: 50.0,
+                                                        clipBehavior:
+                                                            Clip.antiAlias,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          shape:
+                                                              BoxShape.circle,
                                                         ),
-                                                        fit: BoxFit.cover,
+                                                        child: Image.network(
+                                                          valueOrDefault<
+                                                              String>(
+                                                            queryUsersUsersRowList
+                                                                .where((e) =>
+                                                                    e.id ==
+                                                                    currentUserUid)
+                                                                .toList()
+                                                                .first
+                                                                .photoUrl,
+                                                            '0',
+                                                          ),
+                                                          fit: BoxFit.cover,
+                                                        ),
                                                       ),
                                                     ),
                                                   ),

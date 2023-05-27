@@ -176,7 +176,7 @@ class _SignIn2WidgetState extends State<SignIn2Widget> {
                   width: double.infinity,
                   height: 52.0,
                   decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    color: FlutterFlowTheme.of(context).white,
                     borderRadius: BorderRadius.circular(12.0),
                   ),
                   child: Align(
@@ -192,31 +192,24 @@ class _SignIn2WidgetState extends State<SignIn2Widget> {
                       decoration: InputDecoration(
                         labelText: 'Имя',
                         labelStyle:
-                            FlutterFlowTheme.of(context).labelMedium.override(
-                                  fontFamily: 'Madelyn',
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
-                                  useGoogleFonts: false,
-                                ),
-                        hintStyle:
-                            FlutterFlowTheme.of(context).labelMedium.override(
-                                  fontFamily: 'DeeDee',
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
-                                  useGoogleFonts: false,
+                            FlutterFlowTheme.of(context).titleLarge.override(
+                                  fontFamily: 'Inter',
+                                  color: FlutterFlowTheme.of(context).accent2,
                                 ),
                         enabledBorder: InputBorder.none,
                         focusedBorder: InputBorder.none,
                         errorBorder: InputBorder.none,
                         focusedErrorBorder: InputBorder.none,
-                        contentPadding:
-                            EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 0.0, 8.0),
+                        contentPadding: EdgeInsetsDirectional.fromSTEB(
+                            16.0, 8.0, 16.0, 8.0),
                       ),
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      style: FlutterFlowTheme.of(context).labelSmall.override(
                             fontFamily: 'Inter',
+                            color: FlutterFlowTheme.of(context).black,
                             fontSize: 16.0,
                             fontWeight: FontWeight.normal,
                           ),
+                      keyboardType: TextInputType.name,
                       validator: _model.nameInputControllerValidator
                           .asValidator(context),
                     ),
@@ -229,7 +222,7 @@ class _SignIn2WidgetState extends State<SignIn2Widget> {
                   width: double.infinity,
                   height: 52.0,
                   decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    color: FlutterFlowTheme.of(context).white,
                     borderRadius: BorderRadius.circular(12.0),
                   ),
                   child: Align(
@@ -244,23 +237,13 @@ class _SignIn2WidgetState extends State<SignIn2Widget> {
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: 'Дата рождения',
-                        labelStyle:
-                            FlutterFlowTheme.of(context).labelMedium.override(
-                                  fontFamily: 'Madelyn',
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
-                                  useGoogleFonts: false,
-                                ),
+                        labelStyle: FlutterFlowTheme.of(context).titleLarge,
                         hintText: '25.05.2010',
-                        hintStyle: FlutterFlowTheme.of(context)
-                            .labelMedium
-                            .override(
-                              fontFamily: 'DeeDee',
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold,
-                              useGoogleFonts: false,
-                            ),
+                        hintStyle:
+                            FlutterFlowTheme.of(context).titleLarge.override(
+                                  fontFamily: 'Inter',
+                                  color: FlutterFlowTheme.of(context).accent2,
+                                ),
                         enabledBorder: InputBorder.none,
                         focusedBorder: InputBorder.none,
                         errorBorder: InputBorder.none,
@@ -269,13 +252,11 @@ class _SignIn2WidgetState extends State<SignIn2Widget> {
                             EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 0.0, 8.0),
                         prefixIcon: Icon(
                           FFIcons.kmaterialSymbolsCalendarMonthOutlineRounded,
+                          color: FlutterFlowTheme.of(context).black,
                         ),
                       ),
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Inter',
-                            fontSize: 16.0,
-                            fontWeight: FontWeight.normal,
-                          ),
+                      style: FlutterFlowTheme.of(context).titleLarge,
+                      keyboardType: TextInputType.datetime,
                       validator: _model.birthDateInputControllerValidator
                           .asValidator(context),
                       inputFormatters: [_model.birthDateInputMask],

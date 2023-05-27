@@ -68,51 +68,53 @@ class _QuizzesListWidgetState extends State<QuizzesListWidget> {
             ),
             Padding(
               padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  if ((_model.myAnswer == 1) &&
-                      (_model.myAnswer == widget.feedQuizzesRow?.correctAnswer))
-                    Container(
-                      width: 19.0,
-                      height: 19.0,
-                      decoration: BoxDecoration(
-                        color: Color(0xFF11E666),
-                        shape: BoxShape.circle,
+              child: InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  _model.updatePage(() {
+                    _model.myAnswer = 1;
+                  });
+                },
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    if ((_model.myAnswer == 1) &&
+                        (_model.myAnswer ==
+                            widget.feedQuizzesRow?.correctAnswer))
+                      Container(
+                        width: 19.0,
+                        height: 19.0,
+                        decoration: BoxDecoration(
+                          color: Color(0xFF11E666),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          FFIcons.kmaterialSymbolsDoneRounded,
+                          color: FlutterFlowTheme.of(context).white,
+                          size: 16.0,
+                        ),
                       ),
-                      child: Icon(
-                        FFIcons.kmaterialSymbolsDoneRounded,
-                        color: FlutterFlowTheme.of(context).white,
-                        size: 16.0,
+                    if ((_model.myAnswer == 1) &&
+                        (_model.myAnswer !=
+                            widget.feedQuizzesRow?.correctAnswer))
+                      Container(
+                        width: 19.0,
+                        height: 19.0,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).error,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          FFIcons.ksystemUiconsCross1,
+                          color: FlutterFlowTheme.of(context).white,
+                          size: 16.0,
+                        ),
                       ),
-                    ),
-                  if ((_model.myAnswer == 1) &&
-                      (_model.myAnswer != widget.feedQuizzesRow?.correctAnswer))
-                    Container(
-                      width: 19.0,
-                      height: 19.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).error,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Icon(
-                        FFIcons.ksystemUiconsCross1,
-                        color: FlutterFlowTheme.of(context).white,
-                        size: 16.0,
-                      ),
-                    ),
-                  if (_model.myAnswer != 1)
-                    InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        _model.updatePage(() {
-                          _model.myAnswer = 1;
-                        });
-                      },
-                      child: Container(
+                    if (_model.myAnswer != 1)
+                      Container(
                         width: 19.0,
                         height: 19.0,
                         decoration: BoxDecoration(
@@ -125,158 +127,172 @@ class _QuizzesListWidgetState extends State<QuizzesListWidget> {
                           ),
                         ),
                       ),
-                    ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
-                    child: Text(
-                      valueOrDefault<String>(
-                        widget.feedQuizzesRow?.answer1,
-                        'answer 1',
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
+                      child: Text(
+                        valueOrDefault<String>(
+                          widget.feedQuizzesRow?.answer1,
+                          'answer 1',
+                        ),
+                        style: FlutterFlowTheme.of(context).labelSmall,
                       ),
-                      style: FlutterFlowTheme.of(context).labelSmall,
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                if ((_model.myAnswer == 2) &&
-                    (_model.myAnswer == widget.feedQuizzesRow?.correctAnswer))
-                  Container(
-                    width: 19.0,
-                    height: 19.0,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF11E666),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      FFIcons.kmaterialSymbolsDoneRounded,
-                      color: FlutterFlowTheme.of(context).white,
-                      size: 16.0,
-                    ),
-                  ),
-                if ((_model.myAnswer == 2) &&
-                    (_model.myAnswer != widget.feedQuizzesRow?.correctAnswer))
-                  Container(
-                    width: 19.0,
-                    height: 19.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).error,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      FFIcons.ksystemUiconsCross1,
-                      color: FlutterFlowTheme.of(context).white,
-                      size: 16.0,
-                    ),
-                  ),
-                if (_model.myAnswer != 2)
-                  InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      _model.updatePage(() {
-                        _model.myAnswer = 2;
-                      });
-                    },
-                    child: Container(
-                      width: 19.0,
-                      height: 19.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: FlutterFlowTheme.of(context).titleColor,
-                          width: 1.0,
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+              child: InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  _model.updatePage(() {
+                    _model.myAnswer = 2;
+                  });
+                },
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    if ((_model.myAnswer == 2) &&
+                        (_model.myAnswer ==
+                            widget.feedQuizzesRow?.correctAnswer))
+                      Container(
+                        width: 19.0,
+                        height: 19.0,
+                        decoration: BoxDecoration(
+                          color: Color(0xFF11E666),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          FFIcons.kmaterialSymbolsDoneRounded,
+                          color: FlutterFlowTheme.of(context).white,
+                          size: 16.0,
                         ),
                       ),
+                    if ((_model.myAnswer == 2) &&
+                        (_model.myAnswer !=
+                            widget.feedQuizzesRow?.correctAnswer))
+                      Container(
+                        width: 19.0,
+                        height: 19.0,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).error,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          FFIcons.ksystemUiconsCross1,
+                          color: FlutterFlowTheme.of(context).white,
+                          size: 16.0,
+                        ),
+                      ),
+                    if (_model.myAnswer != 2)
+                      Container(
+                        width: 19.0,
+                        height: 19.0,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: FlutterFlowTheme.of(context).titleColor,
+                            width: 1.0,
+                          ),
+                        ),
+                      ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
+                      child: Text(
+                        valueOrDefault<String>(
+                          widget.feedQuizzesRow?.answer2,
+                          'answer 2',
+                        ),
+                        style: FlutterFlowTheme.of(context).labelSmall,
+                      ),
                     ),
-                  ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
-                  child: Text(
-                    valueOrDefault<String>(
-                      widget.feedQuizzesRow?.answer2,
-                      'answer 2',
-                    ),
-                    style: FlutterFlowTheme.of(context).labelSmall,
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
-            Row(
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                if ((_model.myAnswer == 3) &&
-                    (_model.myAnswer == widget.feedQuizzesRow?.correctAnswer))
-                  Container(
-                    width: 19.0,
-                    height: 19.0,
-                    decoration: BoxDecoration(
-                      color: Color(0xFF11E666),
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      FFIcons.kmaterialSymbolsDoneRounded,
-                      color: FlutterFlowTheme.of(context).white,
-                      size: 16.0,
-                    ),
-                  ),
-                if ((_model.myAnswer == 3) &&
-                    (_model.myAnswer != widget.feedQuizzesRow?.correctAnswer))
-                  Container(
-                    width: 19.0,
-                    height: 19.0,
-                    decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).error,
-                      shape: BoxShape.circle,
-                    ),
-                    child: Icon(
-                      FFIcons.ksystemUiconsCross1,
-                      color: FlutterFlowTheme.of(context).white,
-                      size: 16.0,
-                    ),
-                  ),
-                if (_model.myAnswer != 3)
-                  InkWell(
-                    splashColor: Colors.transparent,
-                    focusColor: Colors.transparent,
-                    hoverColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    onTap: () async {
-                      _model.updatePage(() {
-                        _model.myAnswer = 3;
-                      });
-                    },
-                    child: Container(
-                      width: 19.0,
-                      height: 19.0,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        shape: BoxShape.circle,
-                        border: Border.all(
-                          color: FlutterFlowTheme.of(context).titleColor,
-                          width: 1.0,
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+              child: InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  _model.updatePage(() {
+                    _model.myAnswer = 3;
+                  });
+                },
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    if ((_model.myAnswer == 3) &&
+                        (_model.myAnswer ==
+                            widget.feedQuizzesRow?.correctAnswer))
+                      Container(
+                        width: 19.0,
+                        height: 19.0,
+                        decoration: BoxDecoration(
+                          color: Color(0xFF11E666),
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          FFIcons.kmaterialSymbolsDoneRounded,
+                          color: FlutterFlowTheme.of(context).white,
+                          size: 16.0,
                         ),
                       ),
+                    if ((_model.myAnswer == 3) &&
+                        (_model.myAnswer !=
+                            widget.feedQuizzesRow?.correctAnswer))
+                      Container(
+                        width: 19.0,
+                        height: 19.0,
+                        decoration: BoxDecoration(
+                          color: FlutterFlowTheme.of(context).error,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Icon(
+                          FFIcons.ksystemUiconsCross1,
+                          color: FlutterFlowTheme.of(context).white,
+                          size: 16.0,
+                        ),
+                      ),
+                    if (_model.myAnswer != 3)
+                      Container(
+                        width: 19.0,
+                        height: 19.0,
+                        decoration: BoxDecoration(
+                          color:
+                              FlutterFlowTheme.of(context).secondaryBackground,
+                          shape: BoxShape.circle,
+                          border: Border.all(
+                            color: FlutterFlowTheme.of(context).titleColor,
+                            width: 1.0,
+                          ),
+                        ),
+                      ),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
+                      child: Text(
+                        valueOrDefault<String>(
+                          widget.feedQuizzesRow?.answer3,
+                          'answer 3',
+                        ),
+                        style: FlutterFlowTheme.of(context).labelSmall,
+                      ),
                     ),
-                  ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
-                  child: Text(
-                    valueOrDefault<String>(
-                      widget.feedQuizzesRow?.answer3,
-                      'answer 3',
-                    ),
-                    style: FlutterFlowTheme.of(context).labelSmall,
-                  ),
+                  ],
                 ),
-              ],
+              ),
             ),
           ],
         ),

@@ -133,6 +133,12 @@ class FFAppState extends ChangeNotifier {
   set photoUrl(String _value) {
     _photoUrl = _value;
   }
+
+  LatLng? _mapInitialLatLng = LatLng(55.7522, 37.6156);
+  LatLng? get mapInitialLatLng => _mapInitialLatLng;
+  set mapInitialLatLng(LatLng? _value) {
+    _mapInitialLatLng = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

@@ -86,7 +86,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                           borderRadius:
                                               BorderRadius.circular(0.0),
                                           child: Image.asset(
-                                            'assets/images/Onbrd1.jpg',
+                                            'assets/images/Onbrd1.webp',
                                             width: 246.0,
                                             fit: BoxFit.contain,
                                           ),
@@ -135,7 +135,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                           borderRadius:
                                               BorderRadius.circular(0.0),
                                           child: Image.asset(
-                                            'assets/images/Onbrd2.jpg',
+                                            'assets/images/Onbrd2.webp',
                                             width: 246.0,
                                             fit: BoxFit.contain,
                                           ),
@@ -184,7 +184,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                           borderRadius:
                                               BorderRadius.circular(0.0),
                                           child: Image.asset(
-                                            'assets/images/Onbrd3.jpg',
+                                            'assets/images/Onbrd3.webp',
                                             width: 246.0,
                                             fit: BoxFit.contain,
                                           ),

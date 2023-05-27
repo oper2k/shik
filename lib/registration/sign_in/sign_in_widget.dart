@@ -113,7 +113,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                     width: double.infinity,
                     height: 52.0,
                     decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      color: FlutterFlowTheme.of(context).white,
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                     child: Align(
@@ -129,24 +129,24 @@ class _SignInWidgetState extends State<SignInWidget> {
                         decoration: InputDecoration(
                           labelText: 'Email',
                           labelStyle:
-                              FlutterFlowTheme.of(context).labelSmall.override(
+                              FlutterFlowTheme.of(context).titleLarge.override(
                                     fontFamily: 'Inter',
-                                    color: Color(0xFF76787A),
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.normal,
+                                    color: FlutterFlowTheme.of(context).accent2,
                                   ),
-                          hintStyle: FlutterFlowTheme.of(context).labelSmall,
                           enabledBorder: InputBorder.none,
                           focusedBorder: InputBorder.none,
                           errorBorder: InputBorder.none,
                           focusedErrorBorder: InputBorder.none,
                           contentPadding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 8.0, 0.0, 8.0),
+                              16.0, 8.0, 16.0, 8.0),
                         ),
                         style: FlutterFlowTheme.of(context).labelSmall.override(
                               fontFamily: 'Inter',
-                              color: FlutterFlowTheme.of(context).secondaryText,
+                              color: FlutterFlowTheme.of(context).black,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.normal,
                             ),
+                        keyboardType: TextInputType.emailAddress,
                         validator: _model.emailInputControllerValidator
                             .asValidator(context),
                       ),
@@ -159,7 +159,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                     width: double.infinity,
                     height: 52.0,
                     decoration: BoxDecoration(
-                      color: FlutterFlowTheme.of(context).secondaryBackground,
+                      color: FlutterFlowTheme.of(context).white,
                       borderRadius: BorderRadius.circular(12.0),
                     ),
                     child: Align(
@@ -171,31 +171,38 @@ class _SignInWidgetState extends State<SignInWidget> {
                           Duration(milliseconds: 500),
                           () => setState(() {}),
                         ),
-                        obscureText: false,
+                        obscureText: !_model.passwordInputVisibility,
                         decoration: InputDecoration(
                           labelText: 'Пароль',
                           labelStyle:
-                              FlutterFlowTheme.of(context).labelSmall.override(
+                              FlutterFlowTheme.of(context).titleLarge.override(
                                     fontFamily: 'Inter',
-                                    color: Color(0xFF76787A),
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                          hintStyle:
-                              FlutterFlowTheme.of(context).labelSmall.override(
-                                    fontFamily: 'Inter',
-                                    fontWeight: FontWeight.bold,
+                                    color: FlutterFlowTheme.of(context).accent2,
                                   ),
                           enabledBorder: InputBorder.none,
                           focusedBorder: InputBorder.none,
                           errorBorder: InputBorder.none,
                           focusedErrorBorder: InputBorder.none,
                           contentPadding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 8.0, 0.0, 8.0),
+                              16.0, 8.0, 16.0, 8.0),
+                          suffixIcon: InkWell(
+                            onTap: () => setState(
+                              () => _model.passwordInputVisibility =
+                                  !_model.passwordInputVisibility,
+                            ),
+                            focusNode: FocusNode(skipTraversal: true),
+                            child: Icon(
+                              _model.passwordInputVisibility
+                                  ? Icons.visibility_outlined
+                                  : Icons.visibility_off_outlined,
+                              color: FlutterFlowTheme.of(context).black,
+                              size: 24.0,
+                            ),
+                          ),
                         ),
                         style: FlutterFlowTheme.of(context).labelSmall.override(
                               fontFamily: 'Inter',
-                              color: FlutterFlowTheme.of(context).secondaryText,
+                              color: FlutterFlowTheme.of(context).black,
                               fontSize: 16.0,
                               fontWeight: FontWeight.normal,
                             ),

@@ -1,3 +1,4 @@
+import '/backend/supabase/supabase.dart';
 import '/components/button_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -8,7 +9,12 @@ import 'buy_course_model.dart';
 export 'buy_course_model.dart';
 
 class BuyCourseWidget extends StatefulWidget {
-  const BuyCourseWidget({Key? key}) : super(key: key);
+  const BuyCourseWidget({
+    Key? key,
+    required this.coursesRow,
+  }) : super(key: key);
+
+  final CoursesRow? coursesRow;
 
   @override
   _BuyCourseWidgetState createState() => _BuyCourseWidgetState();
@@ -82,7 +88,10 @@ class _BuyCourseWidgetState extends State<BuyCourseWidget> {
                     Align(
                       alignment: AlignmentDirectional(0.0, 0.0),
                       child: Text(
-                        'Курс по фортепиано',
+                        valueOrDefault<String>(
+                          widget.coursesRow?.title,
+                          'Название курса',
+                        ),
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Inter',
                               fontSize: 16.0,
@@ -117,28 +126,18 @@ class _BuyCourseWidgetState extends State<BuyCourseWidget> {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Фортепиано',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Inter',
-                                          color: Color(0xFF76787A),
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.bold,
-                                          lineHeight: 1.4,
-                                        ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 4.0, 0.0, 0.0),
-                                    child: Text(
-                                      '24 видеоурока',
+                              Expanded(
+                                flex: 4,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      valueOrDefault<String>(
+                                        widget.coursesRow?.title,
+                                        'Название курса',
+                                      ),
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
                                           .override(
@@ -149,67 +148,93 @@ class _BuyCourseWidgetState extends State<BuyCourseWidget> {
                                             lineHeight: 1.4,
                                           ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 26.0, 0.0, 0.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 4.0, 0.0, 0.0),
-                                          child: Text(
-                                            '10 550 ₽',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Inter',
-                                                  fontSize: 24.0,
-                                                  fontWeight: FontWeight.bold,
-                                                  lineHeight: 1.4,
-                                                ),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  12.0, 4.0, 0.0, 0.0),
-                                          child: Text(
-                                            '12 990 ₽',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyMedium
-                                                .override(
-                                                  fontFamily: 'Inter',
-                                                  fontSize: 16.0,
-                                                  fontWeight: FontWeight.bold,
-                                                  lineHeight: 1.4,
-                                                ),
-                                          ),
-                                        ),
-                                      ],
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 4.0, 0.0, 0.0),
+                                      child: Text(
+                                        '${widget.coursesRow?.lessonsCount?.toString()} видеоурока',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              color: Color(0xFF76787A),
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.bold,
+                                              lineHeight: 1.4,
+                                            ),
+                                      ),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 30.0, 0.0, 0.0),
-                                    child: Text(
-                                      'Преподаватель курса \nРиад Маммадов',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            color: Color(0xFF76787A),
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.bold,
-                                            lineHeight: 1.4,
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 26.0, 0.0, 0.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 4.0, 0.0, 0.0),
+                                            child: Text(
+                                              '${formatNumber(
+                                                widget.coursesRow!.price! * 0.8,
+                                                formatType: FormatType.custom,
+                                                format: '#',
+                                                locale: '',
+                                              )} ₽',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        fontSize: 24.0,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        lineHeight: 1.4,
+                                                      ),
+                                            ),
                                           ),
+                                          Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    12.0, 4.0, 0.0, 0.0),
+                                            child: Text(
+                                              '${widget.coursesRow?.price?.toString()} ₽',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        fontSize: 16.0,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        lineHeight: 1.4,
+                                                      ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 30.0, 0.0, 0.0),
+                                      child: Text(
+                                        'Преподаватель курса ${widget.coursesRow?.instructorName}',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              color: Color(0xFF76787A),
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.bold,
+                                              lineHeight: 1.4,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                               Expanded(
+                                flex: 3,
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment:
@@ -221,8 +246,10 @@ class _BuyCourseWidgetState extends State<BuyCourseWidget> {
                                       child: ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(12.0),
-                                        child: Image.asset(
-                                          'assets/images/pian.png',
+                                        child: Image.network(
+                                          widget.coursesRow!.imageUrl!,
+                                          width: 150.0,
+                                          height: 150.0,
                                           fit: BoxFit.cover,
                                         ),
                                       ),
@@ -238,12 +265,29 @@ class _BuyCourseWidgetState extends State<BuyCourseWidget> {
                     Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 26.0, 0.0, 0.0),
-                      child: wrapWithModel(
-                        model: _model.buttonModel,
-                        updateCallback: () => setState(() {}),
-                        child: ButtonWidget(
-                          text: 'Оплатить',
-                          btnColor: Color(0xFFDEA5BA),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          context.pushNamed(
+                            'SuccessPage',
+                            queryParams: {
+                              'coursesRow': serializeParam(
+                                widget.coursesRow,
+                                ParamType.SupabaseRow,
+                              ),
+                            }.withoutNulls,
+                          );
+                        },
+                        child: wrapWithModel(
+                          model: _model.buttonModel,
+                          updateCallback: () => setState(() {}),
+                          child: ButtonWidget(
+                            text: 'Оплатить',
+                            btnColor: Color(0xFFDEA5BA),
+                          ),
                         ),
                       ),
                     ),

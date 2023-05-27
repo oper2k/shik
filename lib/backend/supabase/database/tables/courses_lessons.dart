@@ -32,4 +32,13 @@ class CoursesLessonsRow extends SupabaseDataRow {
 
   String? get videoUrl => getField<String>('video_url');
   set videoUrl(String? value) => setField<String>('video_url', value);
+
+  bool? get openStatus => getField<bool>('open_status');
+  set openStatus(bool? value) => setField<bool>('open_status', value);
+
+  int? get lessonNumber => getField<int>('lesson_number');
+  set lessonNumber(int? value) => setField<int>('lesson_number', value);
+
+  String? get imageUrl => getField<String>('image_url');
+  set imageUrl(String? value) => setField<String>('image_url', value);
 }

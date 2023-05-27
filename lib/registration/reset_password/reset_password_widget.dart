@@ -2,6 +2,7 @@ import '/auth/supabase_auth/auth_util.dart';
 import '/components/button_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -114,35 +115,40 @@ class _ResetPasswordWidgetState extends State<ResetPasswordWidget> {
                   width: double.infinity,
                   height: 52.0,
                   decoration: BoxDecoration(
-                    color: FlutterFlowTheme.of(context).secondaryBackground,
+                    color: FlutterFlowTheme.of(context).white,
                     borderRadius: BorderRadius.circular(12.0),
                   ),
                   child: Align(
                     alignment: AlignmentDirectional(0.0, 0.0),
                     child: TextFormField(
                       controller: _model.emailInputController,
+                      onChanged: (_) => EasyDebounce.debounce(
+                        '_model.emailInputController',
+                        Duration(milliseconds: 500),
+                        () => setState(() {}),
+                      ),
                       obscureText: false,
                       decoration: InputDecoration(
                         labelText: 'Email',
                         labelStyle:
-                            FlutterFlowTheme.of(context).labelSmall.override(
+                            FlutterFlowTheme.of(context).titleLarge.override(
                                   fontFamily: 'Inter',
-                                  color: Color(0xFF76787A),
-                                  fontSize: 14.0,
-                                  fontWeight: FontWeight.normal,
+                                  color: FlutterFlowTheme.of(context).accent2,
                                 ),
-                        hintStyle: FlutterFlowTheme.of(context).labelSmall,
                         enabledBorder: InputBorder.none,
                         focusedBorder: InputBorder.none,
                         errorBorder: InputBorder.none,
                         focusedErrorBorder: InputBorder.none,
-                        contentPadding:
-                            EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 0.0, 8.0),
+                        contentPadding: EdgeInsetsDirectional.fromSTEB(
+                            16.0, 8.0, 16.0, 8.0),
                       ),
                       style: FlutterFlowTheme.of(context).labelSmall.override(
                             fontFamily: 'Inter',
-                            color: FlutterFlowTheme.of(context).secondaryText,
+                            color: FlutterFlowTheme.of(context).black,
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.normal,
                           ),
+                      keyboardType: TextInputType.emailAddress,
                       validator: _model.emailInputControllerValidator
                           .asValidator(context),
                     ),

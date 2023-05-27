@@ -15,6 +15,7 @@ class SignInModel extends FlutterFlowModel {
   String? Function(BuildContext, String?)? emailInputControllerValidator;
   // State field(s) for PasswordInput widget.
   TextEditingController? passwordInputController;
+  late bool passwordInputVisibility;
   String? Function(BuildContext, String?)? passwordInputControllerValidator;
   // Model for button component.
   late ButtonModel buttonModel1;
@@ -24,6 +25,7 @@ class SignInModel extends FlutterFlowModel {
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
+    passwordInputVisibility = false;
     buttonModel1 = createModel(context, () => ButtonModel());
     buttonModel2 = createModel(context, () => ButtonModel());
   }

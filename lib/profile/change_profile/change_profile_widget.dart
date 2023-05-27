@@ -319,9 +319,9 @@ class _ChangeProfileWidgetState extends State<ChangeProfileWidget> {
                         EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                     child: Container(
                       width: double.infinity,
-                      height: 56.0,
+                      height: 52.0,
                       decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        color: FlutterFlowTheme.of(context).white,
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       child: Align(
@@ -335,35 +335,28 @@ class _ChangeProfileWidgetState extends State<ChangeProfileWidget> {
                           ),
                           obscureText: false,
                           decoration: InputDecoration(
+                            labelText: 'Имя',
                             labelStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
+                                .titleLarge
                                 .override(
-                                  fontFamily: 'Madelyn',
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
-                                  useGoogleFonts: false,
-                                ),
-                            hintStyle: FlutterFlowTheme.of(context)
-                                .labelMedium
-                                .override(
-                                  fontFamily: 'DeeDee',
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
-                                  useGoogleFonts: false,
+                                  fontFamily: 'Inter',
+                                  color: FlutterFlowTheme.of(context).accent2,
                                 ),
                             enabledBorder: InputBorder.none,
                             focusedBorder: InputBorder.none,
                             errorBorder: InputBorder.none,
                             focusedErrorBorder: InputBorder.none,
                             contentPadding: EdgeInsetsDirectional.fromSTEB(
-                                16.0, 8.0, 0.0, 8.0),
+                                16.0, 8.0, 16.0, 8.0),
                           ),
                           style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
+                              FlutterFlowTheme.of(context).labelSmall.override(
                                     fontFamily: 'Inter',
+                                    color: FlutterFlowTheme.of(context).black,
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.normal,
                                   ),
+                          keyboardType: TextInputType.name,
                           validator: _model.nameInputControllerValidator
                               .asValidator(context),
                         ),
@@ -375,9 +368,9 @@ class _ChangeProfileWidgetState extends State<ChangeProfileWidget> {
                         EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 0.0),
                     child: Container(
                       width: double.infinity,
-                      height: 56.0,
+                      height: 52.0,
                       decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
+                        color: FlutterFlowTheme.of(context).white,
                         borderRadius: BorderRadius.circular(12.0),
                       ),
                       child: TextFormField(
@@ -389,35 +382,26 @@ class _ChangeProfileWidgetState extends State<ChangeProfileWidget> {
                         ),
                         obscureText: false,
                         decoration: InputDecoration(
+                          labelText: 'Дата рождения',
                           labelStyle:
-                              FlutterFlowTheme.of(context).labelMedium.override(
-                                    fontFamily: 'Madelyn',
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold,
-                                    useGoogleFonts: false,
+                              FlutterFlowTheme.of(context).titleLarge.override(
+                                    fontFamily: 'Inter',
+                                    color: FlutterFlowTheme.of(context).accent2,
                                   ),
-                          hintStyle:
-                              FlutterFlowTheme.of(context).labelMedium.override(
-                                    fontFamily: 'DeeDee',
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold,
-                                    useGoogleFonts: false,
-                                  ),
+                          hintStyle: FlutterFlowTheme.of(context).titleLarge,
                           enabledBorder: InputBorder.none,
                           focusedBorder: InputBorder.none,
                           errorBorder: InputBorder.none,
                           focusedErrorBorder: InputBorder.none,
                           contentPadding: EdgeInsetsDirectional.fromSTEB(
-                              16.0, 14.0, 0.0, 8.0),
+                              16.0, 8.0, 0.0, 8.0),
                           prefixIcon: Icon(
                             FFIcons.kmaterialSymbolsCalendarMonthOutlineRounded,
+                            color: FlutterFlowTheme.of(context).black,
                           ),
                         ),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.normal,
-                            ),
+                        style: FlutterFlowTheme.of(context).titleLarge,
+                        keyboardType: TextInputType.datetime,
                         validator: _model.birthDateInputControllerValidator
                             .asValidator(context),
                         inputFormatters: [_model.birthDateInputMask],

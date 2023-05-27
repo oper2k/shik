@@ -1,3 +1,4 @@
+import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_video_player.dart';
@@ -8,7 +9,12 @@ import 'questions_model.dart';
 export 'questions_model.dart';
 
 class QuestionsWidget extends StatefulWidget {
-  const QuestionsWidget({Key? key}) : super(key: key);
+  const QuestionsWidget({
+    Key? key,
+    required this.feed5QuestionsRow,
+  }) : super(key: key);
+
+  final Feed5QuestionsRow? feed5QuestionsRow;
 
   @override
   _QuestionsWidgetState createState() => _QuestionsWidgetState();
@@ -115,7 +121,10 @@ class _QuestionsWidgetState extends State<QuestionsWidget> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  '5 вопросов педагогу фортепиано\nИветта Исааковна Юдович',
+                                  valueOrDefault<String>(
+                                    widget.feed5QuestionsRow?.title,
+                                    'Заголвоок',
+                                  ),
                                   style: FlutterFlowTheme.of(context)
                                       .bodyMedium
                                       .override(
@@ -128,8 +137,7 @@ class _QuestionsWidgetState extends State<QuestionsWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 20.0, 0.0, 0.0),
                                   child: FlutterFlowVideoPlayer(
-                                    path:
-                                        'https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4',
+                                    path: widget.feed5QuestionsRow!.videoUrl!,
                                     videoType: VideoType.network,
                                     autoPlay: false,
                                     looping: true,
@@ -142,69 +150,11 @@ class _QuestionsWidgetState extends State<QuestionsWidget> {
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 30.0, 0.0, 0.0),
                                   child: Text(
-                                    'Юдович Иветта Исааковна - преподаватель по классу фортепиано Детской музыкальной школы имени С.И.Танссва. Заслуженный работник культуры РФ, имеет звание «Лучший преподаватель детской школы искусств России», награждена Медалью ордена «За заслуги перед отечеством» II степени. ',
-                                    style: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .override(
-                                          fontFamily: 'Inter',
-                                          lineHeight: 1.4,
-                                        ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsetsDirectional.fromSTEB(
-                          24.0, 18.0, 24.0, 45.0),
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 1.0,
-                        decoration: BoxDecoration(
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              12.0, 16.0, 12.0, 18.0),
-                          child: SingleChildScrollView(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  '5 вопросов педагогу фортепиано\nИветта Исааковна Юдович',
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        fontSize: 13.0,
-                                        fontWeight: FontWeight.normal,
-                                      ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 20.0, 0.0, 0.0),
-                                  child: FlutterFlowVideoPlayer(
-                                    path:
-                                        'https://assets.mixkit.co/videos/preview/mixkit-forest-stream-in-the-sunlight-529-large.mp4',
-                                    videoType: VideoType.network,
-                                    autoPlay: false,
-                                    looping: true,
-                                    showControls: true,
-                                    allowFullScreen: true,
-                                    allowPlaybackSpeedMenu: false,
-                                  ),
-                                ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 30.0, 0.0, 0.0),
-                                  child: Text(
-                                    'Юдович Иветта Исааковна - преподаватель по классу фортепиано Детской музыкальной школы имени С.И.Танссва. Заслуженный работник культуры РФ, имеет звание «Лучший преподаватель детской школы искусств России», награждена Медалью ордена «За заслуги перед отечеством» II степени. ',
+                                    valueOrDefault<String>(
+                                      widget.feed5QuestionsRow
+                                          ?.educatorDescription,
+                                      'Описание преподавателя',
+                                    ),
                                     style: FlutterFlowTheme.of(context)
                                         .bodyMedium
                                         .override(

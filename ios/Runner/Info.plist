@@ -43,11 +43,15 @@
 	<true/>
 
 	<key>NSCameraUsageDescription</key>
-    <string>In order to take a picture or video, this app requires permission to access the camera.</string>
+    <string>Нам необходим доступ до вашей камеры чтобы вы могли загрузить свой аватар</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-    <string>In order to upload data, this app requires permission to access the photo library.</string>
+    <string>Нам необходим доступ до вашей галереи чтобы вы могли загрузить свой аватар</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-    <string>Пожалуйста, предоставьте доступ к геолокации</string>
+    <string>Пожалуйста, предоставьте доступ к геолокации чтобы мы могли показать вам ближайшие школы</string>
+	<key>PermissionGroupNotification</key>
+    <string>Мы будет присылать вам уведомления о новых курсах и тестах</string>
+	<key>NSMicrophoneUsageDescription</key>
+    <string>Нам необходим доступ до вашего микрофона чтобы вы могли проходить музыкальные тесты</string>
 
 
 	<key>UILaunchStoryboardName</key>
@@ -69,22 +73,6 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-<key>CFBundleURLTypes</key>
-  <array>
-    <dict>
-      <key>CFBundleURLSchemes</key>
-      <array>
-        <string>vk7645811</string>
-      </array>
-    </dict>
-  </array>
-  <key>LSApplicationQueriesSchemes</key>
-  <array>
-    <string>vk</string>
-    <string>vk-share</string>
-    <string>vkauthorize</string>
-  </array>
-  <key>VKAppId</key>
-  <string>7645811</string>
+
 </dict>
 </plist>

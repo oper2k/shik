@@ -26,9 +26,21 @@ class CoursesRow extends SupabaseDataRow {
   String? get imageUrl => getField<String>('image_url');
   set imageUrl(String? value) => setField<String>('image_url', value);
 
-  String? get description => getField<String>('description');
-  set description(String? value) => setField<String>('description', value);
+  String? get instructorDescription =>
+      getField<String>('instructor_description');
+  set instructorDescription(String? value) =>
+      setField<String>('instructor_description', value);
 
   int? get price => getField<int>('price');
   set price(int? value) => setField<int>('price', value);
+
+  String? get instructorName => getField<String>('instructor_name');
+  set instructorName(String? value) =>
+      setField<String>('instructor_name', value);
+
+  int? get lessonsCount => getField<int>('lessons_count');
+  set lessonsCount(int? value) => setField<int>('lessons_count', value);
+
+  String? get schoolAdress => getField<String>('school_adress');
+  set schoolAdress(String? value) => setField<String>('school_adress', value);
 }

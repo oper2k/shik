@@ -3,42 +3,48 @@ import 'package:flutter/widgets.dart';
 class FFIcons {
   FFIcons._();
 
+  static const String _icomoon111Family = 'Icomoon111';
   static const String _icomoonFamily = 'Icomoon';
 
+  // icomoon111
+  static const IconData kphUser =
+      IconData(0xe900, fontFamily: _icomoon111Family);
+
   // icomoon
+  static const IconData kgroup51321 =
+      IconData(0xe927, fontFamily: _icomoonFamily);
+  static const IconData kgroup51322 =
+      IconData(0xe968, fontFamily: _icomoonFamily);
   static const IconData kvector11 =
-      IconData(0xe915, fontFamily: _icomoonFamily);
+      IconData(0xe925, fontFamily: _icomoonFamily);
   static const IconData kvector12 =
       IconData(0xe916, fontFamily: _icomoonFamily);
   static const IconData ksystemUiconsCross1 =
       IconData(0xe917, fontFamily: _icomoonFamily);
   static const IconData kopenmojiMusicalScore =
-      IconData(0xe918, fontFamily: _icomoonFamily);
+      IconData(0xe924, fontFamily: _icomoonFamily);
   static const IconData kgroup51320 =
       IconData(0xe919, fontFamily: _icomoonFamily);
   static const IconData kgroup51301 =
       IconData(0xe91a, fontFamily: _icomoonFamily);
+  static const IconData ksign = IconData(0xe983, fontFamily: _icomoonFamily);
   static const IconData kgroup2 = IconData(0xe91d, fontFamily: _icomoonFamily);
+  static const IconData kcircus = IconData(0xe923, fontFamily: _icomoonFamily);
   static const IconData kfluentMdl2ReminderTime =
       IconData(0xe91e, fontFamily: _icomoonFamily);
+  static const IconData kiconamoonMicrophoneLight =
+      IconData(0xe986, fontFamily: _icomoonFamily);
   static const IconData kradixIconsMagicWand =
       IconData(0xe91f, fontFamily: _icomoonFamily);
-  static const IconData kiconamoonMicrophoneLight =
-      IconData(0xe920, fontFamily: _icomoonFamily);
+  static const IconData kuserIco = IconData(0xe920, fontFamily: _icomoonFamily);
   static const IconData kfluentMdl2MusicNote =
       IconData(0xe921, fontFamily: _icomoonFamily);
   static const IconData kcomponent19 =
       IconData(0xe922, fontFamily: _icomoonFamily);
-  static const IconData kcomponent151 =
-      IconData(0xe923, fontFamily: _icomoonFamily);
   static const IconData kcomponent15 =
-      IconData(0xe926, fontFamily: _icomoonFamily);
-  static const IconData kcomponent16 =
-      IconData(0xe927, fontFamily: _icomoonFamily);
-  static const IconData kcomponent17 =
-      IconData(0xe928, fontFamily: _icomoonFamily);
-  static const IconData kcomponent18 =
-      IconData(0xe929, fontFamily: _icomoonFamily);
+      IconData(0xe984, fontFamily: _icomoonFamily);
+  static const IconData kcomponent151 =
+      IconData(0xe985, fontFamily: _icomoonFamily);
   static const IconData kproperty1Variant3 =
       IconData(0xe92c, fontFamily: _icomoonFamily);
   static const IconData kgroup21 = IconData(0xe92e, fontFamily: _icomoonFamily);
@@ -97,6 +103,8 @@ class FFIcons {
   static const IconData kright6 = IconData(0xe901, fontFamily: _icomoonFamily);
   static const IconData kleft2 = IconData(0xe902, fontFamily: _icomoonFamily);
   static const IconData karrow = IconData(0xe903, fontFamily: _icomoonFamily);
+  static const IconData kiconParkOutlineCircus =
+      IconData(0xe954, fontFamily: _icomoonFamily);
   static const IconData kentypoNote =
       IconData(0xe94d, fontFamily: _icomoonFamily);
   static const IconData kmaterialSymbolsDoneRounded =
@@ -110,9 +118,6 @@ class FFIcons {
   static const IconData kmdiArt = IconData(0xe952, fontFamily: _icomoonFamily);
   static const IconData kmaterialSymbolsStar =
       IconData(0xe953, fontFamily: _icomoonFamily);
-  static const IconData kiconParkOutlineCircus =
-      IconData(0xe954, fontFamily: _icomoonFamily);
-  static const IconData kgroup3 = IconData(0xe955, fontFamily: _icomoonFamily);
   static const IconData kfa6SolidMasksTheater =
       IconData(0xe959, fontFamily: _icomoonFamily);
   static const IconData karcticonsMyapplist =
