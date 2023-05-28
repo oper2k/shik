@@ -71,13 +71,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, _) =>
-          appStateNotifier.loggedIn ? NewsWidget() : OnboardingWidget(),
+          appStateNotifier.loggedIn ? HomeWidget() : OnboardingWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? NewsWidget() : OnboardingWidget(),
+              appStateNotifier.loggedIn ? HomeWidget() : OnboardingWidget(),
         ),
         FFRoute(
           name: 'Onboarding',
@@ -92,7 +92,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'Profile',
           path: '/profile',
-          requireAuth: true,
           builder: (context, params) => ProfileWidget(),
         ),
         FFRoute(
@@ -106,9 +105,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => MapPageWidget(),
         ),
         FFRoute(
-          name: 'News',
-          path: '/news',
-          builder: (context, params) => NewsWidget(),
+          name: 'Home',
+          path: '/home',
+          builder: (context, params) => HomeWidget(),
         ),
         FFRoute(
           name: 'Interview',
@@ -317,7 +316,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'NotAuthorized',
           path: '/notAuthorized',
-          builder: (context, params) => NotAuthorizedWidget(),
+          builder: (context, params) => NotAuthorizedWidget(
+            activeTab: params.getParam('activeTab', ParamType.int),
+          ),
         ),
         FFRoute(
           name: 'Route1',

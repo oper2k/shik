@@ -297,7 +297,7 @@ class _RateWidgetState extends State<RateWidget> {
                                                                 .toList()
                                                                 .first
                                                                 .photoUrl,
-                                                            '0',
+                                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/ozl3rs92wddb/ph_user.png',
                                                           ),
                                                           fit: BoxFit.cover,
                                                         ),
@@ -553,7 +553,7 @@ class _RateWidgetState extends State<RateWidget> {
                                                                   String>(
                                                                 queryUsersChildItem
                                                                     .photoUrl,
-                                                                '0',
+                                                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/ozl3rs92wddb/ph_user.png',
                                                               ),
                                                               fit: BoxFit.cover,
                                                             ),
@@ -800,6 +800,11 @@ class _RateWidgetState extends State<RateWidget> {
                                         }),
                                       );
                                     },
+                                  ),
+                                  Container(
+                                    width: double.infinity,
+                                    height: 100.0,
+                                    decoration: BoxDecoration(),
                                   ),
                                 ],
                               ),

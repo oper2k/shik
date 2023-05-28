@@ -84,12 +84,21 @@ class _Wrong1WidgetState extends State<Wrong1Widget> {
                 Padding(
                   padding:
                       EdgeInsetsDirectional.fromSTEB(24.0, 46.0, 24.0, 6.0),
-                  child: wrapWithModel(
-                    model: _model.buttonModel,
-                    updateCallback: () => setState(() {}),
-                    child: ButtonWidget(
-                      text: 'Следующий вопрос',
-                      btnColor: FlutterFlowTheme.of(context).greenActive,
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      Navigator.pop(context);
+                    },
+                    child: wrapWithModel(
+                      model: _model.buttonModel,
+                      updateCallback: () => setState(() {}),
+                      child: ButtonWidget(
+                        text: 'Следующий вопрос',
+                        btnColor: FlutterFlowTheme.of(context).greenActive,
+                      ),
                     ),
                   ),
                 ),

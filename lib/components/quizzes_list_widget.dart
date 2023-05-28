@@ -2,6 +2,7 @@ import '/backend/supabase/supabase.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'quizzes_list_model.dart';
@@ -77,6 +78,11 @@ class _QuizzesListWidgetState extends State<QuizzesListWidget> {
                   _model.updatePage(() {
                     _model.myAnswer = 1;
                   });
+                  if (widget.feedQuizzesRow?.correctAnswer == 1) {
+                    HapticFeedback.mediumImpact();
+                  } else {
+                    return;
+                  }
                 },
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
@@ -122,7 +128,7 @@ class _QuizzesListWidgetState extends State<QuizzesListWidget> {
                               FlutterFlowTheme.of(context).secondaryBackground,
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: FlutterFlowTheme.of(context).titleColor,
+                            color: FlutterFlowTheme.of(context).primaryText,
                             width: 1.0,
                           ),
                         ),
@@ -143,7 +149,7 @@ class _QuizzesListWidgetState extends State<QuizzesListWidget> {
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
               child: InkWell(
                 splashColor: Colors.transparent,
                 focusColor: Colors.transparent,
@@ -153,6 +159,11 @@ class _QuizzesListWidgetState extends State<QuizzesListWidget> {
                   _model.updatePage(() {
                     _model.myAnswer = 2;
                   });
+                  if (widget.feedQuizzesRow?.correctAnswer == 2) {
+                    HapticFeedback.mediumImpact();
+                  } else {
+                    return;
+                  }
                 },
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
@@ -198,7 +209,7 @@ class _QuizzesListWidgetState extends State<QuizzesListWidget> {
                               FlutterFlowTheme.of(context).secondaryBackground,
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: FlutterFlowTheme.of(context).titleColor,
+                            color: FlutterFlowTheme.of(context).primaryText,
                             width: 1.0,
                           ),
                         ),
@@ -219,7 +230,7 @@ class _QuizzesListWidgetState extends State<QuizzesListWidget> {
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
               child: InkWell(
                 splashColor: Colors.transparent,
                 focusColor: Colors.transparent,
@@ -229,6 +240,11 @@ class _QuizzesListWidgetState extends State<QuizzesListWidget> {
                   _model.updatePage(() {
                     _model.myAnswer = 3;
                   });
+                  if (widget.feedQuizzesRow?.correctAnswer == 3) {
+                    HapticFeedback.mediumImpact();
+                  } else {
+                    return;
+                  }
                 },
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
@@ -274,7 +290,7 @@ class _QuizzesListWidgetState extends State<QuizzesListWidget> {
                               FlutterFlowTheme.of(context).secondaryBackground,
                           shape: BoxShape.circle,
                           border: Border.all(
-                            color: FlutterFlowTheme.of(context).titleColor,
+                            color: FlutterFlowTheme.of(context).primaryText,
                             width: 1.0,
                           ),
                         ),

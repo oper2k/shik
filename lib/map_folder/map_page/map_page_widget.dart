@@ -1,9 +1,12 @@
 import '/backend/supabase/supabase.dart';
 import '/components/map_component_widget.dart';
+import '/components/map_not_widget.dart';
 import '/components/tab_bar_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/map_folder/school_info/school_info_widget.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -76,7 +79,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
             return Container(
               width: double.infinity,
               decoration: BoxDecoration(
-                color: FlutterFlowTheme.of(context).secondaryBackground,
+                color: FlutterFlowTheme.of(context).primaryBackground,
               ),
               child: Stack(
                 children: [
@@ -84,7 +87,6 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                     wrapWithModel(
                       model: _model.mapComponentModel,
                       updateCallback: () => setState(() {}),
-                      updateOnChange: true,
                       child: MapComponentWidget(
                         mapRowList: queryMapMapRowList,
                       ),
@@ -92,87 +94,54 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                   if (_model.filterVisibility ?? true)
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 45.0, 24.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(24.0, 55.0, 24.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.end,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Expanded(
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 0.0, 24.0, 0.0),
-                              child: InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  setState(() {
-                                    _model.filterVisibility = false;
-                                  });
-                                },
-                                child: Container(
-                                  width: double.infinity,
-                                  height: 48.0,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .secondaryBackground,
-                                    borderRadius: BorderRadius.circular(12.0),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            16.0, 0.0, 0.0, 0.0),
-                                        child: Icon(
-                                          FFIcons.kicSharpSearch1,
-                                          color: FlutterFlowTheme.of(context)
-                                              .primaryText,
-                                          size: 24.0,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            8.0, 4.0, 0.0, 0.0),
-                                        child: Text(
-                                          'Поиск по карте',
-                                          style: FlutterFlowTheme.of(context)
-                                              .bodyLarge,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          InkWell(
-                            splashColor: Colors.transparent,
-                            focusColor: Colors.transparent,
-                            hoverColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
-                            onTap: () async {
-                              context.pushNamed('Profile');
-                            },
-                            child: Container(
-                              width: 40.0,
-                              height: 40.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                shape: BoxShape.circle,
-                              ),
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                setState(() {
+                                  _model.filterVisibility = false;
+                                });
+                              },
                               child: Container(
-                                width: 40.0,
-                                height: 40.0,
-                                clipBehavior: Clip.antiAlias,
+                                width: double.infinity,
+                                height: 48.0,
                                 decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  borderRadius: BorderRadius.circular(12.0),
                                 ),
-                                child: Image.asset(
-                                  'assets/images/profile.png',
-                                  fit: BoxFit.cover,
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          16.0, 0.0, 0.0, 0.0),
+                                      child: Icon(
+                                        FFIcons.kicSharpSearch1,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        size: 24.0,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          8.0, 0.0, 0.0, 0.0),
+                                      child: Text(
+                                        'Поиск по карте',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyLarge,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),
@@ -183,87 +152,136 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                   if (!_model.filterVisibility!)
                     Padding(
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 45.0, 0.0, 100.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 55.0, 0.0, 100.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 24.0, 0.0, 24.0, 0.0),
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 1.0,
-                              height: 48.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              child: TextFormField(
-                                controller: _model.searchInputController,
-                                onChanged: (_) => EasyDebounce.debounce(
-                                  '_model.searchInputController',
-                                  Duration(milliseconds: 500),
-                                  () => setState(() {}),
-                                ),
-                                autofocus: true,
-                                obscureText: false,
-                                decoration: InputDecoration(
-                                  labelText: 'Поиск по карте',
-                                  labelStyle: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        fontWeight: FontWeight.normal,
-                                        lineHeight: 1.4,
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Expanded(
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 24.0, 0.0),
+                                    child: Container(
+                                      width: MediaQuery.of(context).size.width *
+                                          1.0,
+                                      height: 48.0,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        borderRadius:
+                                            BorderRadius.circular(12.0),
                                       ),
-                                  hintStyle:
-                                      FlutterFlowTheme.of(context).labelMedium,
-                                  enabledBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1.0,
+                                      child: TextFormField(
+                                        controller:
+                                            _model.searchInputController,
+                                        onChanged: (_) => EasyDebounce.debounce(
+                                          '_model.searchInputController',
+                                          Duration(milliseconds: 100),
+                                          () => setState(() {}),
+                                        ),
+                                        obscureText: false,
+                                        decoration: InputDecoration(
+                                          labelText: 'Поиск по карте',
+                                          labelStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .bodyMedium
+                                                  .override(
+                                                    fontFamily: 'Inter',
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                    lineHeight: 1.4,
+                                                  ),
+                                          hintStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelMedium,
+                                          enabledBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                          ),
+                                          focusedBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                          ),
+                                          errorBorder: UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                          ),
+                                          focusedErrorBorder:
+                                              UnderlineInputBorder(
+                                            borderSide: BorderSide(
+                                              color: Color(0x00000000),
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                          ),
+                                          filled: true,
+                                          fillColor:
+                                              FlutterFlowTheme.of(context)
+                                                  .secondaryBackground,
+                                          prefixIcon: Icon(
+                                            FFIcons.kicSharpSearch1,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryText,
+                                          ),
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                        validator: _model
+                                            .searchInputControllerValidator
+                                            .asValidator(context),
+                                      ),
                                     ),
-                                    borderRadius: BorderRadius.circular(12.0),
-                                  ),
-                                  focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(12.0),
-                                  ),
-                                  errorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(12.0),
-                                  ),
-                                  focusedErrorBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Color(0x00000000),
-                                      width: 1.0,
-                                    ),
-                                    borderRadius: BorderRadius.circular(12.0),
-                                  ),
-                                  filled: true,
-                                  fillColor: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  prefixIcon: Icon(
-                                    FFIcons.kicSharpSearch1,
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryText,
                                   ),
                                 ),
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      fontWeight: FontWeight.normal,
+                                Container(
+                                  width: 48.0,
+                                  height: 48.0,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      setState(() {
+                                        _model.filterVisibility = true;
+                                      });
+                                    },
+                                    child: Icon(
+                                      FFIcons.ksystemUiconsCross1,
+                                      color: FlutterFlowTheme.of(context)
+                                          .secondaryText,
+                                      size: 24.0,
                                     ),
-                                validator: _model.searchInputControllerValidator
-                                    .asValidator(context),
-                              ),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           Padding(
@@ -288,6 +306,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                           onTap: () async {
                                             setState(() {
                                               _model.filterValue = null;
+                                              _model.filterValue2 = null;
                                             });
                                           },
                                           child: Container(
@@ -535,8 +554,342 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                               ),
                             ),
                           ),
-                          if (_model.filterValue == null ||
-                              _model.filterValue == '')
+                          Container(
+                            width: double.infinity,
+                            decoration: BoxDecoration(),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  24.0, 24.0, 24.0, 0.0),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  if (responsiveVisibility(
+                                    context: context,
+                                    phone: false,
+                                    tablet: false,
+                                    tabletLandscape: false,
+                                    desktop: false,
+                                  ))
+                                    GridView(
+                                      padding: EdgeInsets.zero,
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 5,
+                                        crossAxisSpacing: 10.0,
+                                        mainAxisSpacing: 10.0,
+                                        childAspectRatio: 1.0,
+                                      ),
+                                      primary: false,
+                                      shrinkWrap: true,
+                                      scrollDirection: Axis.vertical,
+                                      children: [
+                                        InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            setState(() {
+                                              _model.filterValue2 = 'Изо';
+                                            });
+                                          },
+                                          child: Container(
+                                            width: 57.0,
+                                            height: 57.0,
+                                            decoration: BoxDecoration(
+                                              color: Color(0xFFA3C8D8),
+                                              borderRadius:
+                                                  BorderRadius.circular(12.0),
+                                            ),
+                                            child: Icon(
+                                              FFIcons.kmdiArt,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .white,
+                                              size: 34.0,
+                                            ),
+                                          ),
+                                        ),
+                                        InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            setState(() {
+                                              _model.filterValue2 = 'Театр';
+                                            });
+                                          },
+                                          child: Container(
+                                            width: 57.0,
+                                            height: 57.0,
+                                            decoration: BoxDecoration(
+                                              color: Color(0xFFDBDBDB),
+                                              borderRadius:
+                                                  BorderRadius.circular(12.0),
+                                            ),
+                                            child: Icon(
+                                              FFIcons.kfa6SolidMasksTheater,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .white,
+                                              size: 30.0,
+                                            ),
+                                          ),
+                                        ),
+                                        InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            setState(() {
+                                              _model.filterValue2 = 'Хорео';
+                                            });
+                                          },
+                                          child: Container(
+                                            width: 57.0,
+                                            height: 57.0,
+                                            decoration: BoxDecoration(
+                                              color: Color(0xFFC7BBDC),
+                                              borderRadius:
+                                                  BorderRadius.circular(12.0),
+                                            ),
+                                            child: Icon(
+                                              FFIcons.kmdiShoeBallet,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .white,
+                                              size: 30.0,
+                                            ),
+                                          ),
+                                        ),
+                                        InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            setState(() {
+                                              _model.filterValue2 = 'Цирк';
+                                            });
+                                          },
+                                          child: Container(
+                                            width: 57.0,
+                                            height: 57.0,
+                                            decoration: BoxDecoration(
+                                              color: Color(0xFFDEA5BA),
+                                              borderRadius:
+                                                  BorderRadius.circular(12.0),
+                                            ),
+                                            child: Icon(
+                                              FFIcons.kiconParkOutlineCircus,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .white,
+                                              size: 30.0,
+                                            ),
+                                          ),
+                                        ),
+                                        InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            setState(() {
+                                              _model.filterValue2 = 'Музыка';
+                                            });
+                                          },
+                                          child: Container(
+                                            width: 57.0,
+                                            height: 57.0,
+                                            decoration: BoxDecoration(
+                                              color: Color(0xFFD1E4A4),
+                                              borderRadius:
+                                                  BorderRadius.circular(12.0),
+                                            ),
+                                            child: Icon(
+                                              FFIcons.ksubwayMusic,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .white,
+                                              size: 30.0,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Expanded(
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 6.0, 5.0, 0.0),
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              setState(() {
+                                                _model.filterValue2 = 'Музыка';
+                                              });
+                                            },
+                                            child: Text(
+                                              'музыка',
+                                              textAlign: TextAlign.center,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        lineHeight: 1.4,
+                                                      ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  5.0, 6.0, 5.0, 0.0),
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              setState(() {
+                                                _model.filterValue2 = 'Изо';
+                                              });
+                                            },
+                                            child: Text(
+                                              'изо',
+                                              textAlign: TextAlign.center,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        lineHeight: 1.4,
+                                                      ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  5.0, 6.0, 5.0, 0.0),
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              setState(() {
+                                                _model.filterValue2 = 'Театр';
+                                              });
+                                            },
+                                            child: Text(
+                                              'театр',
+                                              textAlign: TextAlign.center,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        lineHeight: 1.4,
+                                                      ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  5.0, 6.0, 5.0, 0.0),
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              setState(() {
+                                                _model.filterValue2 = 'Хорео';
+                                              });
+                                            },
+                                            child: Text(
+                                              'хорео',
+                                              textAlign: TextAlign.center,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        lineHeight: 1.4,
+                                                      ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  5.0, 6.0, 0.0, 0.0),
+                                          child: InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              setState(() {
+                                                _model.filterValue2 = 'Цирк';
+                                              });
+                                            },
+                                            child: Text(
+                                              'цирк',
+                                              textAlign: TextAlign.center,
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                        lineHeight: 1.4,
+                                                      ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          if (!((_model.filterValue != null &&
+                                  _model.filterValue != '') ||
+                              (_model.filterValue2 != null &&
+                                  _model.filterValue2 != '')))
                             Expanded(
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
@@ -545,6 +898,9 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                   builder: (context) {
                                     final mapChild =
                                         queryMapMapRowList.toList();
+                                    if (mapChild.isEmpty) {
+                                      return MapNotWidget();
+                                    }
                                     return ListView.builder(
                                       padding: EdgeInsets.zero,
                                       shrinkWrap: true,
@@ -553,203 +909,221 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                       itemBuilder: (context, mapChildIndex) {
                                         final mapChildItem =
                                             mapChild[mapChildIndex];
-                                        return Padding(
-                                          padding:
-                                              EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 20.0),
-                                          child: InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              setState(() {
-                                                _model.filterVisibility = true;
-                                              });
-                                              await showModalBottomSheet(
-                                                isScrollControlled: true,
-                                                backgroundColor:
-                                                    Colors.transparent,
-                                                context: context,
-                                                builder: (bottomSheetContext) {
-                                                  return GestureDetector(
-                                                    onTap: () =>
-                                                        FocusScope.of(context)
-                                                            .requestFocus(
-                                                                _unfocusNode),
-                                                    child: Padding(
-                                                      padding: MediaQuery.of(
-                                                              bottomSheetContext)
-                                                          .viewInsets,
-                                                      child: SchoolInfoWidget(
-                                                        current: mapChildItem,
+                                        return Visibility(
+                                          visible: functions.showSearchResult(
+                                                  valueOrDefault<String>(
+                                                    _model.searchInputController
+                                                        .text,
+                                                    '0',
+                                                  ),
+                                                  valueOrDefault<String>(
+                                                    mapChildItem.title,
+                                                    '0',
+                                                  ),
+                                                  valueOrDefault<String>(
+                                                    mapChildItem.adress,
+                                                    '0',
+                                                  )) ??
+                                              true,
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 20.0),
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                await showModalBottomSheet(
+                                                  isScrollControlled: true,
+                                                  backgroundColor:
+                                                      Colors.transparent,
+                                                  context: context,
+                                                  builder:
+                                                      (bottomSheetContext) {
+                                                    return GestureDetector(
+                                                      onTap: () =>
+                                                          FocusScope.of(context)
+                                                              .requestFocus(
+                                                                  _unfocusNode),
+                                                      child: Padding(
+                                                        padding: MediaQuery.of(
+                                                                bottomSheetContext)
+                                                            .viewInsets,
+                                                        child: SchoolInfoWidget(
+                                                          current: mapChildItem,
+                                                        ),
                                                       ),
-                                                    ),
-                                                  );
-                                                },
-                                              ).then(
-                                                  (value) => setState(() {}));
-
-                                              setState(() {
-                                                _model.filterVisibility = false;
-                                              });
-                                            },
-                                            child: Container(
-                                              width: double.infinity,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryBackground,
-                                                borderRadius:
-                                                    BorderRadius.circular(12.0),
-                                              ),
-                                              child: Padding(
-                                                padding: EdgeInsetsDirectional
-                                                    .fromSTEB(
-                                                        16.0, 24.0, 16.0, 32.0),
-                                                child: Column(
-                                                  mainAxisSize:
-                                                      MainAxisSize.max,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      valueOrDefault<String>(
-                                                        mapChildItem.title,
-                                                        'Заголовок',
-                                                      ),
-                                                      style: FlutterFlowTheme
-                                                              .of(context)
-                                                          .bodyMedium
-                                                          .override(
-                                                            fontFamily: 'Inter',
-                                                            fontSize: 16.0,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            lineHeight: 1.4,
-                                                          ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  22.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Text(
-                                                            valueOrDefault<
-                                                                String>(
-                                                              mapChildItem
-                                                                  .adress,
-                                                              'Заголовок',
+                                                    );
+                                                  },
+                                                ).then(
+                                                    (value) => setState(() {}));
+                                              },
+                                              child: Container(
+                                                width: double.infinity,
+                                                decoration: BoxDecoration(
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryBackground,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          12.0),
+                                                ),
+                                                child: Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(16.0, 24.0,
+                                                          16.0, 32.0),
+                                                  child: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.max,
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: [
+                                                      Text(
+                                                        valueOrDefault<String>(
+                                                          mapChildItem.title,
+                                                          'Заголовок',
+                                                        ),
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .bodyMedium
+                                                            .override(
+                                                              fontFamily:
+                                                                  'Inter',
+                                                              fontSize: 16.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              lineHeight: 1.4,
                                                             ),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Inter',
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .normal,
-                                                                  lineHeight:
-                                                                      1.4,
-                                                                ),
-                                                          ),
-                                                          Icon(
-                                                            FFIcons
-                                                                .kclarityMapMarkerLine,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primaryText,
-                                                            size: 24.0,
-                                                          ),
-                                                        ],
                                                       ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  8.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Text(
-                                                        'Ежедневно 09:00-21:00',
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Inter',
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .normal,
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    22.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Expanded(
+                                                              child:
+                                                                  AutoSizeText(
+                                                                valueOrDefault<
+                                                                    String>(
+                                                                  mapChildItem
+                                                                      .adress,
+                                                                  'Заголовок',
                                                                 ),
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  22.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.max,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .end,
-                                                        children: [
-                                                          Text(
-                                                            valueOrDefault<
-                                                                String>(
-                                                              mapChildItem
-                                                                  .phone,
-                                                              'Телефон',
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Inter',
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .normal,
+                                                                      lineHeight:
+                                                                          1.4,
+                                                                    ),
+                                                              ),
                                                             ),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Inter',
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .normal,
-                                                                  lineHeight:
-                                                                      1.4,
-                                                                ),
-                                                          ),
-                                                          Icon(
-                                                            FFIcons.kphPhone,
-                                                            color: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .primaryText,
-                                                            size: 24.0,
-                                                          ),
-                                                        ],
+                                                            Icon(
+                                                              FFIcons
+                                                                  .kclarityMapMarkerLine,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryText,
+                                                              size: 24.0,
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ],
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    8.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child: Text(
+                                                          'Ежедневно 09:00-21:00',
+                                                          style: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .bodyMedium
+                                                              .override(
+                                                                fontFamily:
+                                                                    'Inter',
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .normal,
+                                                              ),
+                                                        ),
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    22.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        child: Row(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceBetween,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                              valueOrDefault<
+                                                                  String>(
+                                                                mapChildItem
+                                                                    .phone,
+                                                                'Телефон',
+                                                              ),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Inter',
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
+                                                                    lineHeight:
+                                                                        1.4,
+                                                                  ),
+                                                            ),
+                                                            Icon(
+                                                              FFIcons.kphPhone,
+                                                              color: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .primaryText,
+                                                              size: 24.0,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -761,8 +1135,10 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                 ),
                               ),
                             ),
-                          if (_model.filterValue != null &&
-                              _model.filterValue != '')
+                          if ((_model.filterValue != null &&
+                                  _model.filterValue != '') ||
+                              (_model.filterValue2 != null &&
+                                  _model.filterValue2 != ''))
                             Expanded(
                               child: Padding(
                                 padding: EdgeInsetsDirectional.fromSTEB(
@@ -771,7 +1147,10 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                   builder: (context) {
                                     final mapChild = queryMapMapRowList
                                         .where((e) =>
-                                            e.category == _model.filterValue)
+                                            (e.category ==
+                                                _model.filterValue) ||
+                                            (e.profession ==
+                                                _model.filterValue2))
                                         .toList();
                                     return ListView.builder(
                                       padding: EdgeInsets.zero,
@@ -870,30 +1249,32 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                                             MainAxisSize.max,
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
-                                                                .spaceBetween,
+                                                                .start,
                                                         crossAxisAlignment:
                                                             CrossAxisAlignment
                                                                 .end,
                                                         children: [
-                                                          Text(
-                                                            valueOrDefault<
-                                                                String>(
-                                                              mapChildItem
-                                                                  .adress,
-                                                              'Адресс',
+                                                          Expanded(
+                                                            child: AutoSizeText(
+                                                              valueOrDefault<
+                                                                  String>(
+                                                                mapChildItem
+                                                                    .adress,
+                                                                'Адресс',
+                                                              ),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Inter',
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
+                                                                    lineHeight:
+                                                                        1.4,
+                                                                  ),
                                                             ),
-                                                            style: FlutterFlowTheme
-                                                                    .of(context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Inter',
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .normal,
-                                                                  lineHeight:
-                                                                      1.4,
-                                                                ),
                                                           ),
                                                           Icon(
                                                             FFIcons
@@ -999,45 +1380,6 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                       updateCallback: () => setState(() {}),
                       child: TabBarWidget(
                         activeTab: 2,
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: AlignmentDirectional(1.0, 0.65),
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 24.0, 0.0),
-                      child: Container(
-                        width: 70.0,
-                        height: 70.0,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).greenActive,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              FFIcons.kclarityMapMarkerLine1,
-                              color: Colors.black,
-                              size: 24.0,
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 4.0, 0.0, 0.0),
-                              child: Text(
-                                'Где я?',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      fontWeight: FontWeight.normal,
-                                    ),
-                              ),
-                            ),
-                          ],
-                        ),
                       ),
                     ),
                   ),

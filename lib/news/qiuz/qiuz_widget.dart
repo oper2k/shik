@@ -114,62 +114,59 @@ class _QiuzWidgetState extends State<QiuzWidget> {
                                 ),
                           ),
                         ),
-                        Align(
-                          alignment: AlignmentDirectional(1.0, 0.0),
-                          child: Container(
-                            width: 44.0,
-                            height: 44.0,
-                            decoration: BoxDecoration(),
-                            child: Align(
-                              alignment: AlignmentDirectional(1.0, 0.0),
-                              child: Icon(
-                                FFIcons.kicSharpSearch1,
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                size: 24.0,
-                              ),
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   ),
                   Flexible(
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                      child: Builder(
-                        builder: (context) {
-                          final queryQuizzesChild =
-                              queryQuizzesFeedQuizzesRowList.toList();
-                          return SingleChildScrollView(
-                            child: Column(
-                              mainAxisSize: MainAxisSize.max,
-                              children: List.generate(queryQuizzesChild.length,
-                                  (queryQuizzesChildIndex) {
-                                final queryQuizzesChildItem =
-                                    queryQuizzesChild[queryQuizzesChildIndex];
-                                return Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      0.0, 16.0, 0.0, 0.0),
-                                  child: wrapWithModel(
-                                    model: _model.quizzesListModels.getModel(
-                                      queryQuizzesChildIndex.toString(),
-                                      queryQuizzesChildIndex,
-                                    ),
-                                    updateCallback: () => setState(() {}),
-                                    updateOnChange: true,
-                                    child: QuizzesListWidget(
-                                      key: Key(
-                                        'Keyx2m_${queryQuizzesChildIndex.toString()}',
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                24.0, 0.0, 24.0, 0.0),
+                            child: Builder(
+                              builder: (context) {
+                                final queryQuizzesChild =
+                                    queryQuizzesFeedQuizzesRowList.toList();
+                                return Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children:
+                                      List.generate(queryQuizzesChild.length,
+                                          (queryQuizzesChildIndex) {
+                                    final queryQuizzesChildItem =
+                                        queryQuizzesChild[
+                                            queryQuizzesChildIndex];
+                                    return Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 16.0, 0.0, 0.0),
+                                      child: wrapWithModel(
+                                        model:
+                                            _model.quizzesListModels.getModel(
+                                          queryQuizzesChildIndex.toString(),
+                                          queryQuizzesChildIndex,
+                                        ),
+                                        updateCallback: () => setState(() {}),
+                                        updateOnChange: true,
+                                        child: QuizzesListWidget(
+                                          key: Key(
+                                            'Keyx2m_${queryQuizzesChildIndex.toString()}',
+                                          ),
+                                          feedQuizzesRow: queryQuizzesChildItem,
+                                        ),
                                       ),
-                                      feedQuizzesRow: queryQuizzesChildItem,
-                                    ),
-                                  ),
+                                    );
+                                  }),
                                 );
-                              }),
+                              },
                             ),
-                          );
-                        },
+                          ),
+                          Container(
+                            width: double.infinity,
+                            height: 60.0,
+                            decoration: BoxDecoration(),
+                          ),
+                        ],
                       ),
                     ),
                   ),

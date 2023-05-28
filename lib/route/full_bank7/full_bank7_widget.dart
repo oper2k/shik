@@ -191,99 +191,107 @@ class _FullBank7WidgetState extends State<FullBank7Widget> {
                             ],
                           ),
                         ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Container(
-                              width: 19.0,
-                              height: 19.0,
-                              decoration: BoxDecoration(
-                                color: Color(0xFF11E666),
-                                shape: BoxShape.circle,
-                              ),
-                              child: Icon(
-                                FFIcons.kmaterialSymbolsDoneRounded,
-                                color: FlutterFlowTheme.of(context).white,
-                                size: 16.0,
-                              ),
-                            ),
-                            Container(
-                              width: 19.0,
-                              height: 19.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  color:
-                                      FlutterFlowTheme.of(context).titleColor,
-                                  width: 1.0,
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 10.0, 0.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 19.0,
+                                height: 19.0,
+                                decoration: BoxDecoration(
+                                  color: Color(0xFF11E666),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  FFIcons.kmaterialSymbolsDoneRounded,
+                                  color: FlutterFlowTheme.of(context).white,
+                                  size: 16.0,
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  12.0, 0.0, 0.0, 0.0),
-                              child: Text(
-                                'Классическая музыка',
-                                style: FlutterFlowTheme.of(context)
-                                    .labelSmall
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.normal,
-                                    ),
+                              Container(
+                                width: 19.0,
+                                height: 19.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color:
+                                        FlutterFlowTheme.of(context).titleColor,
+                                    width: 1.0,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ],
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    12.0, 0.0, 0.0, 0.0),
+                                child: Text(
+                                  'Классическая музыка',
+                                  style: FlutterFlowTheme.of(context)
+                                      .labelSmall
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        fontSize: 14.0,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                        Row(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Container(
-                              width: 19.0,
-                              height: 19.0,
-                              decoration: BoxDecoration(
-                                color: Color(0xFF11E666),
-                                shape: BoxShape.circle,
-                              ),
-                              child: Icon(
-                                FFIcons.kmaterialSymbolsDoneRounded,
-                                color: FlutterFlowTheme.of(context).white,
-                                size: 16.0,
-                              ),
-                            ),
-                            Container(
-                              width: 19.0,
-                              height: 19.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                shape: BoxShape.circle,
-                                border: Border.all(
-                                  color:
-                                      FlutterFlowTheme.of(context).titleColor,
-                                  width: 1.0,
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              0.0, 10.0, 0.0, 0.0),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 19.0,
+                                height: 19.0,
+                                decoration: BoxDecoration(
+                                  color: Color(0xFF11E666),
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Icon(
+                                  FFIcons.kmaterialSymbolsDoneRounded,
+                                  color: FlutterFlowTheme.of(context).white,
+                                  size: 16.0,
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  12.0, 0.0, 0.0, 0.0),
-                              child: Text(
-                                'Микс',
-                                style: FlutterFlowTheme.of(context)
-                                    .labelSmall
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      fontSize: 14.0,
-                                      fontWeight: FontWeight.normal,
-                                    ),
+                              Container(
+                                width: 19.0,
+                                height: 19.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color:
+                                        FlutterFlowTheme.of(context).titleColor,
+                                    width: 1.0,
+                                  ),
+                                ),
                               ),
-                            ),
-                          ],
+                              Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    12.0, 0.0, 0.0, 0.0),
+                                child: Text(
+                                  'Микс',
+                                  style: FlutterFlowTheme.of(context)
+                                      .labelSmall
+                                      .override(
+                                        fontFamily: 'Inter',
+                                        fontSize: 14.0,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),

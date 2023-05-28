@@ -88,12 +88,7 @@ class _PlaylistWidgetState extends State<PlaylistWidget> {
                     child: Stack(
                       children: [
                         ClipRRect(
-                          borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(12.0),
-                            bottomRight: Radius.circular(12.0),
-                            topLeft: Radius.circular(0.0),
-                            topRight: Radius.circular(0.0),
-                          ),
+                          borderRadius: BorderRadius.circular(0.0),
                           child: Image.network(
                             widget.playlistsRow!.imageUrl!,
                             width: double.infinity,
@@ -137,23 +132,6 @@ class _PlaylistWidgetState extends State<PlaylistWidget> {
                                   color: FlutterFlowTheme.of(context).white,
                                   lineHeight: 1.4,
                                 ),
-                          ),
-                        ),
-                        Align(
-                          alignment: AlignmentDirectional(1.0, 0.0),
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 26.0, 0.0),
-                            child: Container(
-                              width: 40.0,
-                              height: 40.0,
-                              decoration: BoxDecoration(),
-                              child: Icon(
-                                FFIcons.kicSharpSearch1,
-                                color: FlutterFlowTheme.of(context).white,
-                                size: 24.0,
-                              ),
-                            ),
                           ),
                         ),
                       ],

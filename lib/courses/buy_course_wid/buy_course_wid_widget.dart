@@ -1,5 +1,6 @@
 import '/backend/supabase/supabase.dart';
 import '/components/button_widget.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
@@ -62,11 +63,30 @@ class _BuyCourseWidWidgetState extends State<BuyCourseWidWidget> {
           borderRadius: BorderRadius.circular(12.0),
         ),
         child: Padding(
-          padding: EdgeInsetsDirectional.fromSTEB(22.0, 0.0, 22.0, 0.0),
+          padding: EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 24.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  FlutterFlowIconButton(
+                    borderRadius: 20.0,
+                    borderWidth: 1.0,
+                    buttonSize: 40.0,
+                    icon: Icon(
+                      FFIcons.ksystemUiconsCross1,
+                      color: FlutterFlowTheme.of(context).black,
+                      size: 30.0,
+                    ),
+                    onPressed: () async {
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              ),
               Text(
                 'Полный курс доступен \nтолько после покупки',
                 textAlign: TextAlign.center,

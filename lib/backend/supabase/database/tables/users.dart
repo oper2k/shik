@@ -38,4 +38,10 @@ class UsersRow extends SupabaseDataRow {
 
   int? get rating => getField<int>('rating');
   set rating(int? value) => setField<int>('rating', value);
+
+  int? get role => getField<int>('role');
+  set role(int? value) => setField<int>('role', value);
+
+  String? get email => getField<String>('email');
+  set email(String? value) => setField<String>('email', value);
 }

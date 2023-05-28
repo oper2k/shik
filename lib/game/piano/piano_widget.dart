@@ -53,6 +53,18 @@ class _PianoWidgetState extends State<PianoWidget>
         ),
       ],
     ),
+    'containerOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+      ],
+    ),
   };
 
   @override
@@ -171,103 +183,168 @@ class _PianoWidgetState extends State<PianoWidget>
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
                             24.0, 24.0, 24.0, 24.0),
-                        child: Row(
+                        child: Column(
                           mainAxisSize: MainAxisSize.max,
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(8.0),
-                              child: Image.network(
-                                () {
-                                  if (_model.noteNumber == 1) {
-                                    return 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/gzqd1x2plsjd/1.jpg';
-                                  } else if (_model.noteNumber == 2) {
-                                    return 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/ubq41hsprrd9/2.jpg';
-                                  } else {
-                                    return '11';
-                                  }
-                                }(),
-                                width: 148.0,
-                                height: 150.0,
-                                fit: BoxFit.contain,
-                              ),
-                            ).animateOnPageLoad(
-                                animationsMap['imageOnPageLoadAnimation']!),
-                            Column(
+                            Row(
                               mainAxisSize: MainAxisSize.max,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                Container(
-                                  width: 220.0,
-                                  child: Stack(
-                                    alignment: AlignmentDirectional(0.0, 1.0),
-                                    children: [
-                                      FlutterFlowAudioPlayer(
-                                        audio: Audio.network(
-                                          () {
-                                            if (_model.noteNumber == 1) {
-                                              return 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/2nftemyqo81r/zvuk-notyi-do.mp3';
-                                            } else if (_model.noteNumber == 2) {
-                                              return 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/rnfeudx1z5kp/zvuk-notyi-re.mp3';
-                                            } else {
-                                              return 'https://filesamples.com/samples/audio/mp3/sample3.mp3';
-                                            }
-                                          }(),
-                                          metas: Metas(
-                                            id: 'sample3.mp3-cb8ccbfe',
-                                            title: 'Какая это нота?',
-                                          ),
-                                        ),
-                                        titleTextStyle:
-                                            FlutterFlowTheme.of(context)
-                                                .titleLarge
-                                                .override(
-                                                  fontFamily: 'Inter',
-                                                  fontSize: 20.0,
-                                                  lineHeight: 1.0,
-                                                ),
-                                        playbackDurationTextStyle:
-                                            FlutterFlowTheme.of(context)
-                                                .bodyLarge
-                                                .override(
-                                                  fontFamily: 'Inter',
-                                                  fontSize: 0.0,
-                                                  lineHeight: 1.7,
-                                                ),
-                                        fillColor: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                        playbackButtonColor:
-                                            FlutterFlowTheme.of(context)
-                                                .primary,
-                                        activeTrackColor:
-                                            FlutterFlowTheme.of(context)
-                                                .alternate,
-                                        elevation: 0.0,
-                                      ).animateOnPageLoad(animationsMap[
-                                          'audioPlayerOnPageLoadAnimation']!),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.network(
+                                    () {
+                                      if (_model.noteNumber == 1) {
+                                        return 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/gzqd1x2plsjd/1.jpg';
+                                      } else if (_model.noteNumber == 2) {
+                                        return 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/ubq41hsprrd9/2.jpg';
+                                      } else {
+                                        return '11';
+                                      }
+                                    }(),
+                                    width: 148.0,
+                                    height: 150.0,
+                                    fit: BoxFit.contain,
+                                  ),
+                                ).animateOnPageLoad(
+                                    animationsMap['imageOnPageLoadAnimation']!),
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    if (responsiveVisibility(
+                                      context: context,
+                                      phone: false,
+                                      tablet: false,
+                                      tabletLandscape: false,
+                                      desktop: false,
+                                    ))
                                       Container(
-                                        width: double.infinity,
-                                        height: 25.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
+                                        width: 220.0,
+                                        child: Stack(
+                                          alignment:
+                                              AlignmentDirectional(0.0, 1.0),
+                                          children: [
+                                            FlutterFlowAudioPlayer(
+                                              audio: Audio.network(
+                                                () {
+                                                  if (_model.noteNumber == 1) {
+                                                    return 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/2nftemyqo81r/zvuk-notyi-do.mp3';
+                                                  } else if (_model
+                                                          .noteNumber ==
+                                                      2) {
+                                                    return 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/rnfeudx1z5kp/zvuk-notyi-re.mp3';
+                                                  } else {
+                                                    return 'https://filesamples.com/samples/audio/mp3/sample3.mp3';
+                                                  }
+                                                }(),
+                                                metas: Metas(
+                                                  id: 'sample3.mp3-cb8ccbfe',
+                                                  title: 'Какая это нота?',
+                                                ),
+                                              ),
+                                              titleTextStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .titleLarge
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        fontSize: 20.0,
+                                                        lineHeight: 1.0,
+                                                      ),
+                                              playbackDurationTextStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyLarge
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        fontSize: 0.0,
+                                                        lineHeight: 1.7,
+                                                      ),
+                                              fillColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .secondaryBackground,
+                                              playbackButtonColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                              activeTrackColor:
+                                                  FlutterFlowTheme.of(context)
+                                                      .alternate,
+                                              elevation: 0.0,
+                                            ).animateOnPageLoad(animationsMap[
+                                                'audioPlayerOnPageLoadAnimation']!),
+                                            Container(
+                                              width: double.infinity,
+                                              height: 25.0,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        _model.soundPlayer1 ??= AudioPlayer();
+                                        if (_model.soundPlayer1!.playing) {
+                                          await _model.soundPlayer1!.stop();
+                                        }
+                                        _model.soundPlayer1!.setVolume(1.0);
+                                        _model.soundPlayer1!
+                                            .setUrl(_model.mp3!)
+                                            .then((_) =>
+                                                _model.soundPlayer1!.play());
+                                      },
+                                      child: Container(
+                                        width: 80.0,
+                                        height: 80.0,
+                                        decoration: BoxDecoration(
+                                          color: Color(0xFFA3C8D8),
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Icon(
+                                          FFIcons.kzondiconsPlayOutline,
+                                          color: FlutterFlowTheme.of(context)
+                                              .white,
+                                          size: 45.0,
+                                        ),
+                                      ),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'containerOnPageLoadAnimation']!),
+                                  ],
                                 ),
-                                Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
-                                      16.0, 0.0, 0.0, 0.0),
-                                  child: Text(
-                                    'Угаданных подряд нот: ${valueOrDefault<String>(
-                                      _model.gameNumber?.toString(),
-                                      '0',
-                                    )}',
+                              ],
+                            ),
+                            Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 16.0, 0.0, 0.0),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Угаданных подряд нот:',
                                     style:
                                         FlutterFlowTheme.of(context).labelSmall,
                                   ),
-                                ),
-                              ],
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        6.0, 0.0, 0.0, 0.0),
+                                    child: Text(
+                                      valueOrDefault<String>(
+                                        _model.gameNumber?.toString(),
+                                        '0',
+                                      ),
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelSmall,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ],
                         ),
@@ -288,6 +365,17 @@ class _PianoWidgetState extends State<PianoWidget>
                           _model.startGame = false;
                           _model.noteNumber = random_data.randomInteger(1, 2);
                         });
+                        if (_model.noteNumber == 1) {
+                          setState(() {
+                            _model.mp3 =
+                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/2nftemyqo81r/zvuk-notyi-do.mp3';
+                          });
+                        } else if (_model.noteNumber == 2) {
+                          setState(() {
+                            _model.mp3 =
+                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/rnfeudx1z5kp/zvuk-notyi-re.mp3';
+                          });
+                        }
                       },
                       child: wrapWithModel(
                         model: _model.buttonModel,
@@ -364,21 +452,28 @@ class _PianoWidgetState extends State<PianoWidget>
                                     setState(() {
                                       _model.key = 1;
                                     });
-                                    _model.soundPlayer1 ??= AudioPlayer();
-                                    if (_model.soundPlayer1!.playing) {
-                                      await _model.soundPlayer1!.stop();
+                                    await Future.delayed(
+                                        const Duration(milliseconds: 100));
+                                    _model.soundPlayer2 ??= AudioPlayer();
+                                    if (_model.soundPlayer2!.playing) {
+                                      await _model.soundPlayer2!.stop();
                                     }
-                                    _model.soundPlayer1!.setVolume(1.0);
-                                    _model.soundPlayer1!
+                                    _model.soundPlayer2!.setVolume(1.0);
+                                    _model.soundPlayer2!
                                         .setUrl(
                                             'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/2nftemyqo81r/zvuk-notyi-do.mp3')
                                         .then(
-                                            (_) => _model.soundPlayer1!.play());
+                                            (_) => _model.soundPlayer2!.play());
 
-                                    await Future.delayed(
-                                        const Duration(milliseconds: 300));
-                                    if (!_model.startGame!) {
+                                    if (_model.startGame!) {
+                                      setState(() {
+                                        _model.key = 0;
+                                      });
+                                    } else {
                                       if (_model.key == _model.noteNumber) {
+                                        setState(() {
+                                          _model.key = 0;
+                                        });
                                         await showDialog(
                                           context: context,
                                           builder: (alertDialogContext) {
@@ -402,6 +497,9 @@ class _PianoWidgetState extends State<PianoWidget>
                                               _model.gameNumber! + 1;
                                         });
                                       } else {
+                                        setState(() {
+                                          _model.key = 0;
+                                        });
                                         await showDialog(
                                           context: context,
                                           builder: (alertDialogContext) {
@@ -420,13 +518,14 @@ class _PianoWidgetState extends State<PianoWidget>
                                         );
                                         setState(() {
                                           _model.startGame = false;
-                                          _model.gameNumber = null;
+                                          _model.gameNumber = 0;
                                         });
                                       }
+
+                                      setState(() {
+                                        _model.key = 0;
+                                      });
                                     }
-                                    setState(() {
-                                      _model.key = 0;
-                                    });
                                   },
                                   child: Container(
                                     width: double.infinity,
@@ -536,16 +635,16 @@ class _PianoWidgetState extends State<PianoWidget>
                                     setState(() {
                                       _model.key = 2;
                                     });
-                                    _model.soundPlayer2 ??= AudioPlayer();
-                                    if (_model.soundPlayer2!.playing) {
-                                      await _model.soundPlayer2!.stop();
+                                    _model.soundPlayer3 ??= AudioPlayer();
+                                    if (_model.soundPlayer3!.playing) {
+                                      await _model.soundPlayer3!.stop();
                                     }
-                                    _model.soundPlayer2!.setVolume(1.0);
-                                    _model.soundPlayer2!
+                                    _model.soundPlayer3!.setVolume(1.0);
+                                    _model.soundPlayer3!
                                         .setUrl(
                                             'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/rnfeudx1z5kp/zvuk-notyi-re.mp3')
                                         .then(
-                                            (_) => _model.soundPlayer2!.play());
+                                            (_) => _model.soundPlayer3!.play());
 
                                     await Future.delayed(
                                         const Duration(milliseconds: 300));
@@ -592,7 +691,7 @@ class _PianoWidgetState extends State<PianoWidget>
                                         );
                                         setState(() {
                                           _model.startGame = true;
-                                          _model.gameNumber = null;
+                                          _model.gameNumber = 0;
                                         });
                                       }
                                     }

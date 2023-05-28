@@ -5,7 +5,7 @@ export '/registration/registration/registration_widget.dart'
 export '/profile/profile/profile_widget.dart' show ProfileWidget;
 export '/registration/sign_in/sign_in_widget.dart' show SignInWidget;
 export '/map_folder/map_page/map_page_widget.dart' show MapPageWidget;
-export '/news/news/news_widget.dart' show NewsWidget;
+export '/news/home/home_widget.dart' show HomeWidget;
 export '/news/interview/interview_widget.dart' show InterviewWidget;
 export '/news/facts/facts_widget.dart' show FactsWidget;
 export '/news/interesting/interesting_widget.dart' show InterestingWidget;

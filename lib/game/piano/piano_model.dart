@@ -21,14 +21,17 @@ class PianoModel extends FlutterFlowModel {
 
   int? noteNumber;
 
-  int? gameNumber;
+  int? gameNumber = 0;
+
+  String? mp3;
 
   ///  State fields for stateful widgets in this page.
 
+  AudioPlayer? soundPlayer1;
   // Model for button component.
   late ButtonModel buttonModel;
-  AudioPlayer? soundPlayer1;
   AudioPlayer? soundPlayer2;
+  AudioPlayer? soundPlayer3;
 
   /// Initialization and disposal methods.
 

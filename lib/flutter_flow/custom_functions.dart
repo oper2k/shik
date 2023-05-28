@@ -34,8 +34,8 @@ int? mapGetIndex(
   List<LatLng>? latLngList,
   LatLng? latLng,
 ) {
-  if (latLngList == null || latLng == null) {
-    return null;
+  if (latLngList == null || latLng == null || latLngList.isEmpty) {
+    return 0;
   }
 
   double roundedLat = double.parse(latLng.latitude.toStringAsFixed(6));
@@ -52,7 +52,7 @@ int? mapGetIndex(
     }
   }
 
-  return null;
+  return 0;
 }
 
 int? findUserIndex(
@@ -88,4 +88,22 @@ int? substratOne(int? value) {
   } else {
     return result;
   }
+}
+
+bool? showSearchResult(
+  String textSearchFor,
+  String textSearchName,
+  String textSearchNfamily,
+) {
+  // search in different case
+  if (textSearchFor.isEmpty) {
+    return true;
+  }
+  if (textSearchName.toLowerCase().contains(textSearchFor.toLowerCase())) {
+    return true;
+  }
+  if (textSearchNfamily.toLowerCase().contains(textSearchFor.toLowerCase())) {
+    return true;
+  }
+  return false;
 }

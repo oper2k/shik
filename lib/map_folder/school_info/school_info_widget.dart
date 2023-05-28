@@ -99,19 +99,30 @@ class _SchoolInfoWidgetState extends State<SchoolInfoWidget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 6.0, 0.0, 0.0),
                   child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Text(
-                        valueOrDefault<String>(
-                          widget.current?.adress,
-                          'Адрес не указан',
-                        ),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.normal,
-                              lineHeight: 1.4,
+                      Flexible(
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                valueOrDefault<String>(
+                                  widget.current?.adress,
+                                  'Адрес не указан',
+                                ),
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Inter',
+                                      fontWeight: FontWeight.normal,
+                                      lineHeight: 1.4,
+                                    ),
+                              ),
                             ),
+                          ],
+                        ),
                       ),
                       Icon(
                         FFIcons.kclarityMapMarkerLine,
@@ -155,52 +166,72 @@ class _SchoolInfoWidgetState extends State<SchoolInfoWidget> {
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 6.0, 0.0, 0.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        valueOrDefault<String>(
-                          widget.current?.phone,
-                          'Телефон не указан',
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      await launchURL('tel:${widget.current?.phone}');
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          valueOrDefault<String>(
+                            widget.current?.phone,
+                            'Телефон не указан',
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.normal,
+                                    lineHeight: 1.4,
+                                  ),
                         ),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.normal,
-                              lineHeight: 1.4,
-                            ),
-                      ),
-                      Icon(
-                        FFIcons.kphPhone,
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        size: 24.0,
-                      ),
-                    ],
+                        Icon(
+                          FFIcons.kphPhone,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          size: 24.0,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        valueOrDefault<String>(
-                          widget.current?.email,
-                          'Почта не указана',
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      await launchURL('mailto:${widget.current?.email}');
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          valueOrDefault<String>(
+                            widget.current?.email,
+                            'Почта не указана',
+                          ),
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Inter',
+                                    fontWeight: FontWeight.normal,
+                                    lineHeight: 1.4,
+                                  ),
                         ),
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
-                              fontWeight: FontWeight.normal,
-                              lineHeight: 1.4,
-                            ),
-                      ),
-                      Icon(
-                        FFIcons.kiconamoonEmailLight,
-                        color: FlutterFlowTheme.of(context).primaryText,
-                        size: 24.0,
-                      ),
-                    ],
+                        Icon(
+                          FFIcons.kiconamoonEmailLight,
+                          color: FlutterFlowTheme.of(context).primaryText,
+                          size: 24.0,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Divider(

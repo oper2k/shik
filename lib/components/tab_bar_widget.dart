@@ -84,7 +84,7 @@ class _TabBarWidgetState extends State<TabBarWidget> {
                         HapticFeedback.selectionClick();
 
                         context.pushNamed(
-                          'News',
+                          'Home',
                           extra: <String, dynamic>{
                             kTransitionInfoKey: TransitionInfo(
                               hasTransition: true,

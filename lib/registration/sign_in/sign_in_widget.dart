@@ -334,7 +334,7 @@ class _SignInWidgetState extends State<SignInWidget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
-                      context.pushNamed('News');
+                      context.pushNamed('Home');
                     },
                     child: Row(
                       mainAxisSize: MainAxisSize.max,

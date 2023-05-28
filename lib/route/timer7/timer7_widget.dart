@@ -50,7 +50,7 @@ class _Timer7WidgetState extends State<Timer7Widget> {
             borderRadius: BorderRadius.circular(12.0),
           ),
           child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 28.0, 0.0, 10.0),
+            padding: EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 24.0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -64,14 +64,14 @@ class _Timer7WidgetState extends State<Timer7Widget> {
                       ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 46.0, 0.0, 36.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 46.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Expanded(
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              60.0, 0.0, 6.0, 0.0),
+                              0.0, 0.0, 6.0, 0.0),
                           child: wrapWithModel(
                             model: _model.buttonModel1,
                             updateCallback: () => setState(() {}),
@@ -86,7 +86,7 @@ class _Timer7WidgetState extends State<Timer7Widget> {
                       Expanded(
                         child: Padding(
                           padding: EdgeInsetsDirectional.fromSTEB(
-                              6.0, 0.0, 60.0, 0.0),
+                              6.0, 0.0, 0.0, 0.0),
                           child: wrapWithModel(
                             model: _model.buttonModel2,
                             updateCallback: () => setState(() {}),

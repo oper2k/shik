@@ -130,16 +130,24 @@ class _Route3WordsIndiSymbolWidgetState
                       ),
                 ),
               ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 58.0, 0.0, 0.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(0.0),
-                  child: Image.asset(
-                    'assets/images/Vector.png',
-                    width: 134.0,
-                    fit: BoxFit.cover,
+              Stack(
+                children: [
+                  Align(
+                    alignment: AlignmentDirectional(0.0, 0.0),
+                    child: Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 58.0, 0.0, 0.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(0.0),
+                        child: Image.asset(
+                          'assets/images/Vector.png',
+                          width: 134.0,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                ],
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(24.0, 50.0, 24.0, 0.0),

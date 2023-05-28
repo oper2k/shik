@@ -1,6 +1,8 @@
 import '/components/button_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/route/right1/right1_widget.dart';
+import '/route/wrong1/wrong1_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -129,7 +131,7 @@ class _Route1WidgetState extends State<Route1Widget> {
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(16.0, 28.0, 16.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -144,44 +146,55 @@ class _Route1WidgetState extends State<Route1Widget> {
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 8.0, 8.0, 8.0, 8.0),
-                            child: Container(
-                              width: 100.0,
-                              height: 185.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 6.0,
-                                    color: Color(0xB3EFEFEF),
-                                    offset: Offset(0.0, 0.0),
-                                  )
-                                ],
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    FFIcons.kradixIconsMagicWand,
-                                    color: FlutterFlowTheme.of(context).black,
-                                    size: 60.0,
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                setState(() {
+                                  _model.numberAns = 1;
+                                });
+                              },
+                              child: Container(
+                                width: 100.0,
+                                height: 185.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  border: Border.all(
+                                    color: _model.numberAns == 1
+                                        ? FlutterFlowTheme.of(context)
+                                            .greenActive
+                                        : Color(0x00000000),
+                                    width: 2.0,
                                   ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 24.0, 0.0, 0.0),
-                                    child: Text(
-                                      'Дирижер',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            fontWeight: FontWeight.normal,
-                                          ),
+                                ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      FFIcons.kradixIconsMagicWand,
+                                      color: FlutterFlowTheme.of(context).black,
+                                      size: 60.0,
                                     ),
-                                  ),
-                                ],
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 24.0, 0.0, 0.0),
+                                      child: Text(
+                                        'Дирижер',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -190,48 +203,55 @@ class _Route1WidgetState extends State<Route1Widget> {
                           child: Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 8.0, 8.0, 8.0, 8.0),
-                            child: Container(
-                              width: 100.0,
-                              height: 185.0,
-                              decoration: BoxDecoration(
-                                color: FlutterFlowTheme.of(context)
-                                    .secondaryBackground,
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 6.0,
-                                    color: Color(0xB3EFEFEF),
-                                    offset: Offset(0.0, 0.0),
-                                  )
-                                ],
-                                borderRadius: BorderRadius.circular(12.0),
-                                border: Border.all(
-                                  color: FlutterFlowTheme.of(context).primary,
-                                  width: 2.0,
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                setState(() {
+                                  _model.numberAns = 2;
+                                });
+                              },
+                              child: Container(
+                                width: 100.0,
+                                height: 185.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  borderRadius: BorderRadius.circular(12.0),
+                                  border: Border.all(
+                                    color: _model.numberAns == 2
+                                        ? FlutterFlowTheme.of(context)
+                                            .greenActive
+                                        : Color(0x00000000),
+                                    width: 2.0,
+                                  ),
                                 ),
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    FFIcons.kopenmojiMusicalScore,
-                                    color: FlutterFlowTheme.of(context).black,
-                                    size: 60.0,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 24.0, 0.0, 0.0),
-                                    child: Text(
-                                      'Композитор',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            fontWeight: FontWeight.normal,
-                                          ),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      FFIcons.kopenmojiMusicalScore,
+                                      color: FlutterFlowTheme.of(context).black,
+                                      size: 60.0,
                                     ),
-                                  ),
-                                ],
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          0.0, 24.0, 0.0, 0.0),
+                                      child: Text(
+                                        'Композитор',
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -239,34 +259,35 @@ class _Route1WidgetState extends State<Route1Widget> {
                       ],
                     ),
                   ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                8.0, 8.0, 8.0, 8.0),
+                  Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              8.0, 8.0, 8.0, 8.0),
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              setState(() {
+                                _model.numberAns = 3;
+                              });
+                            },
                             child: Container(
                               width: 100.0,
                               height: 185.0,
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 6.0,
-                                    color: Color(0xB3EFEFEF),
-                                    offset: Offset(0.0, 0.0),
-                                  )
-                                ],
                                 borderRadius: BorderRadius.circular(12.0),
                                 border: Border.all(
-                                  color:
-                                      FlutterFlowTheme.of(context).greenActive,
+                                  color: _model.numberAns == 3
+                                      ? FlutterFlowTheme.of(context).greenActive
+                                      : Color(0x00000000),
                                   width: 2.0,
                                 ),
                               ),
@@ -297,24 +318,34 @@ class _Route1WidgetState extends State<Route1Widget> {
                             ),
                           ),
                         ),
-                        Expanded(
-                          child: Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                8.0, 8.0, 8.0, 8.0),
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              8.0, 8.0, 8.0, 8.0),
+                          child: InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              setState(() {
+                                _model.numberAns = 4;
+                              });
+                            },
                             child: Container(
                               width: 100.0,
                               height: 185.0,
                               decoration: BoxDecoration(
                                 color: FlutterFlowTheme.of(context)
                                     .secondaryBackground,
-                                boxShadow: [
-                                  BoxShadow(
-                                    blurRadius: 6.0,
-                                    color: Color(0xB3EFEFEF),
-                                    offset: Offset(0.0, 0.0),
-                                  )
-                                ],
                                 borderRadius: BorderRadius.circular(12.0),
+                                border: Border.all(
+                                  color: _model.numberAns == 4
+                                      ? FlutterFlowTheme.of(context).greenActive
+                                      : Color(0x00000000),
+                                  width: 2.0,
+                                ),
                               ),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
@@ -343,8 +374,8 @@ class _Route1WidgetState extends State<Route1Widget> {
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -356,39 +387,78 @@ class _Route1WidgetState extends State<Route1Widget> {
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 45.0),
-                    child: wrapWithModel(
-                      model: _model.buttonModel1,
-                      updateCallback: () => setState(() {}),
-                      child: ButtonWidget(
-                        text: 'Проверить',
-                        btnColor: FlutterFlowTheme.of(context).notActiveButton,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 45.0),
-                    child: InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        context.pushNamed('Route2');
-                      },
+                  if (_model.numberAns == null)
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 45.0),
                       child: wrapWithModel(
-                        model: _model.buttonModel2,
+                        model: _model.buttonModel1,
                         updateCallback: () => setState(() {}),
                         child: ButtonWidget(
                           text: 'Проверить',
-                          btnColor: FlutterFlowTheme.of(context).greenActive,
+                          btnColor:
+                              FlutterFlowTheme.of(context).notActiveButton,
                         ),
                       ),
                     ),
-                  ),
+                  if (_model.numberAns != null)
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 45.0),
+                      child: InkWell(
+                        splashColor: Colors.transparent,
+                        focusColor: Colors.transparent,
+                        hoverColor: Colors.transparent,
+                        highlightColor: Colors.transparent,
+                        onTap: () async {
+                          if (_model.numberAns == 2) {
+                            await showModalBottomSheet(
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
+                              enableDrag: false,
+                              context: context,
+                              builder: (bottomSheetContext) {
+                                return GestureDetector(
+                                  onTap: () => FocusScope.of(context)
+                                      .requestFocus(_unfocusNode),
+                                  child: Padding(
+                                    padding: MediaQuery.of(bottomSheetContext)
+                                        .viewInsets,
+                                    child: Right1Widget(),
+                                  ),
+                                );
+                              },
+                            ).then((value) => setState(() {}));
+                          } else {
+                            await showModalBottomSheet(
+                              isScrollControlled: true,
+                              backgroundColor: Colors.transparent,
+                              enableDrag: false,
+                              context: context,
+                              builder: (bottomSheetContext) {
+                                return GestureDetector(
+                                  onTap: () => FocusScope.of(context)
+                                      .requestFocus(_unfocusNode),
+                                  child: Padding(
+                                    padding: MediaQuery.of(bottomSheetContext)
+                                        .viewInsets,
+                                    child: Wrong1Widget(),
+                                  ),
+                                );
+                              },
+                            ).then((value) => setState(() {}));
+                          }
+                        },
+                        child: wrapWithModel(
+                          model: _model.buttonModel2,
+                          updateCallback: () => setState(() {}),
+                          child: ButtonWidget(
+                            text: 'Проверить',
+                            btnColor: FlutterFlowTheme.of(context).greenActive,
+                          ),
+                        ),
+                      ),
+                    ),
                 ],
               ),
             ),

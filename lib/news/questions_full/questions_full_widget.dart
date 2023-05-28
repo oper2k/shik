@@ -92,98 +92,128 @@ class _QuestionsFullWidgetState extends State<QuestionsFullWidget> {
               ),
             ),
             Flexible(
-              child: FutureBuilder<List<Feed5QuestionsRow>>(
-                future: Feed5QuestionsTable().queryRows(
-                  queryFn: (q) => q.order('created_at'),
-                ),
-                builder: (context, snapshot) {
-                  // Customize what your widget looks like when it's loading.
-                  if (!snapshot.hasData) {
-                    return Center(
-                      child: SizedBox(
-                        width: 50.0,
-                        height: 50.0,
-                        child: CircularProgressIndicator(
-                          color: FlutterFlowTheme.of(context).primary,
-                        ),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  children: [
+                    FutureBuilder<List<Feed5QuestionsRow>>(
+                      future: Feed5QuestionsTable().queryRows(
+                        queryFn: (q) => q.order('created_at'),
                       ),
-                    );
-                  }
-                  List<Feed5QuestionsRow> columnFeed5QuestionsRowList =
-                      snapshot.data!;
-                  return SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children: List.generate(
-                          columnFeed5QuestionsRowList.length, (columnIndex) {
-                        final columnFeed5QuestionsRow =
-                            columnFeed5QuestionsRowList[columnIndex];
-                        return Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              24.0, 18.0, 24.0, 0.0),
-                          child: Container(
-                            width: MediaQuery.of(context).size.width * 1.0,
-                            decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context)
-                                  .secondaryBackground,
-                              borderRadius: BorderRadius.circular(12.0),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  16.0, 16.0, 16.0, 16.0),
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      columnFeed5QuestionsRow.title!,
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            fontSize: 13.0,
-                                            fontWeight: FontWeight.normal,
-                                          ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 20.0, 0.0, 0.0),
-                                      child: FlutterFlowVideoPlayer(
-                                        path: columnFeed5QuestionsRow.videoUrl!,
-                                        videoType: VideoType.network,
-                                        autoPlay: false,
-                                        looping: true,
-                                        showControls: true,
-                                        allowFullScreen: true,
-                                        allowPlaybackSpeedMenu: false,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
-                                          0.0, 30.0, 0.0, 0.0),
-                                      child: Text(
-                                        columnFeed5QuestionsRow
-                                            .educatorDescription!,
-                                        style: FlutterFlowTheme.of(context)
-                                            .bodyMedium
-                                            .override(
-                                              fontFamily: 'Inter',
-                                              lineHeight: 1.4,
-                                            ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                      builder: (context, snapshot) {
+                        // Customize what your widget looks like when it's loading.
+                        if (!snapshot.hasData) {
+                          return Center(
+                            child: SizedBox(
+                              width: 50.0,
+                              height: 50.0,
+                              child: CircularProgressIndicator(
+                                color: FlutterFlowTheme.of(context).primary,
                               ),
                             ),
-                          ),
+                          );
+                        }
+                        List<Feed5QuestionsRow> columnFeed5QuestionsRowList =
+                            snapshot.data!;
+                        return Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children:
+                              List.generate(columnFeed5QuestionsRowList.length,
+                                  (columnIndex) {
+                            final columnFeed5QuestionsRow =
+                                columnFeed5QuestionsRowList[columnIndex];
+                            return Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  24.0, 18.0, 24.0, 0.0),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * 1.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      16.0, 16.0, 16.0, 16.0),
+                                  child: SingleChildScrollView(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          columnFeed5QuestionsRow.title!,
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Inter',
+                                                fontSize: 13.0,
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 20.0, 0.0, 0.0),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(15.0),
+                                            child: Container(
+                                              width: double.infinity,
+                                              decoration: BoxDecoration(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
+                                                borderRadius:
+                                                    BorderRadius.circular(15.0),
+                                              ),
+                                              child: FlutterFlowVideoPlayer(
+                                                path: columnFeed5QuestionsRow
+                                                    .videoUrl!,
+                                                videoType: VideoType.network,
+                                                autoPlay: false,
+                                                looping: true,
+                                                showControls: true,
+                                                allowFullScreen: true,
+                                                allowPlaybackSpeedMenu: false,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 30.0, 0.0, 0.0),
+                                          child: Text(
+                                            columnFeed5QuestionsRow
+                                                .educatorDescription!,
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  lineHeight: 1.4,
+                                                ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          }),
                         );
-                      }),
+                      },
                     ),
-                  );
-                },
+                    Container(
+                      width: double.infinity,
+                      height: 60.0,
+                      decoration: BoxDecoration(),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

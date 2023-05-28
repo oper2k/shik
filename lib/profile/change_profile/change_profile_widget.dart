@@ -121,16 +121,24 @@ class _ChangeProfileWidgetState extends State<ChangeProfileWidget> {
                     Container(
                       width: 120.0,
                       height: 120.0,
-                      clipBehavior: Clip.antiAlias,
                       decoration: BoxDecoration(
+                        color: FlutterFlowTheme.of(context).secondaryBackground,
                         shape: BoxShape.circle,
                       ),
-                      child: Image.network(
-                        valueOrDefault<String>(
-                          FFAppState().photoUrl,
-                          '0',
+                      child: Container(
+                        width: 120.0,
+                        height: 120.0,
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
                         ),
-                        fit: BoxFit.cover,
+                        child: Image.network(
+                          valueOrDefault<String>(
+                            FFAppState().photoUrl,
+                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/ozl3rs92wddb/ph_user.png',
+                          ),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                     Align(
@@ -222,96 +230,6 @@ class _ChangeProfileWidgetState extends State<ChangeProfileWidget> {
                     child: Text(
                       currentUserEmail,
                       style: FlutterFlowTheme.of(context).bodyLarge,
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        borderRadius: BorderRadius.circular(16.0),
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Expanded(
-                            child: InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                setState(() {
-                                  FFAppState().darkMode = true;
-                                });
-                                setDarkModeSetting(context, ThemeMode.dark);
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  borderRadius: BorderRadius.circular(16.0),
-                                ),
-                                child: Align(
-                                  alignment: AlignmentDirectional(0.0, 0.0),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 12.0, 0.0, 12.0),
-                                    child: Text(
-                                      'Темная тема',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyLarge
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            lineHeight: 1.0,
-                                          ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                            child: InkWell(
-                              splashColor: Colors.transparent,
-                              focusColor: Colors.transparent,
-                              hoverColor: Colors.transparent,
-                              highlightColor: Colors.transparent,
-                              onTap: () async {
-                                setState(() {
-                                  FFAppState().darkMode = false;
-                                });
-                                setDarkModeSetting(context, ThemeMode.light);
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  borderRadius: BorderRadius.circular(16.0),
-                                ),
-                                child: Align(
-                                  alignment: AlignmentDirectional(0.0, 0.0),
-                                  child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        0.0, 12.0, 0.0, 12.0),
-                                    child: Text(
-                                      'Светлая тема',
-                                      style: FlutterFlowTheme.of(context)
-                                          .bodyLarge
-                                          .override(
-                                            fontFamily: 'Inter',
-                                            lineHeight: 1.0,
-                                          ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
                     ),
                   ),
                   Padding(
