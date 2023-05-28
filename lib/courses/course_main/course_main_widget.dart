@@ -1,3 +1,4 @@
+import '/auth/base_auth_user_provider.dart';
 import '/auth/supabase_auth/auth_util.dart';
 import '/backend/supabase/supabase.dart';
 import '/components/tab_bar_widget.dart';
@@ -32,11 +33,29 @@ class _CourseMainWidgetState extends State<CourseMainWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (currentUserUid == null || currentUserUid == '') {
-        context.pushNamed('NotAuthorized');
-      } else {
+      if (loggedIn) {
         return;
       }
+
+      if (Navigator.of(context).canPop()) {
+        context.pop();
+      }
+      context.pushNamed(
+        'NotAuthorized',
+        queryParams: {
+          'activeTab': serializeParam(
+            4,
+            ParamType.int,
+          ),
+        }.withoutNulls,
+        extra: <String, dynamic>{
+          kTransitionInfoKey: TransitionInfo(
+            hasTransition: true,
+            transitionType: PageTransitionType.fade,
+            duration: Duration(milliseconds: 0),
+          ),
+        },
+      );
     });
 
     _model.textController ??= TextEditingController();
@@ -141,7 +160,7 @@ class _CourseMainWidgetState extends State<CourseMainWidget> {
                                         child: Image.network(
                                           valueOrDefault<String>(
                                             stackUsersRow?.photoUrl,
-                                            '0',
+                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/ozl3rs92wddb/ph_user.png',
                                           ),
                                           fit: BoxFit.cover,
                                         ),
@@ -278,182 +297,47 @@ class _CourseMainWidgetState extends State<CourseMainWidget> {
                                             padding:
                                                 EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 20.0),
-                                            child: Container(
-                                              width: double.infinity,
-                                              height: 185.0,
-                                              child: Stack(
-                                                children: [
-                                                  ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12.0),
-                                                    child: Image.network(
-                                                      coursesChildItem
-                                                          .imageUrl!,
-                                                      width: double.infinity,
-                                                      height: 248.0,
-                                                      fit: BoxFit.cover,
+                                            child: InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                context.pushNamed(
+                                                  'CourseList',
+                                                  queryParams: {
+                                                    'coursesRow':
+                                                        serializeParam(
+                                                      coursesChildItem,
+                                                      ParamType.SupabaseRow,
                                                     ),
-                                                  ),
-                                                  Align(
-                                                    alignment:
-                                                        AlignmentDirectional(
-                                                            0.0, 0.0),
-                                                    child: Column(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment.end,
-                                                      children: [
-                                                        Text(
-                                                          valueOrDefault<
-                                                              String>(
-                                                            coursesChildItem
-                                                                .title,
-                                                            'Название курса',
-                                                          ),
-                                                          style: FlutterFlowTheme
-                                                                  .of(context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Inter',
-                                                                color: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .white,
-                                                                fontSize: 24.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold,
-                                                              ),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              EdgeInsetsDirectional
-                                                                  .fromSTEB(
-                                                                      0.0,
-                                                                      18.0,
-                                                                      0.0,
-                                                                      24.0),
-                                                          child: InkWell(
-                                                            splashColor: Colors
-                                                                .transparent,
-                                                            focusColor: Colors
-                                                                .transparent,
-                                                            hoverColor: Colors
-                                                                .transparent,
-                                                            highlightColor:
-                                                                Colors
-                                                                    .transparent,
-                                                            onTap: () async {
-                                                              context.pushNamed(
-                                                                'CourseList',
-                                                                queryParams: {
-                                                                  'coursesRow':
-                                                                      serializeParam(
-                                                                    coursesChildItem,
-                                                                    ParamType
-                                                                        .SupabaseRow,
-                                                                  ),
-                                                                }.withoutNulls,
-                                                              );
-                                                            },
-                                                            child: Container(
-                                                              width: 206.0,
-                                                              height: 48.0,
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                color: Color(
-                                                                    0xFFDEA5BA),
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            12.0),
-                                                              ),
-                                                              child: Align(
-                                                                alignment:
-                                                                    AlignmentDirectional(
-                                                                        0.0,
-                                                                        0.0),
-                                                                child: Text(
-                                                                  'Изучать',
-                                                                  style: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .bodyMedium
-                                                                      .override(
-                                                                        fontFamily:
-                                                                            'Inter',
-                                                                        color: FlutterFlowTheme.of(context)
-                                                                            .white,
-                                                                        fontSize:
-                                                                            16.0,
-                                                                        fontWeight:
-                                                                            FontWeight.bold,
-                                                                      ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          );
-                                        }),
-                                      ),
-                                    );
-                                  },
-                                ),
-                              ),
-                            ),
-                          if (_model.textController.text != null &&
-                              _model.textController.text != '')
-                            Expanded(
-                              child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 24.0, 0.0, 0.0),
-                                child: Builder(
-                                  builder: (context) {
-                                    final coursesChild =
-                                        queryCoursesCoursesRowList.toList();
-                                    return SingleChildScrollView(
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.max,
-                                        children:
-                                            List.generate(coursesChild.length,
-                                                (coursesChildIndex) {
-                                          final coursesChildItem =
-                                              coursesChild[coursesChildIndex];
-                                          return Visibility(
-                                            visible:
-                                                functions.textSearchInChild(
-                                                        _model.textController
-                                                            .text,
-                                                        coursesChildItem
-                                                            .title) ??
-                                                    true,
-                                            child: Padding(
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      0.0, 0.0, 0.0, 20.0),
+                                                  }.withoutNulls,
+                                                );
+                                              },
                                               child: Container(
                                                 width: double.infinity,
                                                 height: 185.0,
                                                 child: Stack(
                                                   children: [
-                                                    ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                      child: Image.network(
-                                                        coursesChildItem
-                                                            .imageUrl!,
-                                                        width: double.infinity,
-                                                        height: 248.0,
-                                                        fit: BoxFit.cover,
+                                                    Container(
+                                                      decoration: BoxDecoration(
+                                                        color: FlutterFlowTheme
+                                                                .of(context)
+                                                            .secondaryBackground,
+                                                      ),
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(12.0),
+                                                        child: Image.network(
+                                                          coursesChildItem
+                                                              .imageUrl!,
+                                                          width:
+                                                              double.infinity,
+                                                          height: 248.0,
+                                                          fit: BoxFit.cover,
+                                                        ),
                                                       ),
                                                     ),
                                                     Align(
@@ -538,6 +422,166 @@ class _CourseMainWidgetState extends State<CourseMainWidget> {
                                                       ),
                                                     ),
                                                   ],
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        }),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          if (_model.textController.text != null &&
+                              _model.textController.text != '')
+                            Expanded(
+                              child: Padding(
+                                padding: EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 24.0, 0.0, 0.0),
+                                child: Builder(
+                                  builder: (context) {
+                                    final coursesChild =
+                                        queryCoursesCoursesRowList.toList();
+                                    return SingleChildScrollView(
+                                      child: Column(
+                                        mainAxisSize: MainAxisSize.max,
+                                        children:
+                                            List.generate(coursesChild.length,
+                                                (coursesChildIndex) {
+                                          final coursesChildItem =
+                                              coursesChild[coursesChildIndex];
+                                          return Visibility(
+                                            visible:
+                                                functions.textSearchInChild(
+                                                        _model.textController
+                                                            .text,
+                                                        coursesChildItem
+                                                            .title) ??
+                                                    true,
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      0.0, 0.0, 0.0, 20.0),
+                                              child: InkWell(
+                                                splashColor: Colors.transparent,
+                                                focusColor: Colors.transparent,
+                                                hoverColor: Colors.transparent,
+                                                highlightColor:
+                                                    Colors.transparent,
+                                                onTap: () async {
+                                                  context.pushNamed(
+                                                    'CourseList',
+                                                    queryParams: {
+                                                      'coursesRow':
+                                                          serializeParam(
+                                                        coursesChildItem,
+                                                        ParamType.SupabaseRow,
+                                                      ),
+                                                    }.withoutNulls,
+                                                  );
+                                                },
+                                                child: Container(
+                                                  width: double.infinity,
+                                                  height: 185.0,
+                                                  child: Stack(
+                                                    children: [
+                                                      ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(12.0),
+                                                        child: Image.network(
+                                                          coursesChildItem
+                                                              .imageUrl!,
+                                                          width:
+                                                              double.infinity,
+                                                          height: 248.0,
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                      Align(
+                                                        alignment:
+                                                            AlignmentDirectional(
+                                                                0.0, 0.0),
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.max,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .end,
+                                                          children: [
+                                                            Text(
+                                                              valueOrDefault<
+                                                                  String>(
+                                                                coursesChildItem
+                                                                    .title,
+                                                                'Название курса',
+                                                              ),
+                                                              style: FlutterFlowTheme
+                                                                      .of(context)
+                                                                  .bodyMedium
+                                                                  .override(
+                                                                    fontFamily:
+                                                                        'Inter',
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .white,
+                                                                    fontSize:
+                                                                        24.0,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold,
+                                                                  ),
+                                                            ),
+                                                            Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          0.0,
+                                                                          18.0,
+                                                                          0.0,
+                                                                          24.0),
+                                                              child: Container(
+                                                                width: 206.0,
+                                                                height: 48.0,
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  color: Color(
+                                                                      0xFFDEA5BA),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              12.0),
+                                                                ),
+                                                                child: Align(
+                                                                  alignment:
+                                                                      AlignmentDirectional(
+                                                                          0.0,
+                                                                          0.0),
+                                                                  child: Text(
+                                                                    'Изучать',
+                                                                    style: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Inter',
+                                                                          color:
+                                                                              FlutterFlowTheme.of(context).white,
+                                                                          fontSize:
+                                                                              16.0,
+                                                                          fontWeight:
+                                                                              FontWeight.bold,
+                                                                        ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),

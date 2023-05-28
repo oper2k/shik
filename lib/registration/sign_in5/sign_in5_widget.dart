@@ -327,7 +327,7 @@ class _SignIn5WidgetState extends State<SignIn5Widget> {
                             'id': currentUserUid,
                           });
 
-                          context.goNamed('News');
+                          context.goNamed('Home');
                         },
                         child: wrapWithModel(
                           model: _model.buttonModel2,

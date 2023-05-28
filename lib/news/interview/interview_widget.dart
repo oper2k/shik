@@ -102,23 +102,6 @@ class _InterviewWidgetState extends State<InterviewWidget> {
                           ),
                     ),
                   ),
-                  Align(
-                    alignment: AlignmentDirectional(1.0, 0.0),
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 26.0, 0.0),
-                      child: Container(
-                        width: 40.0,
-                        height: 40.0,
-                        decoration: BoxDecoration(),
-                        child: Icon(
-                          FFIcons.kicSharpSearch1,
-                          color: FlutterFlowTheme.of(context).white,
-                          size: 24.0,
-                        ),
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -182,18 +165,22 @@ class _InterviewWidgetState extends State<InterviewWidget> {
                                 ),
                               if (widget.feedInterviewRow?.mainPart != null &&
                                   widget.feedInterviewRow?.mainPart != '')
-                                Text(
-                                  valueOrDefault<String>(
-                                    widget.feedInterviewRow?.mainPart,
-                                    'Дополнительный контент',
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 8.0, 0.0, 0.0),
+                                  child: Text(
+                                    valueOrDefault<String>(
+                                      widget.feedInterviewRow?.mainPart,
+                                      'Дополнительный контент',
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .override(
+                                          fontFamily: 'Inter',
+                                          fontWeight: FontWeight.normal,
+                                          lineHeight: 1.4,
+                                        ),
                                   ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        fontWeight: FontWeight.normal,
-                                        lineHeight: 1.4,
-                                      ),
                                 ),
                               if (widget.feedInterviewRow?.interviewUrl !=
                                       null &&

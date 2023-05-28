@@ -136,14 +136,27 @@ class _QuestionsWidgetState extends State<QuestionsWidget> {
                                 Padding(
                                   padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 20.0, 0.0, 0.0),
-                                  child: FlutterFlowVideoPlayer(
-                                    path: widget.feed5QuestionsRow!.videoUrl!,
-                                    videoType: VideoType.network,
-                                    autoPlay: false,
-                                    looping: true,
-                                    showControls: true,
-                                    allowFullScreen: true,
-                                    allowPlaybackSpeedMenu: false,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    child: Container(
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        borderRadius:
+                                            BorderRadius.circular(15.0),
+                                      ),
+                                      child: FlutterFlowVideoPlayer(
+                                        path:
+                                            widget.feed5QuestionsRow!.videoUrl!,
+                                        videoType: VideoType.network,
+                                        autoPlay: false,
+                                        looping: true,
+                                        showControls: true,
+                                        allowFullScreen: true,
+                                        allowPlaybackSpeedMenu: false,
+                                      ),
+                                    ),
                                   ),
                                 ),
                                 Padding(

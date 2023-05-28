@@ -111,6 +111,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                               .titleSmall
                                               .override(
                                                 fontFamily: 'Inter',
+                                                fontSize: 18.0,
                                                 lineHeight: 1.4,
                                               ),
                                         ),
@@ -160,6 +161,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                               .titleSmall
                                               .override(
                                                 fontFamily: 'Inter',
+                                                fontSize: 18.0,
                                                 lineHeight: 1.4,
                                               ),
                                         ),
@@ -209,6 +211,7 @@ class _OnboardingWidgetState extends State<OnboardingWidget> {
                                               .titleSmall
                                               .override(
                                                 fontFamily: 'Inter',
+                                                fontSize: 18.0,
                                                 lineHeight: 1.4,
                                               ),
                                         ),

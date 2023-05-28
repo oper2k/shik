@@ -54,7 +54,7 @@ class _BackButtonWidgetState extends State<BackButtonWidget> {
             padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 2.0, 0.0),
             child: Icon(
               FFIcons.kleft2,
-              color: FlutterFlowTheme.of(context).primaryText,
+              color: FlutterFlowTheme.of(context).black,
               size: 20.0,
             ),
           ),

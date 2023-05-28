@@ -19,7 +19,9 @@ class MapComponentModel extends FlutterFlowModel {
 
   LatLng? centerMap;
 
-  int? index;
+  int index = 0;
+
+  bool pin = false;
 
   ///  State fields for stateful widgets in this component.
 

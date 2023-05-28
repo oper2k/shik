@@ -79,29 +79,26 @@ class _MapComponentWidgetState extends State<MapComponentWidget> {
               marker.serialize(),
               marker,
               () async {
-                _model.updatePage(() {
+                setState(() {
                   _model.centerMap = _model.googleMapsCenter;
-                  _model.index = functions.mapGetIndex(
-                      _model.latLngList.toList(), _model.centerMap);
                 });
-                if (_model.index != null) {
-                  await showModalBottomSheet(
-                    isScrollControlled: true,
-                    backgroundColor: Colors.transparent,
-                    enableDrag: false,
-                    context: context,
-                    builder: (bottomSheetContext) {
-                      return Padding(
-                        padding: MediaQuery.of(bottomSheetContext).viewInsets,
-                        child: SchoolInfoWidget(
-                          current: widget.mapRowList![_model.index!],
-                        ),
-                      );
-                    },
-                  ).then((value) => setState(() {}));
-                } else {
-                  return;
-                }
+                setState(() {
+                  _model.index = functions.mapGetIndex(
+                      _model.latLngList.toList(), _model.centerMap)!;
+                });
+                await showModalBottomSheet(
+                  isScrollControlled: true,
+                  backgroundColor: Colors.transparent,
+                  context: context,
+                  builder: (bottomSheetContext) {
+                    return Padding(
+                      padding: MediaQuery.of(bottomSheetContext).viewInsets,
+                      child: SchoolInfoWidget(
+                        current: widget.mapRowList![_model.index],
+                      ),
+                    );
+                  },
+                ).then((value) => setState(() {}));
               },
             ),
           )
@@ -113,7 +110,7 @@ class _MapComponentWidgetState extends State<MapComponentWidget> {
       allowInteraction: true,
       allowZoom: true,
       showZoomControls: true,
-      showLocation: true,
+      showLocation: false,
       showCompass: false,
       showMapToolbar: false,
       showTraffic: false,

@@ -139,6 +139,12 @@ class FFAppState extends ChangeNotifier {
   set mapInitialLatLng(LatLng? _value) {
     _mapInitialLatLng = _value;
   }
+
+  LatLng? _userLocation = LatLng(55.7522, 37.6156);
+  LatLng? get userLocation => _userLocation;
+  set userLocation(LatLng? _value) {
+    _userLocation = _value;
+  }
 }
 
 LatLng? _latLngFromString(String? val) {

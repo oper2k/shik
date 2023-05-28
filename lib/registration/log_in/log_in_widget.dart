@@ -2,7 +2,6 @@ import '/auth/supabase_auth/auth_util.dart';
 import '/components/button_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -291,7 +290,7 @@ class _LogInWidgetState extends State<LogInWidget> {
                                     return;
                                   }
 
-                                  context.goNamedAuth('News', context.mounted);
+                                  context.goNamedAuth('Home', context.mounted);
                                 },
                                 child: wrapWithModel(
                                   model: _model.buttonModel2,
@@ -305,21 +304,6 @@ class _LogInWidgetState extends State<LogInWidget> {
                               ),
                             ),
                         ],
-                      ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 91.0, 0.0, 0.0),
-                        child: Text(
-                          valueOrDefault<String>(
-                            FFAppState().loginJSON.toString(),
-                            'или войти с помощью',
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyLarge.override(
-                                    fontFamily: 'Inter',
-                                    color: Color(0x9A222222),
-                                  ),
-                        ),
                       ),
                       Padding(
                         padding:
@@ -366,63 +350,6 @@ class _LogInWidgetState extends State<LogInWidget> {
                       ),
                     ],
                   ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                child: FFButtonWidget(
-                  onPressed: () {
-                    print('Button pressed ...');
-                  },
-                  text: 'Button',
-                  options: FFButtonOptions(
-                    height: 40.0,
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primary,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily: 'Inter',
-                          color: Colors.white,
-                        ),
-                    elevation: 3.0,
-                    borderSide: BorderSide(
-                      color: Colors.transparent,
-                      width: 1.0,
-                    ),
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 45.0),
-                child: Builder(
-                  builder: (context) {
-                    final vkFriends = FFAppState().listVKfriends.toList();
-                    return Column(
-                      mainAxisSize: MainAxisSize.max,
-                      children:
-                          List.generate(vkFriends.length, (vkFriendsIndex) {
-                        final vkFriendsItem = vkFriends[vkFriendsIndex];
-                        return Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
-                              0.0, 10.0, 0.0, 0.0),
-                          child: Text(
-                            valueOrDefault<String>(
-                              vkFriendsItem.toString(),
-                              'нет',
-                            ),
-                            style:
-                                FlutterFlowTheme.of(context).bodyLarge.override(
-                                      fontFamily: 'Inter',
-                                      color: Color(0x9A222222),
-                                    ),
-                          ),
-                        );
-                      }),
-                    );
-                  },
                 ),
               ),
             ],

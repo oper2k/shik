@@ -102,23 +102,6 @@ class _ProfessionsWidgetState extends State<ProfessionsWidget> {
                           ),
                     ),
                   ),
-                  Align(
-                    alignment: AlignmentDirectional(1.0, 0.0),
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 26.0, 0.0),
-                      child: Container(
-                        width: 40.0,
-                        height: 40.0,
-                        decoration: BoxDecoration(),
-                        child: Icon(
-                          FFIcons.kicSharpSearch1,
-                          color: FlutterFlowTheme.of(context).white,
-                          size: 24.0,
-                        ),
-                      ),
-                    ),
-                  ),
                 ],
               ),
             ),
