@@ -92,6 +92,7 @@ class _BuyCourseWidWidgetState extends State<BuyCourseWidWidget> {
                 textAlign: TextAlign.center,
                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                       fontFamily: 'Inter',
+                      color: FlutterFlowTheme.of(context).black,
                       fontSize: 24.0,
                       fontWeight: FontWeight.bold,
                     ),
@@ -106,7 +107,7 @@ class _BuyCourseWidWidgetState extends State<BuyCourseWidWidget> {
                   onTap: () async {
                     context.pushNamed(
                       'BuyCourse',
-                      queryParams: {
+                      queryParameters: {
                         'coursesRow': serializeParam(
                           widget.coursesRow,
                           ParamType.SupabaseRow,

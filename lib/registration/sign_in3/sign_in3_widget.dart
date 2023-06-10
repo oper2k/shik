@@ -26,7 +26,6 @@ class _SignIn3WidgetState extends State<SignIn3Widget> {
   late SignIn3Model _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -38,7 +37,6 @@ class _SignIn3WidgetState extends State<SignIn3Widget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -47,7 +45,7 @@ class _SignIn3WidgetState extends State<SignIn3Widget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -207,8 +205,8 @@ class _SignIn3WidgetState extends State<SignIn3Widget> {
                           height: 44.0,
                           decoration: BoxDecoration(
                             color: artDirectionChildItem == _model.artDirection
-                                ? Color(0xFFDEA5BA)
-                                : Color(0x00000000),
+                                ? FlutterFlowTheme.of(context).primary
+                                : FlutterFlowTheme.of(context).black,
                             borderRadius: BorderRadius.circular(30.0),
                             border: Border.all(
                               color:
@@ -293,7 +291,7 @@ class _SignIn3WidgetState extends State<SignIn3Widget> {
                         onTap: () async {
                           context.pushNamed(
                             'SignIn4',
-                            queryParams: {
+                            queryParameters: {
                               'artDirection': serializeParam(
                                 _model.artDirection,
                                 ParamType.String,

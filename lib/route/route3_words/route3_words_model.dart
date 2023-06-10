@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 class Route3WordsModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // Model for button component.
   late ButtonModel buttonModel;
 
@@ -19,8 +20,11 @@ class Route3WordsModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     buttonModel.dispose();
   }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 

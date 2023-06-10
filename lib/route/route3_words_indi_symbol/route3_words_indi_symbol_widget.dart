@@ -1,9 +1,10 @@
+import '/components/button_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
+import 'package:signature/signature.dart';
 import 'route3_words_indi_symbol_model.dart';
 export 'route3_words_indi_symbol_model.dart';
 
@@ -20,7 +21,6 @@ class _Route3WordsIndiSymbolWidgetState
   late Route3WordsIndiSymbolModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -32,7 +32,6 @@ class _Route3WordsIndiSymbolWidgetState
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -41,7 +40,7 @@ class _Route3WordsIndiSymbolWidgetState
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -52,7 +51,7 @@ class _Route3WordsIndiSymbolWidgetState
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(24.0, 45.0, 24.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(24.0, 15.0, 24.0, 0.0),
                 child: Stack(
                   alignment: AlignmentDirectional(0.0, 0.0),
                   children: [
@@ -79,20 +78,6 @@ class _Route3WordsIndiSymbolWidgetState
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(40.0, 0.0, 12.0, 0.0),
-                      child: LinearPercentIndicator(
-                        percent: 0.3,
-                        width: MediaQuery.of(context).size.width * 0.75,
-                        lineHeight: 8.0,
-                        animation: true,
-                        progressColor: Color(0xFFA4CE57),
-                        backgroundColor: FlutterFlowTheme.of(context).accent4,
-                        barRadius: Radius.circular(8.0),
-                        padding: EdgeInsets.zero,
                       ),
                     ),
                   ],
@@ -123,34 +108,54 @@ class _Route3WordsIndiSymbolWidgetState
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                 child: Text(
-                  'Уровень : Lite',
+                  'Уровень: легкий',
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                         fontFamily: 'Inter',
                         fontWeight: FontWeight.normal,
                       ),
                 ),
               ),
-              Stack(
-                children: [
-                  Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 58.0, 0.0, 0.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(0.0),
-                        child: Image.asset(
-                          'assets/images/Vector.png',
-                          width: 134.0,
-                          fit: BoxFit.contain,
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                child: Stack(
+                  children: [
+                    Align(
+                      alignment: AlignmentDirectional(0.0, 0.0),
+                      child: Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            0.0, 30.0, 0.0, 30.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(0.0),
+                          child: Image.asset(
+                            'assets/images/Vector.png',
+                            width: 134.0,
+                            height: 400.0,
+                            fit: BoxFit.contain,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 6.0, 0.0, 0.0),
+                      child: ClipRect(
+                        child: Signature(
+                          controller: _model.signatureController ??=
+                              SignatureController(
+                            penStrokeWidth: 4.0,
+                            penColor: FlutterFlowTheme.of(context).greenActive,
+                            exportBackgroundColor: Color(0x00000000),
+                          ),
+                          backgroundColor: Color(0x00000000),
+                          height: 450.0,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(24.0, 50.0, 24.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(24.0, 10.0, 24.0, 0.0),
                 child: Text(
                   'Помещает ноту «соль» первой октавы на вторую линейку нотоносца',
                   textAlign: TextAlign.center,
@@ -161,7 +166,7 @@ class _Route3WordsIndiSymbolWidgetState
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 26.0, 0.0, 50.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 10.0),
                 child: InkWell(
                   splashColor: Colors.transparent,
                   focusColor: Colors.transparent,
@@ -177,6 +182,32 @@ class _Route3WordsIndiSymbolWidgetState
                           fontSize: 20.0,
                           fontWeight: FontWeight.normal,
                         ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 30.0),
+                child: InkWell(
+                  splashColor: Colors.transparent,
+                  focusColor: Colors.transparent,
+                  hoverColor: Colors.transparent,
+                  highlightColor: Colors.transparent,
+                  onTap: () async {
+                    if (FFAppState().currentLessonIndex == 2) {
+                      setState(() {
+                        FFAppState().currentLessonIndex =
+                            FFAppState().currentLessonIndex + 1;
+                      });
+                    }
+
+                    context.goNamed('Route');
+                  },
+                  child: wrapWithModel(
+                    model: _model.buttonModel,
+                    updateCallback: () => setState(() {}),
+                    child: ButtonWidget(
+                      text: 'Далее',
+                    ),
                   ),
                 ),
               ),

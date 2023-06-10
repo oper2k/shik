@@ -16,6 +16,7 @@ import 'package:provider/provider.dart';
 class ProfileModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // Model for tabBar component.
   late TabBarModel tabBarModel;
 
@@ -26,8 +27,11 @@ class ProfileModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     tabBarModel.dispose();
   }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 

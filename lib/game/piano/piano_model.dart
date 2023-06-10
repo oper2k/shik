@@ -27,21 +27,29 @@ class PianoModel extends FlutterFlowModel {
 
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   AudioPlayer? soundPlayer1;
   // Model for button component.
-  late ButtonModel buttonModel;
+  late ButtonModel buttonModel1;
   AudioPlayer? soundPlayer2;
   AudioPlayer? soundPlayer3;
+  // Model for button component.
+  late ButtonModel buttonModel2;
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
-    buttonModel = createModel(context, () => ButtonModel());
+    buttonModel1 = createModel(context, () => ButtonModel());
+    buttonModel2 = createModel(context, () => ButtonModel());
   }
 
   void dispose() {
-    buttonModel.dispose();
+    unfocusNode.dispose();
+    buttonModel1.dispose();
+    buttonModel2.dispose();
   }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 

@@ -5,9 +5,11 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/profile/friend_added/friend_added_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:aligned_dialog/aligned_dialog.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'rate_model.dart';
 export 'rate_model.dart';
 
@@ -22,7 +24,6 @@ class _RateWidgetState extends State<RateWidget> {
   late RateModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -34,7 +35,6 @@ class _RateWidgetState extends State<RateWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -43,7 +43,7 @@ class _RateWidgetState extends State<RateWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -144,17 +144,26 @@ class _RateWidgetState extends State<RateWidget> {
                               ),
                               Align(
                                 alignment: AlignmentDirectional(1.0, 0.0),
-                                child: Container(
-                                  width: 44.0,
-                                  height: 44.0,
-                                  decoration: BoxDecoration(),
-                                  child: Align(
-                                    alignment: AlignmentDirectional(1.0, 0.0),
-                                    child: Icon(
-                                      FFIcons.kicSharpSearch1,
-                                      color: FlutterFlowTheme.of(context)
-                                          .primaryText,
-                                      size: 24.0,
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    context.pushNamed('FriendSearch');
+                                  },
+                                  child: Container(
+                                    width: 44.0,
+                                    height: 44.0,
+                                    decoration: BoxDecoration(),
+                                    child: Align(
+                                      alignment: AlignmentDirectional(1.0, 0.0),
+                                      child: Icon(
+                                        FFIcons.kicSharpSearch1,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        size: 32.0,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -403,12 +412,45 @@ class _RateWidgetState extends State<RateWidget> {
                                                   width: 40.0,
                                                   height: 40.0,
                                                   decoration: BoxDecoration(),
-                                                  child: Icon(
-                                                    FFIcons.kclarityShareLine,
-                                                    color: FlutterFlowTheme.of(
-                                                            context)
-                                                        .white,
-                                                    size: 24.0,
+                                                  child: Builder(
+                                                    builder: (context) =>
+                                                        InkWell(
+                                                      splashColor:
+                                                          Colors.transparent,
+                                                      focusColor:
+                                                          Colors.transparent,
+                                                      hoverColor:
+                                                          Colors.transparent,
+                                                      highlightColor:
+                                                          Colors.transparent,
+                                                      onTap: () async {
+                                                        await Share.share(
+                                                          'Я набрал ${valueOrDefault<String>(
+                                                            queryUsersUsersRowList
+                                                                .where((e) =>
+                                                                    e.id ==
+                                                                    currentUserUid)
+                                                                .toList()
+                                                                .first
+                                                                .rating
+                                                                ?.toString(),
+                                                            '0',
+                                                          )} баллов в приложении ШИК!',
+                                                          sharePositionOrigin:
+                                                              getWidgetBoundingBox(
+                                                                  context),
+                                                        );
+                                                      },
+                                                      child: Icon(
+                                                        FFIcons
+                                                            .kclarityShareLine,
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .white,
+                                                        size: 24.0,
+                                                      ),
+                                                    ),
                                                   ),
                                                 ),
                                               ],
@@ -575,28 +617,58 @@ class _RateWidgetState extends State<RateWidget> {
                                                               CrossAxisAlignment
                                                                   .start,
                                                           children: [
-                                                            Text(
-                                                              valueOrDefault<
-                                                                  String>(
-                                                                queryUsersChildItem
-                                                                    .name,
-                                                                'Имя',
-                                                              ),
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMedium
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Inter',
-                                                                    color: FlutterFlowTheme.of(
+                                                            RichText(
+                                                              text: TextSpan(
+                                                                children: [
+                                                                  TextSpan(
+                                                                    text: valueOrDefault<
+                                                                        String>(
+                                                                      queryUsersChildItem
+                                                                          .name,
+                                                                      'name',
+                                                                    ),
+                                                                    style: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .primaryText,
-                                                                    fontSize:
-                                                                        16.0,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold,
+                                                                        .bodyMedium
+                                                                        .override(
+                                                                          fontFamily:
+                                                                              'Inter',
+                                                                          fontSize:
+                                                                              16.0,
+                                                                          fontWeight:
+                                                                              FontWeight.bold,
+                                                                        ),
                                                                   ),
+                                                                  TextSpan(
+                                                                    text: ' ',
+                                                                    style:
+                                                                        TextStyle(),
+                                                                  ),
+                                                                  TextSpan(
+                                                                    text: functions
+                                                                            .onlineStatus(queryUsersChildItem.lastSession)!
+                                                                        ? '(В сети)'
+                                                                        : '(Не в сети)',
+                                                                    style:
+                                                                        TextStyle(
+                                                                      color: functions.onlineStatus(queryUsersChildItem
+                                                                              .lastSession)!
+                                                                          ? Color(
+                                                                              0xFFA4CE57)
+                                                                          : Color(
+                                                                              0xFFDA5C21),
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600,
+                                                                      fontSize:
+                                                                          14.0,
+                                                                    ),
+                                                                  )
+                                                                ],
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium,
+                                                              ),
                                                             ),
                                                             Row(
                                                               mainAxisSize:
@@ -692,13 +764,17 @@ class _RateWidgetState extends State<RateWidget> {
                                                                 avoidOverflow:
                                                                     false,
                                                                 targetAnchor:
-                                                                    Alignment(
-                                                                        0.0,
-                                                                        0.0),
+                                                                    AlignmentDirectional(
+                                                                            0.0,
+                                                                            0.0)
+                                                                        .resolve(
+                                                                            Directionality.of(context)),
                                                                 followerAnchor:
-                                                                    Alignment(
-                                                                        0.0,
-                                                                        0.0),
+                                                                    AlignmentDirectional(
+                                                                            0.0,
+                                                                            0.0)
+                                                                        .resolve(
+                                                                            Directionality.of(context)),
                                                                 builder:
                                                                     (dialogContext) {
                                                                   return Material(
@@ -709,7 +785,7 @@ class _RateWidgetState extends State<RateWidget> {
                                                                       onTap: () => FocusScope.of(
                                                                               context)
                                                                           .requestFocus(
-                                                                              _unfocusNode),
+                                                                              _model.unfocusNode),
                                                                       child:
                                                                           Container(
                                                                         height:

@@ -107,3 +107,37 @@ bool? showSearchResult(
   }
   return false;
 }
+
+bool? onlineStatus(DateTime? dateTime) {
+  DateTime currentTime = DateTime.now();
+
+  Duration difference = currentTime.difference(dateTime!);
+
+  // Проверяем, если разница между текущим временем и dateTime
+  // составляет менее 20 минут, возвращаем true
+  if (difference.inMinutes.abs() < 20) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+double? progressBar(
+  double? fact,
+  double? plan,
+) {
+  if (plan == null || plan.isNaN || fact == null || fact.isNaN) {
+    return 0;
+  }
+  if (fact / plan > 1) {
+    return 1;
+  }
+  return fact / plan;
+}
+
+bool? containsInt(
+  int? value,
+  List<int>? list,
+) {
+  return list!.contains(value!);
+}

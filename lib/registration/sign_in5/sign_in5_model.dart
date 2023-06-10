@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 class SignIn5Model extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // Model for button component.
   late ButtonModel buttonModel1;
   // Model for button component.
@@ -24,9 +25,12 @@ class SignIn5Model extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     buttonModel1.dispose();
     buttonModel2.dispose();
   }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 

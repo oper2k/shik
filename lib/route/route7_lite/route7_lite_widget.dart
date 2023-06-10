@@ -1,3 +1,4 @@
+import '/components/button_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flip_card/flip_card.dart';
@@ -19,7 +20,6 @@ class _Route7LiteWidgetState extends State<Route7LiteWidget> {
   late Route7LiteModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -31,7 +31,6 @@ class _Route7LiteWidgetState extends State<Route7LiteWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -40,7 +39,7 @@ class _Route7LiteWidgetState extends State<Route7LiteWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -142,7 +141,7 @@ class _Route7LiteWidgetState extends State<Route7LiteWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Уровень : Lite',
+                    'Уровень: легкий',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Inter',
                           fontWeight: FontWeight.normal,
@@ -181,6 +180,7 @@ class _Route7LiteWidgetState extends State<Route7LiteWidget> {
                     childAspectRatio: 1.0,
                   ),
                   primary: false,
+                  shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   children: [
                     FlipCard(
@@ -959,6 +959,33 @@ class _Route7LiteWidgetState extends State<Route7LiteWidget> {
                       ),
                     ),
                   ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 45.0),
+              child: InkWell(
+                splashColor: Colors.transparent,
+                focusColor: Colors.transparent,
+                hoverColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  if (FFAppState().currentLessonIndex == 3) {
+                    setState(() {
+                      FFAppState().currentLessonIndex =
+                          FFAppState().currentLessonIndex + 1;
+                    });
+                  }
+
+                  context.goNamed('Route');
+                },
+                child: wrapWithModel(
+                  model: _model.buttonModel,
+                  updateCallback: () => setState(() {}),
+                  child: ButtonWidget(
+                    text: 'Далее',
+                    btnColor: FlutterFlowTheme.of(context).greenActive,
+                  ),
                 ),
               ),
             ),

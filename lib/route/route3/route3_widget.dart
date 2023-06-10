@@ -19,7 +19,6 @@ class _Route3WidgetState extends State<Route3Widget> {
   late Route3Model _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -31,7 +30,6 @@ class _Route3WidgetState extends State<Route3Widget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -40,7 +38,7 @@ class _Route3WidgetState extends State<Route3Widget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -162,7 +160,14 @@ class _Route3WidgetState extends State<Route3Widget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
-                  context.pushNamed('Route3Words');
+                  if (FFAppState().currentLessonIndex == 2) {
+                    setState(() {
+                      FFAppState().currentLessonIndex =
+                          FFAppState().currentLessonIndex + 1;
+                    });
+                  }
+
+                  context.goNamed('Route');
                 },
                 child: wrapWithModel(
                   model: _model.buttonModel,

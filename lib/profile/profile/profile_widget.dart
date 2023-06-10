@@ -27,7 +27,6 @@ class _ProfileWidgetState extends State<ProfileWidget>
   late ProfileModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   final animationsMap = {
     'containerOnActionTriggerAnimation': AnimationInfo(
@@ -61,7 +60,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
       }
       context.pushNamed(
         'NotAuthorized',
-        queryParams: {
+        queryParameters: {
           'activeTab': serializeParam(
             5,
             ParamType.int,
@@ -89,7 +88,6 @@ class _ProfileWidgetState extends State<ProfileWidget>
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -98,7 +96,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -200,7 +198,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
 
                                 context.pushNamed(
                                   'ChangeProfile',
-                                  queryParams: {
+                                  queryParameters: {
                                     'usersRow': serializeParam(
                                       queryUsersUsersRow,
                                       ParamType.SupabaseRow,
@@ -330,7 +328,7 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                                               color: Theme.of(context)
                                                                           .brightness ==
                                                                       Brightness
-                                                                          .light
+                                                                          .dark
                                                                   ? FlutterFlowTheme.of(
                                                                           context)
                                                                       .primaryText
@@ -499,6 +497,62 @@ class _ProfileWidgetState extends State<ProfileWidget>
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
                                 0.0, 14.0, 0.0, 0.0),
+                            child: InkWell(
+                              splashColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              hoverColor: Colors.transparent,
+                              highlightColor: Colors.transparent,
+                              onTap: () async {
+                                context.pushNamed('MyFriends');
+                              },
+                              child: Container(
+                                height: 52.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryBackground,
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                                child: Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      14.0, 12.0, 14.0, 12.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        FFIcons.kocticonPersonAdd241,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        size: 22.0,
+                                      ),
+                                      Expanded(
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  8.0, 0.0, 0.0, 0.0),
+                                          child: Text(
+                                            'Мои друзья',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium,
+                                          ),
+                                        ),
+                                      ),
+                                      Icon(
+                                        FFIcons.kleft21,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        size: 24.0,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 14.0, 0.0, 0.0),
                             child: Container(
                               height: 52.0,
                               decoration: BoxDecoration(
@@ -636,14 +690,17 @@ class _ProfileWidgetState extends State<ProfileWidget>
                                     context: context,
                                     isGlobal: true,
                                     avoidOverflow: false,
-                                    targetAnchor: Alignment(0.0, 0.0),
-                                    followerAnchor: Alignment(0.0, 0.0),
+                                    targetAnchor: AlignmentDirectional(0.0, 0.0)
+                                        .resolve(Directionality.of(context)),
+                                    followerAnchor: AlignmentDirectional(
+                                            0.0, 0.0)
+                                        .resolve(Directionality.of(context)),
                                     builder: (dialogContext) {
                                       return Material(
                                         color: Colors.transparent,
                                         child: GestureDetector(
                                           onTap: () => FocusScope.of(context)
-                                              .requestFocus(_unfocusNode),
+                                              .requestFocus(_model.unfocusNode),
                                           child: LogOutWidget(),
                                         ),
                                       );

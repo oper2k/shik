@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 class LogInModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // State field(s) for EmailInput widget.
   TextEditingController? emailInputController;
   String? Function(BuildContext, String?)? emailInputControllerValidator;
@@ -31,11 +32,14 @@ class LogInModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     emailInputController?.dispose();
     passwordInputController?.dispose();
     buttonModel1.dispose();
     buttonModel2.dispose();
   }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 

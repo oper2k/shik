@@ -52,6 +52,7 @@ class FlutterFlowAudioPlayer extends StatefulWidget {
 class _FlutterFlowAudioPlayerState extends State<FlutterFlowAudioPlayer>
     with RouteAware {
   AssetsAudioPlayer? _assetsAudioPlayer;
+  bool _subscribedRoute = false;
 
   @override
   void initState() {
@@ -75,6 +76,9 @@ class _FlutterFlowAudioPlayerState extends State<FlutterFlowAudioPlayer>
 
   @override
   void dispose() {
+    if (_subscribedRoute) {
+      routeObserver.unsubscribe(this);
+    }
     _assetsAudioPlayer?.dispose();
     super.dispose();
   }
@@ -93,7 +97,8 @@ class _FlutterFlowAudioPlayerState extends State<FlutterFlowAudioPlayer>
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    if (widget.pauseOnNavigate) {
+    if (widget.pauseOnNavigate && ModalRoute.of(context) is PageRoute) {
+      _subscribedRoute = true;
       routeObserver.subscribe(this, ModalRoute.of(context)!);
     }
   }

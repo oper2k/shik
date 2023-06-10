@@ -9,22 +9,22 @@ import 'package:provider/provider.dart';
 class Route5Model extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // Model for button component.
-  late ButtonModel buttonModel1;
-  // Model for button component.
-  late ButtonModel buttonModel2;
+  late ButtonModel buttonModel;
 
   /// Initialization and disposal methods.
 
   void initState(BuildContext context) {
-    buttonModel1 = createModel(context, () => ButtonModel());
-    buttonModel2 = createModel(context, () => ButtonModel());
+    buttonModel = createModel(context, () => ButtonModel());
   }
 
   void dispose() {
-    buttonModel1.dispose();
-    buttonModel2.dispose();
+    unfocusNode.dispose();
+    buttonModel.dispose();
   }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 

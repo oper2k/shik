@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/upload_data.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
@@ -28,30 +29,30 @@ class _ChangeProfileWidgetState extends State<ChangeProfileWidget> {
   late ChangeProfileModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => ChangeProfileModel());
 
-    _model.nameInputController ??= TextEditingController(
-        text: valueOrDefault<String>(
-      widget.usersRow?.name,
-      'Имя',
-    ));
-    _model.birthDateInputController ??= TextEditingController(
-        text: valueOrDefault<String>(
-      widget.usersRow?.birthDate,
-      '25.05.2000',
-    ));
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setState(() {
+        _model.nameInputController?.text = widget.usersRow!.name!;
+      });
+      setState(() {
+        _model.birthDateInputController?.text = widget.usersRow!.birthDate!;
+      });
+    });
+
+    _model.nameInputController ??= TextEditingController();
+    _model.birthDateInputController ??= TextEditingController();
   }
 
   @override
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -60,7 +61,7 @@ class _ChangeProfileWidgetState extends State<ChangeProfileWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -205,7 +206,10 @@ class _ChangeProfileWidgetState extends State<ChangeProfileWidget> {
                             }
 
                             setState(() {
-                              FFAppState().photoUrl = _model.uploadedFileUrl;
+                              FFAppState().photoUrl = valueOrDefault<String>(
+                                _model.uploadedFileUrl,
+                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/ozl3rs92wddb/ph_user.png',
+                              );
                             });
                           },
                           child: Icon(
@@ -229,12 +233,16 @@ class _ChangeProfileWidgetState extends State<ChangeProfileWidget> {
                     alignment: AlignmentDirectional(0.0, 0.0),
                     child: Text(
                       currentUserEmail,
-                      style: FlutterFlowTheme.of(context).bodyLarge,
+                      style: FlutterFlowTheme.of(context).bodyLarge.override(
+                            fontFamily: 'Inter',
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w600,
+                          ),
                     ),
                   ),
                   Padding(
                     padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 0.0),
                     child: Container(
                       width: double.infinity,
                       height: 52.0,
@@ -333,10 +341,8 @@ class _ChangeProfileWidgetState extends State<ChangeProfileWidget> {
             Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                if (!((_model.nameInputController.text != null &&
-                        _model.nameInputController.text != '') &&
-                    (_model.birthDateInputController.text != null &&
-                        _model.birthDateInputController.text != '')))
+                if (_model.nameInputController.text == null ||
+                    _model.nameInputController.text == '')
                   Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 45.0),
@@ -349,10 +355,8 @@ class _ChangeProfileWidgetState extends State<ChangeProfileWidget> {
                       ),
                     ),
                   ),
-                if ((_model.nameInputController.text != null &&
-                        _model.nameInputController.text != '') &&
-                    (_model.birthDateInputController.text != null &&
-                        _model.birthDateInputController.text != ''))
+                if (_model.nameInputController.text != null &&
+                    _model.nameInputController.text != '')
                   Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 45.0),

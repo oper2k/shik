@@ -21,7 +21,8 @@ export '/news/izo/izo_widget.dart' show IzoWidget;
 export '/profile/change_profile/change_profile_widget.dart'
     show ChangeProfileWidget;
 export '/profile/rate/rate_widget.dart' show RateWidget;
-export '/profile/add_friend/add_friend_widget.dart' show AddFriendWidget;
+export '/profile/friend_search/friend_search_widget.dart'
+    show FriendSearchWidget;
 export '/registration/log_in/log_in_widget.dart' show LogInWidget;
 export '/registration/reset_password/reset_password_widget.dart'
     show ResetPasswordWidget;
@@ -45,7 +46,6 @@ export '/profile/not_authorized/not_authorized_widget.dart'
     show NotAuthorizedWidget;
 export '/route/route1/route1_widget.dart' show Route1Widget;
 export '/route/route2/route2_widget.dart' show Route2Widget;
-export '/route/route2_end/route2_end_widget.dart' show Route2EndWidget;
 export '/route/route3/route3_widget.dart' show Route3Widget;
 export '/route/route3_words/route3_words_widget.dart' show Route3WordsWidget;
 export '/route/route3_draw/route3_draw_widget.dart' show Route3DrawWidget;
@@ -61,3 +61,4 @@ export '/route/route7_lite/route7_lite_widget.dart' show Route7LiteWidget;
 export '/route/route7_intermediate/route7_intermediate_widget.dart'
     show Route7IntermediateWidget;
 export '/route/route7_hard/route7_hard_widget.dart' show Route7HardWidget;
+export '/profile/my_friends/my_friends_widget.dart' show MyFriendsWidget;

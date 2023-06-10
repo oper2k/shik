@@ -68,6 +68,16 @@ class FeedQuizzesStruct extends BaseStruct {
 
   @override
   String toString() => 'FeedQuizzesStruct(${toMap()})';
+
+  @override
+  bool operator ==(Object other) {
+    return other is FeedQuizzesStruct &&
+        index == other.index &&
+        myAnswer == other.myAnswer;
+  }
+
+  @override
+  int get hashCode => const ListEquality().hash([index, myAnswer]);
 }
 
 FeedQuizzesStruct createFeedQuizzesStruct({

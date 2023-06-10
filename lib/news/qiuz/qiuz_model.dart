@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 class QiuzModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // Models for Quizzes_List dynamic component.
   late FlutterFlowDynamicModels<QuizzesListModel> quizzesListModels;
 
@@ -19,8 +20,11 @@ class QiuzModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     quizzesListModels.dispose();
   }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 

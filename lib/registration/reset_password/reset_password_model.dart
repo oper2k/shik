@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 class ResetPasswordModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // State field(s) for EmailInput widget.
   TextEditingController? emailInputController;
   String? Function(BuildContext, String?)? emailInputControllerValidator;
@@ -26,10 +27,13 @@ class ResetPasswordModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     emailInputController?.dispose();
     buttonModel1.dispose();
     buttonModel2.dispose();
   }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 

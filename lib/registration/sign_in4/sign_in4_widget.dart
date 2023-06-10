@@ -28,7 +28,6 @@ class _SignIn4WidgetState extends State<SignIn4Widget> {
   late SignIn4Model _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -40,7 +39,6 @@ class _SignIn4WidgetState extends State<SignIn4Widget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -49,7 +47,7 @@ class _SignIn4WidgetState extends State<SignIn4Widget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -203,12 +201,11 @@ class _SignIn4WidgetState extends State<SignIn4Widget> {
                       width: double.infinity,
                       height: 52.0,
                       decoration: BoxDecoration(
-                        color: Color(0xCCFFFFFF),
                         borderRadius: BorderRadius.circular(12.0),
                         border: Border.all(
                           color: _model.knowledgeLevel == 'Новичок'
-                              ? Color(0xFF404041)
-                              : FlutterFlowTheme.of(context).primaryBackground,
+                              ? FlutterFlowTheme.of(context).backBG
+                              : FlutterFlowTheme.of(context).black,
                           width: 1.0,
                         ),
                       ),
@@ -236,7 +233,8 @@ class _SignIn4WidgetState extends State<SignIn4Widget> {
                                     .bodyMedium
                                     .override(
                                       fontFamily: 'Inter',
-                                      color: FlutterFlowTheme.of(context).black,
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryText,
                                       fontWeight: FontWeight.normal,
                                     ),
                               ),
@@ -262,13 +260,11 @@ class _SignIn4WidgetState extends State<SignIn4Widget> {
                         width: double.infinity,
                         height: 52.0,
                         decoration: BoxDecoration(
-                          color: Color(0xCCFFFFFF),
                           borderRadius: BorderRadius.circular(12.0),
                           border: Border.all(
                             color: _model.knowledgeLevel == 'Немного разбираюсь'
-                                ? Color(0xFF404041)
-                                : FlutterFlowTheme.of(context)
-                                    .primaryBackground,
+                                ? FlutterFlowTheme.of(context).backBG
+                                : FlutterFlowTheme.of(context).black,
                             width: 1.0,
                           ),
                         ),
@@ -296,8 +292,8 @@ class _SignIn4WidgetState extends State<SignIn4Widget> {
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Inter',
-                                        color:
-                                            FlutterFlowTheme.of(context).black,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
                                         fontWeight: FontWeight.normal,
                                       ),
                                 ),
@@ -324,14 +320,12 @@ class _SignIn4WidgetState extends State<SignIn4Widget> {
                         width: double.infinity,
                         height: 52.0,
                         decoration: BoxDecoration(
-                          color: Color(0xCCFFFFFF),
                           borderRadius: BorderRadius.circular(12.0),
                           border: Border.all(
                             color: _model.knowledgeLevel ==
                                     'Средний уровень знаний'
-                                ? Color(0xFF404041)
-                                : FlutterFlowTheme.of(context)
-                                    .primaryBackground,
+                                ? FlutterFlowTheme.of(context).backBG
+                                : FlutterFlowTheme.of(context).black,
                             width: 1.0,
                           ),
                         ),
@@ -359,8 +353,8 @@ class _SignIn4WidgetState extends State<SignIn4Widget> {
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Inter',
-                                        color:
-                                            FlutterFlowTheme.of(context).black,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
                                         fontWeight: FontWeight.normal,
                                       ),
                                 ),
@@ -387,12 +381,11 @@ class _SignIn4WidgetState extends State<SignIn4Widget> {
                         width: double.infinity,
                         height: 52.0,
                         decoration: BoxDecoration(
-                          color: Color(0xCCFFFFFF),
                           borderRadius: BorderRadius.circular(12.0),
                           border: Border.all(
                             color: _model.knowledgeLevel == 'Профессионал'
-                                ? Color(0x00FFFFFF)
-                                : FlutterFlowTheme.of(context).greenActive,
+                                ? FlutterFlowTheme.of(context).backBG
+                                : FlutterFlowTheme.of(context).black,
                             width: 1.0,
                           ),
                         ),
@@ -420,8 +413,8 @@ class _SignIn4WidgetState extends State<SignIn4Widget> {
                                       .bodyMedium
                                       .override(
                                         fontFamily: 'Inter',
-                                        color:
-                                            FlutterFlowTheme.of(context).black,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
                                         fontWeight: FontWeight.normal,
                                       ),
                                 ),
@@ -469,7 +462,7 @@ class _SignIn4WidgetState extends State<SignIn4Widget> {
                         onTap: () async {
                           context.pushNamed(
                             'SignIn5',
-                            queryParams: {
+                            queryParameters: {
                               'artDirection': serializeParam(
                                 widget.artDirection,
                                 ParamType.String,

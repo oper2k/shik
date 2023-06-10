@@ -18,7 +18,6 @@ class _Route3BonusWidgetState extends State<Route3BonusWidget> {
   late Route3BonusModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -30,7 +29,6 @@ class _Route3BonusWidgetState extends State<Route3BonusWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -39,7 +37,7 @@ class _Route3BonusWidgetState extends State<Route3BonusWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,

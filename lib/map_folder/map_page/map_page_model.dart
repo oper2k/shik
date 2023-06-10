@@ -24,6 +24,7 @@ class MapPageModel extends FlutterFlowModel {
 
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // Model for MapComponent component.
   late MapComponentModel mapComponentModel;
   // State field(s) for SearchInput widget.
@@ -40,10 +41,13 @@ class MapPageModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     mapComponentModel.dispose();
     searchInputController?.dispose();
     tabBarModel.dispose();
   }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 

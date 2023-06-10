@@ -28,7 +28,6 @@ class _CourseListWidgetState extends State<CourseListWidget> {
   late CourseListModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -40,7 +39,6 @@ class _CourseListWidgetState extends State<CourseListWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -49,7 +47,7 @@ class _CourseListWidgetState extends State<CourseListWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -223,7 +221,7 @@ class _CourseListWidgetState extends State<CourseListWidget> {
                                                   onTap: () async {
                                                     context.pushNamed(
                                                       'CourseLesson',
-                                                      queryParams: {
+                                                      queryParameters: {
                                                         'coursePurchased':
                                                             serializeParam(
                                                           usersCoursesQueryUsersCoursesRowList
@@ -267,7 +265,7 @@ class _CourseListWidgetState extends State<CourseListWidget> {
                                                               .fromSTEB(
                                                                   4.0,
                                                                   4.0,
-                                                                  0.0,
+                                                                  12.0,
                                                                   4.0),
                                                       child: Row(
                                                         mainAxisSize:
@@ -287,102 +285,32 @@ class _CourseListWidgetState extends State<CourseListWidget> {
                                                               fit: BoxFit.cover,
                                                             ),
                                                           ),
-                                                          Padding(
-                                                            padding:
-                                                                EdgeInsetsDirectional
-                                                                    .fromSTEB(
-                                                                        20.0,
-                                                                        0.0,
-                                                                        0.0,
-                                                                        3.0),
-                                                            child: Column(
-                                                              mainAxisSize:
-                                                                  MainAxisSize
-                                                                      .min,
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Flexible(
-                                                                  child: Text(
-                                                                    'Урок ${coursesLessonsChildFreeLessonsItem.lessonNumber?.toString()}',
-                                                                    textAlign:
-                                                                        TextAlign
-                                                                            .start,
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Inter',
-                                                                          color:
-                                                                              Color(0xFF76787A),
-                                                                          fontWeight:
-                                                                              FontWeight.normal,
-                                                                          lineHeight:
-                                                                              1.4,
-                                                                        ),
-                                                                  ),
-                                                                ),
-                                                                Flexible(
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            4.0,
-                                                                            0.0,
-                                                                            0.0),
+                                                          Expanded(
+                                                            child: Padding(
+                                                              padding:
+                                                                  EdgeInsetsDirectional
+                                                                      .fromSTEB(
+                                                                          20.0,
+                                                                          0.0,
+                                                                          0.0,
+                                                                          3.0),
+                                                              child: Column(
+                                                                mainAxisSize:
+                                                                    MainAxisSize
+                                                                        .min,
+                                                                mainAxisAlignment:
+                                                                    MainAxisAlignment
+                                                                        .center,
+                                                                crossAxisAlignment:
+                                                                    CrossAxisAlignment
+                                                                        .start,
+                                                                children: [
+                                                                  Flexible(
                                                                     child: Text(
-                                                                      valueOrDefault<
-                                                                          String>(
-                                                                        coursesLessonsChildFreeLessonsItem
-                                                                            .title,
-                                                                        'Заголовок',
-                                                                      ),
+                                                                      'Урок ${coursesLessonsChildFreeLessonsItem.lessonNumber?.toString()}',
                                                                       textAlign:
                                                                           TextAlign
                                                                               .start,
-                                                                      maxLines:
-                                                                          2,
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium
-                                                                          .override(
-                                                                            fontFamily:
-                                                                                'Inter',
-                                                                            fontWeight:
-                                                                                FontWeight.normal,
-                                                                            lineHeight:
-                                                                                1.4,
-                                                                          ),
-                                                                    ),
-                                                                  ),
-                                                                ),
-                                                                Flexible(
-                                                                  child:
-                                                                      Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
-                                                                            0.0,
-                                                                            4.0,
-                                                                            0.0,
-                                                                            0.0),
-                                                                    child: Text(
-                                                                      valueOrDefault<
-                                                                          String>(
-                                                                        coursesLessonsChildFreeLessonsItem
-                                                                            .description,
-                                                                        'Описание',
-                                                                      ),
-                                                                      textAlign:
-                                                                          TextAlign
-                                                                              .start,
-                                                                      maxLines:
-                                                                          2,
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
                                                                           .bodyMedium
@@ -390,7 +318,7 @@ class _CourseListWidgetState extends State<CourseListWidget> {
                                                                             fontFamily:
                                                                                 'Inter',
                                                                             color:
-                                                                                Color(0xFF76787A),
+                                                                                FlutterFlowTheme.of(context).primaryText,
                                                                             fontWeight:
                                                                                 FontWeight.normal,
                                                                             lineHeight:
@@ -398,8 +326,69 @@ class _CourseListWidgetState extends State<CourseListWidget> {
                                                                           ),
                                                                     ),
                                                                   ),
-                                                                ),
-                                                              ],
+                                                                  Flexible(
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          0.0,
+                                                                          4.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                      child:
+                                                                          Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          coursesLessonsChildFreeLessonsItem
+                                                                              .title,
+                                                                          'Заголовок',
+                                                                        ),
+                                                                        textAlign:
+                                                                            TextAlign.start,
+                                                                        maxLines:
+                                                                            2,
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Inter',
+                                                                              fontWeight: FontWeight.normal,
+                                                                              lineHeight: 1.4,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                  Flexible(
+                                                                    child:
+                                                                        Padding(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                                                          0.0,
+                                                                          4.0,
+                                                                          0.0,
+                                                                          0.0),
+                                                                      child:
+                                                                          Text(
+                                                                        valueOrDefault<
+                                                                            String>(
+                                                                          coursesLessonsChildFreeLessonsItem
+                                                                              .description,
+                                                                          'Описание',
+                                                                        ),
+                                                                        textAlign:
+                                                                            TextAlign.start,
+                                                                        maxLines:
+                                                                            2,
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Inter',
+                                                                              color: FlutterFlowTheme.of(context).primaryText,
+                                                                              fontWeight: FontWeight.normal,
+                                                                              lineHeight: 1.4,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
                                                             ),
                                                           ),
                                                         ],
@@ -427,7 +416,7 @@ class _CourseListWidgetState extends State<CourseListWidget> {
                                         onTap: () async {
                                           context.pushNamed(
                                             'BuyCourse',
-                                            queryParams: {
+                                            queryParameters: {
                                               'coursesRow': serializeParam(
                                                 widget.coursesRow,
                                                 ParamType.SupabaseRow,
@@ -506,9 +495,17 @@ class _CourseListWidgetState extends State<CourseListWidget> {
                                                       isGlobal: true,
                                                       avoidOverflow: false,
                                                       targetAnchor:
-                                                          Alignment(0.0, 0.0),
+                                                          AlignmentDirectional(
+                                                                  0.0, 0.0)
+                                                              .resolve(
+                                                                  Directionality.of(
+                                                                      context)),
                                                       followerAnchor:
-                                                          Alignment(0.0, 0.0),
+                                                          AlignmentDirectional(
+                                                                  0.0, 0.0)
+                                                              .resolve(
+                                                                  Directionality.of(
+                                                                      context)),
                                                       builder: (dialogContext) {
                                                         return Material(
                                                           color: Colors
@@ -517,8 +514,8 @@ class _CourseListWidgetState extends State<CourseListWidget> {
                                                               GestureDetector(
                                                             onTap: () => FocusScope
                                                                     .of(context)
-                                                                .requestFocus(
-                                                                    _unfocusNode),
+                                                                .requestFocus(_model
+                                                                    .unfocusNode),
                                                             child:
                                                                 BuyCourseWidWidget(
                                                               coursesRow: widget
@@ -590,53 +587,58 @@ class _CourseListWidgetState extends State<CourseListWidget> {
                                                                   ),
                                                                 ),
                                                                 Expanded(
-                                                                  child: Column(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      Flexible(
-                                                                        child:
-                                                                            Text(
-                                                                          'Урок ${coursesLessonsChildItem.lessonNumber?.toString()}',
-                                                                          textAlign:
-                                                                              TextAlign.center,
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: 'Inter',
-                                                                                color: Color(0xFF76787A),
-                                                                                fontWeight: FontWeight.normal,
-                                                                              ),
-                                                                        ),
-                                                                      ),
-                                                                      Flexible(
-                                                                        child:
-                                                                            Padding(
-                                                                          padding: EdgeInsetsDirectional.fromSTEB(
-                                                                              0.0,
-                                                                              4.0,
-                                                                              0.0,
-                                                                              0.0),
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            12.0,
+                                                                            0.0,
+                                                                            12.0,
+                                                                            0.0),
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Flexible(
                                                                           child:
                                                                               Text(
-                                                                            valueOrDefault<String>(
-                                                                              coursesLessonsChildItem.description,
-                                                                              'Описание урока',
-                                                                            ),
+                                                                            'Урок ${coursesLessonsChildItem.lessonNumber?.toString()}',
                                                                             textAlign:
                                                                                 TextAlign.center,
-                                                                            maxLines:
-                                                                                2,
-                                                                            style:
-                                                                                FlutterFlowTheme.of(context).bodyMedium,
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  fontFamily: 'Inter',
+                                                                                  color: FlutterFlowTheme.of(context).primaryText,
+                                                                                  fontWeight: FontWeight.normal,
+                                                                                ),
                                                                           ),
                                                                         ),
-                                                                      ),
-                                                                    ],
+                                                                        Flexible(
+                                                                          child:
+                                                                              Padding(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
+                                                                                0.0,
+                                                                                4.0,
+                                                                                0.0,
+                                                                                0.0),
+                                                                            child:
+                                                                                Text(
+                                                                              valueOrDefault<String>(
+                                                                                coursesLessonsChildItem.description,
+                                                                                'Описание урока',
+                                                                              ),
+                                                                              textAlign: TextAlign.center,
+                                                                              maxLines: 2,
+                                                                              style: FlutterFlowTheme.of(context).bodyMedium,
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ],
@@ -705,7 +707,7 @@ class _CourseListWidgetState extends State<CourseListWidget> {
                                                 onTap: () async {
                                                   context.pushNamed(
                                                     'CourseLesson',
-                                                    queryParams: {
+                                                    queryParameters: {
                                                       'coursePurchased':
                                                           serializeParam(
                                                         true,
@@ -768,53 +770,60 @@ class _CourseListWidgetState extends State<CourseListWidget> {
                                                               ),
                                                             ),
                                                             Expanded(
-                                                              child: Column(
-                                                                mainAxisSize:
-                                                                    MainAxisSize
-                                                                        .max,
-                                                                mainAxisAlignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                children: [
-                                                                  Text(
-                                                                    'Урок ${coursesLessonsChildItem.lessonNumber?.toString()}',
-                                                                    style: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .bodyMedium
-                                                                        .override(
-                                                                          fontFamily:
-                                                                              'Inter',
-                                                                          color:
-                                                                              Color(0xFF76787A),
-                                                                          fontWeight:
-                                                                              FontWeight.normal,
-                                                                        ),
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: EdgeInsetsDirectional
-                                                                        .fromSTEB(
+                                                              child: Padding(
+                                                                padding: EdgeInsetsDirectional
+                                                                    .fromSTEB(
+                                                                        12.0,
+                                                                        0.0,
+                                                                        12.0,
+                                                                        0.0),
+                                                                child: Column(
+                                                                  mainAxisSize:
+                                                                      MainAxisSize
+                                                                          .max,
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .center,
+                                                                  children: [
+                                                                    Flexible(
+                                                                      child:
+                                                                          Text(
+                                                                        'Урок ${coursesLessonsChildItem.lessonNumber?.toString()}',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .bodyMedium
+                                                                            .override(
+                                                                              fontFamily: 'Inter',
+                                                                              color: FlutterFlowTheme.of(context).primaryText,
+                                                                              fontWeight: FontWeight.normal,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                    Flexible(
+                                                                      child:
+                                                                          Padding(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
                                                                             0.0,
                                                                             4.0,
                                                                             0.0,
                                                                             0.0),
-                                                                    child: Text(
-                                                                      valueOrDefault<
-                                                                          String>(
-                                                                        coursesLessonsChildItem
-                                                                            .description,
-                                                                        'Описание урока',
+                                                                        child:
+                                                                            Text(
+                                                                          valueOrDefault<
+                                                                              String>(
+                                                                            coursesLessonsChildItem.description,
+                                                                            'Описание урока',
+                                                                          ),
+                                                                          textAlign:
+                                                                              TextAlign.center,
+                                                                          maxLines:
+                                                                              2,
+                                                                          style:
+                                                                              FlutterFlowTheme.of(context).bodyMedium,
+                                                                        ),
                                                                       ),
-                                                                      textAlign:
-                                                                          TextAlign
-                                                                              .center,
-                                                                      maxLines:
-                                                                          2,
-                                                                      style: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .bodyMedium,
                                                                     ),
-                                                                  ),
-                                                                ],
+                                                                  ],
+                                                                ),
                                                               ),
                                                             ),
                                                           ],

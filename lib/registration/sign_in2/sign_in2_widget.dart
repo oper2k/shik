@@ -22,7 +22,6 @@ class _SignIn2WidgetState extends State<SignIn2Widget> {
   late SignIn2Model _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -37,7 +36,6 @@ class _SignIn2WidgetState extends State<SignIn2Widget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -46,7 +44,7 @@ class _SignIn2WidgetState extends State<SignIn2Widget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -268,10 +266,8 @@ class _SignIn2WidgetState extends State<SignIn2Widget> {
               Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  if (!((_model.nameInputController.text != null &&
-                          _model.nameInputController.text != '') &&
-                      (_model.birthDateInputController.text != null &&
-                          _model.birthDateInputController.text != '')))
+                  if (_model.nameInputController.text == null ||
+                      _model.nameInputController.text == '')
                     Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 45.0),
@@ -285,10 +281,8 @@ class _SignIn2WidgetState extends State<SignIn2Widget> {
                         ),
                       ),
                     ),
-                  if ((_model.nameInputController.text != null &&
-                          _model.nameInputController.text != '') &&
-                      (_model.birthDateInputController.text != null &&
-                          _model.birthDateInputController.text != ''))
+                  if (_model.nameInputController.text != null &&
+                      _model.nameInputController.text != '')
                     Padding(
                       padding:
                           EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 45.0),
@@ -300,7 +294,7 @@ class _SignIn2WidgetState extends State<SignIn2Widget> {
                         onTap: () async {
                           context.pushNamed(
                             'SignIn3',
-                            queryParams: {
+                            queryParameters: {
                               'name': serializeParam(
                                 _model.nameInputController.text,
                                 ParamType.String,

@@ -18,7 +18,6 @@ class _Route7HardWidgetState extends State<Route7HardWidget> {
   late Route7HardModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -30,7 +29,6 @@ class _Route7HardWidgetState extends State<Route7HardWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -39,7 +37,7 @@ class _Route7HardWidgetState extends State<Route7HardWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -141,7 +139,7 @@ class _Route7HardWidgetState extends State<Route7HardWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Уровень : Hard',
+                    'Уровень: легкий',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Inter',
                           fontWeight: FontWeight.normal,

@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 class NotAuthorizedModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // Model for button component.
   late ButtonModel buttonModel;
   // Model for tabBar component.
@@ -23,9 +24,12 @@ class NotAuthorizedModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     buttonModel.dispose();
     tabBarModel.dispose();
   }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 

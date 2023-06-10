@@ -11,6 +11,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 import 'home_model.dart';
 export 'home_model.dart';
 
@@ -25,7 +26,6 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
   late HomeModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   final animationsMap = {
     'stackOnPageLoadAnimation': AnimationInfo(
@@ -48,10 +48,29 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
         ),
       ],
     ),
-    'containerOnPageLoadAnimation': AnimationInfo(
+    'containerOnPageLoadAnimation1': AnimationInfo(
       trigger: AnimationTrigger.onPageLoad,
       effects: [
         VisibilityEffect(duration: 1.ms),
+        MoveEffect(
+          curve: Curves.easeOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: Offset(0.0, 50.0),
+          end: Offset(0.0, 0.0),
+        ),
+        FadeEffect(
+          curve: Curves.easeOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+      ],
+    ),
+    'containerOnPageLoadAnimation2': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
         MoveEffect(
           curve: Curves.easeOut,
           delay: 0.ms,
@@ -134,13 +153,25 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
   void initState() {
     super.initState();
     _model = createModel(context, () => HomeModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await UsersTable().update(
+        data: {
+          'last_session': supaSerialize<DateTime>(getCurrentTimestamp),
+        },
+        matchingRows: (rows) => rows.eq(
+          'id',
+          currentUserUid,
+        ),
+      );
+    });
   }
 
   @override
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -149,7 +180,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -494,14 +525,160 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                           ),
                         ),
                       ).animateOnPageLoad(
-                          animationsMap['containerOnPageLoadAnimation']!),
+                          animationsMap['containerOnPageLoadAnimation1']!),
+                      if (loggedIn)
+                        Padding(
+                          padding: EdgeInsetsDirectional.fromSTEB(
+                              24.0, 23.0, 23.0, 0.0),
+                          child: FutureBuilder<List<UsersRow>>(
+                            future: UsersTable().querySingleRow(
+                              queryFn: (q) => q.eq(
+                                'id',
+                                currentUserUid,
+                              ),
+                            ),
+                            builder: (context, snapshot) {
+                              // Customize what your widget looks like when it's loading.
+                              if (!snapshot.hasData) {
+                                return Center(
+                                  child: SizedBox(
+                                    width: 50.0,
+                                    height: 50.0,
+                                    child: CircularProgressIndicator(
+                                      color:
+                                          FlutterFlowTheme.of(context).primary,
+                                    ),
+                                  ),
+                                );
+                              }
+                              List<UsersRow> queryUsersUsersRowList =
+                                  snapshot.data!;
+                              final queryUsersUsersRow =
+                                  queryUsersUsersRowList.isNotEmpty
+                                      ? queryUsersUsersRowList.first
+                                      : null;
+                              return InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  context.pushNamed(
+                                    'Rate',
+                                    extra: <String, dynamic>{
+                                      kTransitionInfoKey: TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType: PageTransitionType.fade,
+                                        duration: Duration(milliseconds: 0),
+                                      ),
+                                    },
+                                  );
+                                },
+                                child: Container(
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    borderRadius: BorderRadius.circular(15.0),
+                                  ),
+                                  child: Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        12.0, 12.0, 12.0, 12.0),
+                                    child: Row(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Expanded(
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 14.0, 0.0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              children: [
+                                                Padding(
+                                                  padding: EdgeInsetsDirectional
+                                                      .fromSTEB(
+                                                          0.0, 0.0, 8.0, 0.0),
+                                                  child: Icon(
+                                                    FFIcons.kvector12,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .white,
+                                                    size: 18.0,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  'Рейтинг: ${valueOrDefault<String>(
+                                                    queryUsersUsersRow?.rating
+                                                        ?.toString(),
+                                                    '0',
+                                                  )}',
+                                                  style: FlutterFlowTheme.of(
+                                                          context)
+                                                      .bodyMedium
+                                                      .override(
+                                                        fontFamily: 'Inter',
+                                                        color:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .white,
+                                                        fontSize: 16.0,
+                                                        fontWeight:
+                                                            FontWeight.normal,
+                                                      ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          width: 30.0,
+                                          height: 30.0,
+                                          decoration: BoxDecoration(),
+                                          child: Builder(
+                                            builder: (context) => InkWell(
+                                              splashColor: Colors.transparent,
+                                              focusColor: Colors.transparent,
+                                              hoverColor: Colors.transparent,
+                                              highlightColor:
+                                                  Colors.transparent,
+                                              onTap: () async {
+                                                await Share.share(
+                                                  'Я набрал ${valueOrDefault<String>(
+                                                    queryUsersUsersRow?.rating
+                                                        ?.toString(),
+                                                    '0',
+                                                  )} баллов в приложении ШИК!',
+                                                  sharePositionOrigin:
+                                                      getWidgetBoundingBox(
+                                                          context),
+                                                );
+                                              },
+                                              child: Icon(
+                                                FFIcons.kclarityShareLine,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .white,
+                                                size: 24.0,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ).animateOnPageLoad(animationsMap[
+                                  'containerOnPageLoadAnimation2']!);
+                            },
+                          ),
+                        ),
                       Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
                             padding: EdgeInsetsDirectional.fromSTEB(
-                                24.0, 34.0, 0.0, 0.0),
+                                24.0, 24.0, 0.0, 0.0),
                             child: Text(
                               'Интервью с деятелями \nкультуры и искусства',
                               style: FlutterFlowTheme.of(context)
@@ -572,7 +749,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                 onTap: () async {
                                                   context.pushNamed(
                                                     'Interview',
-                                                    queryParams: {
+                                                    queryParameters: {
                                                       'feedInterviewRow':
                                                           serializeParam(
                                                         rowFeedInterviewRow,
@@ -748,7 +925,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                                 onTap: () async {
                                                   context.pushNamed(
                                                     'Facts',
-                                                    queryParams: {
+                                                    queryParameters: {
                                                       'feedFactsRow':
                                                           serializeParam(
                                                         rowFeedFactsRow,
@@ -899,7 +1076,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                       onTap: () async {
                                         context.pushNamed(
                                           'Playlist',
-                                          queryParams: {
+                                          queryParameters: {
                                             'playlistsRow': serializeParam(
                                               columnFeedPlaylistsRow,
                                               ParamType.SupabaseRow,
@@ -1099,7 +1276,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                               onTap: () async {
                                                 context.pushNamed(
                                                   'Interesting',
-                                                  queryParams: {
+                                                  queryParameters: {
                                                     'interestingRow':
                                                         serializeParam(
                                                       rowFeedInterestingRow,
@@ -1243,7 +1420,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                               onTap: () async {
                                 context.pushNamed(
                                   'Questions',
-                                  queryParams: {
+                                  queryParameters: {
                                     'feed5QuestionsRow': serializeParam(
                                       containerFeed5QuestionsRow,
                                       ParamType.SupabaseRow,
@@ -1381,7 +1558,7 @@ class _HomeWidgetState extends State<HomeWidget> with TickerProviderStateMixin {
                                               onTap: () async {
                                                 context.pushNamed(
                                                   'Professions',
-                                                  queryParams: {
+                                                  queryParameters: {
                                                     'feedProfessionsRow':
                                                         serializeParam(
                                                       rowFeedProfessionsRow,

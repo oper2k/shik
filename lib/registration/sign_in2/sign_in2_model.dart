@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 class SignIn2Model extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   bool isDataUploading = false;
   FFUploadedFile uploadedLocalFile =
       FFUploadedFile(bytes: Uint8List.fromList([]));
@@ -37,11 +38,14 @@ class SignIn2Model extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     nameInputController?.dispose();
     birthDateInputController?.dispose();
     buttonModel1.dispose();
     buttonModel2.dispose();
   }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 

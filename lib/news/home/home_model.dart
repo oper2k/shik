@@ -11,10 +11,12 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 class HomeModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // Model for Quizzes_List component.
   late QuizzesListModel quizzesListModel;
   // Model for tabBar component.
@@ -28,9 +30,12 @@ class HomeModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     quizzesListModel.dispose();
     tabBarModel.dispose();
   }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 

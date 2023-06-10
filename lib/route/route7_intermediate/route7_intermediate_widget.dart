@@ -19,7 +19,6 @@ class _Route7IntermediateWidgetState extends State<Route7IntermediateWidget> {
   late Route7IntermediateModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -31,7 +30,6 @@ class _Route7IntermediateWidgetState extends State<Route7IntermediateWidget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -40,7 +38,7 @@ class _Route7IntermediateWidgetState extends State<Route7IntermediateWidget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -142,7 +140,7 @@ class _Route7IntermediateWidgetState extends State<Route7IntermediateWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Уровень : Intermediate',
+                    'Уровень: средний',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Inter',
                           fontWeight: FontWeight.normal,

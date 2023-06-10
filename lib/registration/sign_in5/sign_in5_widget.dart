@@ -32,7 +32,6 @@ class _SignIn5WidgetState extends State<SignIn5Widget> {
   late SignIn5Model _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -44,7 +43,6 @@ class _SignIn5WidgetState extends State<SignIn5Widget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -53,7 +51,7 @@ class _SignIn5WidgetState extends State<SignIn5Widget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -288,7 +286,6 @@ class _SignIn5WidgetState extends State<SignIn5Widget> {
                           widget.knowledgeLevel != '') &&
                       (widget.artDirection != null &&
                           widget.artDirection != '') &&
-                      (widget.birthDate != null && widget.birthDate != '') &&
                       (widget.name != null && widget.name != '')))
                     Padding(
                       padding:
@@ -307,7 +304,6 @@ class _SignIn5WidgetState extends State<SignIn5Widget> {
                           widget.knowledgeLevel != '') &&
                       (widget.artDirection != null &&
                           widget.artDirection != '') &&
-                      (widget.birthDate != null && widget.birthDate != '') &&
                       (widget.name != null && widget.name != ''))
                     Padding(
                       padding:

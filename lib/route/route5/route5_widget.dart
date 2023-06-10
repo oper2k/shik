@@ -19,7 +19,6 @@ class _Route5WidgetState extends State<Route5Widget> {
   late Route5Model _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   @override
   void initState() {
@@ -31,7 +30,6 @@ class _Route5WidgetState extends State<Route5Widget> {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -40,7 +38,7 @@ class _Route5WidgetState extends State<Route5Widget> {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -125,7 +123,7 @@ class _Route5WidgetState extends State<Route5Widget> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Уровень : Lite',
+                    'Уровень: легкий',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Inter',
                           fontWeight: FontWeight.normal,
@@ -504,31 +502,26 @@ class _Route5WidgetState extends State<Route5Widget> {
                   Padding(
                     padding:
                         EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 45.0),
-                    child: wrapWithModel(
-                      model: _model.buttonModel1,
-                      updateCallback: () => setState(() {}),
-                      child: ButtonWidget(
-                        text: 'Проверить',
-                        btnColor: FlutterFlowTheme.of(context).notActiveButton,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 45.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
                       hoverColor: Colors.transparent,
                       highlightColor: Colors.transparent,
                       onTap: () async {
-                        context.pushNamed('Route6');
+                        if (FFAppState().currentLessonIndex == 4) {
+                          setState(() {
+                            FFAppState().currentLessonIndex =
+                                FFAppState().currentLessonIndex + 1;
+                          });
+                        }
+
+                        context.goNamed('Route');
                       },
                       child: wrapWithModel(
-                        model: _model.buttonModel2,
+                        model: _model.buttonModel,
                         updateCallback: () => setState(() {}),
                         child: ButtonWidget(
-                          text: 'Проверить',
+                          text: 'Далее',
                           btnColor: FlutterFlowTheme.of(context).greenActive,
                         ),
                       ),

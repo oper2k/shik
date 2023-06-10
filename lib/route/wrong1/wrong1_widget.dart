@@ -1,3 +1,4 @@
+import '/backend/schema/structs/index.dart';
 import '/components/button_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -8,7 +9,12 @@ import 'wrong1_model.dart';
 export 'wrong1_model.dart';
 
 class Wrong1Widget extends StatefulWidget {
-  const Wrong1Widget({Key? key}) : super(key: key);
+  const Wrong1Widget({
+    Key? key,
+    required this.quizTextDataType,
+  }) : super(key: key);
+
+  final QuizTextStruct? quizTextDataType;
 
   @override
   _Wrong1WidgetState createState() => _Wrong1WidgetState();
@@ -65,20 +71,20 @@ class _Wrong1WidgetState extends State<Wrong1Widget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                   child: Text(
-                    'Ответ: композитор',
+                    'Ответ: ${() {
+                      if (widget.quizTextDataType?.correctAnswer == 1) {
+                        return widget.quizTextDataType?.answer1;
+                      } else if (widget.quizTextDataType?.correctAnswer == 2) {
+                        return widget.quizTextDataType?.answer2;
+                      } else if (widget.quizTextDataType?.correctAnswer == 3) {
+                        return widget.quizTextDataType?.answer3;
+                      } else if (widget.quizTextDataType?.correctAnswer == 4) {
+                        return widget.quizTextDataType?.answer4;
+                      } else {
+                        return 'не указан';
+                      }
+                    }()}',
                     style: FlutterFlowTheme.of(context).bodyMedium,
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 42.0, 0.0, 0.0),
-                  child: Text(
-                    ' Композитор – автор, создатель музыкальных произведений.',
-                    textAlign: TextAlign.center,
-                    style: FlutterFlowTheme.of(context).bodyMedium.override(
-                          fontFamily: 'Inter',
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.normal,
-                        ),
                   ),
                 ),
                 Padding(
@@ -90,7 +96,7 @@ class _Wrong1WidgetState extends State<Wrong1Widget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
-                      Navigator.pop(context);
+                      Navigator.pop(context, true);
                     },
                     child: wrapWithModel(
                       model: _model.buttonModel,

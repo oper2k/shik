@@ -22,7 +22,6 @@ class _IzoWidgetState extends State<IzoWidget> with TickerProviderStateMixin {
   late IzoModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   final animationsMap = {
     'containerOnPageLoadAnimation1': AnimationInfo(
@@ -121,7 +120,6 @@ class _IzoWidgetState extends State<IzoWidget> with TickerProviderStateMixin {
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -130,7 +128,7 @@ class _IzoWidgetState extends State<IzoWidget> with TickerProviderStateMixin {
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -351,17 +349,17 @@ class _IzoWidgetState extends State<IzoWidget> with TickerProviderStateMixin {
                                                     backgroundColor:
                                                         Colors.transparent,
                                                     context: context,
-                                                    builder:
-                                                        (bottomSheetContext) {
+                                                    builder: (context) {
                                                       return GestureDetector(
                                                         onTap: () => FocusScope
                                                                 .of(context)
-                                                            .requestFocus(
-                                                                _unfocusNode),
+                                                            .requestFocus(_model
+                                                                .unfocusNode),
                                                         child: Padding(
-                                                          padding: MediaQuery.of(
-                                                                  bottomSheetContext)
-                                                              .viewInsets,
+                                                          padding:
+                                                              MediaQuery.of(
+                                                                      context)
+                                                                  .viewInsets,
                                                           child:
                                                               SchoolInfoWidget(
                                                             current:

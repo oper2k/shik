@@ -26,7 +26,6 @@ class _PianoWidgetState extends State<PianoWidget>
   late PianoModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   final animationsMap = {
     'imageOnPageLoadAnimation': AnimationInfo(
@@ -77,7 +76,6 @@ class _PianoWidgetState extends State<PianoWidget>
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -86,511 +84,734 @@ class _PianoWidgetState extends State<PianoWidget>
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
         body: SafeArea(
           top: true,
-          child: Padding(
-            padding: EdgeInsetsDirectional.fromSTEB(0.0, 45.0, 0.0, 45.0),
-            child: Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          context.pop();
-                        },
-                        child: Container(
-                          width: 44.0,
-                          height: 44.0,
-                          decoration: BoxDecoration(),
-                          child: Align(
-                            alignment: AlignmentDirectional(0.0, 0.0),
-                            child: Icon(
-                              FFIcons.ksystemUiconsCross1,
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              size: 24.0,
+          child: Stack(
+            children: [
+              Padding(
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 45.0, 0.0, 45.0),
+                child: Column(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(24.0, 0.0, 24.0, 0.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          InkWell(
+                            splashColor: Colors.transparent,
+                            focusColor: Colors.transparent,
+                            hoverColor: Colors.transparent,
+                            highlightColor: Colors.transparent,
+                            onTap: () async {
+                              context.pop();
+                            },
+                            child: Container(
+                              width: 44.0,
+                              height: 44.0,
+                              decoration: BoxDecoration(),
+                              child: Align(
+                                alignment: AlignmentDirectional(0.0, 0.0),
+                                child: Icon(
+                                  FFIcons.ksystemUiconsCross1,
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                  size: 24.0,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                12.0, 0.0, 0.0, 0.0),
+                            child: LinearPercentIndicator(
+                              percent: 0.3,
+                              width: MediaQuery.of(context).size.width * 0.75,
+                              lineHeight: 8.0,
+                              animation: true,
+                              progressColor: Color(0xFFA4CE57),
+                              backgroundColor:
+                                  FlutterFlowTheme.of(context).accent4,
+                              barRadius: Radius.circular(8.0),
+                              padding: EdgeInsets.zero,
+                            ),
+                          ),
+                        ],
                       ),
-                      Padding(
-                        padding:
-                            EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 0.0, 0.0),
-                        child: LinearPercentIndicator(
-                          percent: 0.3,
-                          width: MediaQuery.of(context).size.width * 0.75,
-                          lineHeight: 8.0,
-                          animation: true,
-                          progressColor: Color(0xFFA4CE57),
-                          backgroundColor: FlutterFlowTheme.of(context).accent4,
-                          barRadius: Radius.circular(8.0),
-                          padding: EdgeInsets.zero,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
-                  child: Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Color(0xFFDEA5BA),
                     ),
-                    child: Align(
-                      alignment: AlignmentDirectional(0.0, 0.0),
-                      child: Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
-                            0.0, 10.0, 0.0, 10.0),
-                        child: Text(
-                          'Послушайте и выберите правильную ноту',
-                          textAlign: TextAlign.center,
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                      child: Container(
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFDEA5BA),
+                        ),
+                        child: Align(
+                          alignment: AlignmentDirectional(0.0, 0.0),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                0.0, 10.0, 0.0, 10.0),
+                            child: Text(
+                              'Послушайте и выберите правильную ноту',
+                              textAlign: TextAlign.center,
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
                                     fontFamily: 'Inter',
                                     color: FlutterFlowTheme.of(context).white,
                                     fontSize: 16.0,
                                     fontWeight: FontWeight.bold,
                                     lineHeight: 1.4,
                                   ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ),
-                if (!_model.startGame!)
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 24.0, 24.0, 0.0),
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        color: FlutterFlowTheme.of(context).secondaryBackground,
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      child: Padding(
+                    if (!_model.startGame!)
+                      Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(
-                            24.0, 24.0, 24.0, 24.0),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Row(
+                            24.0, 24.0, 24.0, 0.0),
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                24.0, 24.0, 24.0, 24.0),
+                            child: Column(
                               mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.network(
-                                    () {
-                                      if (_model.noteNumber == 1) {
-                                        return 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/gzqd1x2plsjd/1.jpg';
-                                      } else if (_model.noteNumber == 2) {
-                                        return 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/ubq41hsprrd9/2.jpg';
-                                      } else {
-                                        return '11';
-                                      }
-                                    }(),
-                                    width: 148.0,
-                                    height: 150.0,
-                                    fit: BoxFit.contain,
-                                  ),
-                                ).animateOnPageLoad(
-                                    animationsMap['imageOnPageLoadAnimation']!),
-                                Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    if (responsiveVisibility(
-                                      context: context,
-                                      phone: false,
-                                      tablet: false,
-                                      tabletLandscape: false,
-                                      desktop: false,
-                                    ))
-                                      Container(
-                                        width: 220.0,
-                                        child: Stack(
-                                          alignment:
-                                              AlignmentDirectional(0.0, 1.0),
-                                          children: [
-                                            FlutterFlowAudioPlayer(
-                                              audio: Audio.network(
-                                                () {
-                                                  if (_model.noteNumber == 1) {
-                                                    return 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/2nftemyqo81r/zvuk-notyi-do.mp3';
-                                                  } else if (_model
-                                                          .noteNumber ==
-                                                      2) {
-                                                    return 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/rnfeudx1z5kp/zvuk-notyi-re.mp3';
-                                                  } else {
-                                                    return 'https://filesamples.com/samples/audio/mp3/sample3.mp3';
-                                                  }
-                                                }(),
-                                                metas: Metas(
-                                                  id: 'sample3.mp3-cb8ccbfe',
-                                                  title: 'Какая это нота?',
-                                                ),
-                                              ),
-                                              titleTextStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleLarge
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        fontSize: 20.0,
-                                                        lineHeight: 1.0,
-                                                      ),
-                                              playbackDurationTextStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyLarge
-                                                      .override(
-                                                        fontFamily: 'Inter',
-                                                        fontSize: 0.0,
-                                                        lineHeight: 1.7,
-                                                      ),
-                                              fillColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondaryBackground,
-                                              playbackButtonColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .primary,
-                                              activeTrackColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .alternate,
-                                              elevation: 0.0,
-                                            ).animateOnPageLoad(animationsMap[
-                                                'audioPlayerOnPageLoadAnimation']!),
-                                            Container(
-                                              width: double.infinity,
-                                              height: 25.0,
-                                              decoration: BoxDecoration(
-                                                color:
-                                                    FlutterFlowTheme.of(context)
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: Image.network(
+                                        () {
+                                          if (_model.noteNumber == 1) {
+                                            return 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/gzqd1x2plsjd/1.jpg';
+                                          } else if (_model.noteNumber == 2) {
+                                            return 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/ubq41hsprrd9/2.jpg';
+                                          } else {
+                                            return '11';
+                                          }
+                                        }(),
+                                        width: 148.0,
+                                        height: 150.0,
+                                        fit: BoxFit.contain,
+                                      ),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'imageOnPageLoadAnimation']!),
+                                    Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        if (responsiveVisibility(
+                                          context: context,
+                                          phone: false,
+                                          tablet: false,
+                                          tabletLandscape: false,
+                                          desktop: false,
+                                        ))
+                                          Container(
+                                            width: 220.0,
+                                            child: Stack(
+                                              alignment: AlignmentDirectional(
+                                                  0.0, 1.0),
+                                              children: [
+                                                FlutterFlowAudioPlayer(
+                                                  audio: Audio.network(
+                                                    () {
+                                                      if (_model.noteNumber ==
+                                                          1) {
+                                                        return 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/2nftemyqo81r/zvuk-notyi-do.mp3';
+                                                      } else if (_model
+                                                              .noteNumber ==
+                                                          2) {
+                                                        return 'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/rnfeudx1z5kp/zvuk-notyi-re.mp3';
+                                                      } else {
+                                                        return 'https://filesamples.com/samples/audio/mp3/sample3.mp3';
+                                                      }
+                                                    }(),
+                                                    metas: Metas(
+                                                      id: 'sample3.mp3-2bef190f',
+                                                      title: 'Какая это нота?',
+                                                    ),
+                                                  ),
+                                                  titleTextStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .titleLarge
+                                                          .override(
+                                                            fontFamily: 'Inter',
+                                                            fontSize: 20.0,
+                                                            lineHeight: 1.0,
+                                                          ),
+                                                  playbackDurationTextStyle:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .bodyLarge
+                                                          .override(
+                                                            fontFamily: 'Inter',
+                                                            fontSize: 0.0,
+                                                            lineHeight: 1.7,
+                                                          ),
+                                                  fillColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .secondaryBackground,
+                                                  playbackButtonColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primary,
+                                                  activeTrackColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .alternate,
+                                                  elevation: 0.0,
+                                                ).animateOnPageLoad(animationsMap[
+                                                    'audioPlayerOnPageLoadAnimation']!),
+                                                Container(
+                                                  width: double.infinity,
+                                                  height: 25.0,
+                                                  decoration: BoxDecoration(
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
                                                         .secondaryBackground,
-                                              ),
+                                                  ),
+                                                ),
+                                              ],
                                             ),
-                                          ],
+                                          ),
+                                        InkWell(
+                                          splashColor: Colors.transparent,
+                                          focusColor: Colors.transparent,
+                                          hoverColor: Colors.transparent,
+                                          highlightColor: Colors.transparent,
+                                          onTap: () async {
+                                            _model.soundPlayer1 ??=
+                                                AudioPlayer();
+                                            if (_model.soundPlayer1!.playing) {
+                                              await _model.soundPlayer1!.stop();
+                                            }
+                                            _model.soundPlayer1!.setVolume(1.0);
+                                            _model.soundPlayer1!
+                                                .setUrl(_model.mp3!)
+                                                .then((_) => _model
+                                                    .soundPlayer1!
+                                                    .play());
+                                          },
+                                          child: Container(
+                                            width: 80.0,
+                                            height: 80.0,
+                                            decoration: BoxDecoration(
+                                              color: Color(0xFFA3C8D8),
+                                              shape: BoxShape.circle,
+                                            ),
+                                            child: Icon(
+                                              FFIcons.kzondiconsPlayOutline,
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .white,
+                                              size: 45.0,
+                                            ),
+                                          ),
+                                        ).animateOnPageLoad(animationsMap[
+                                            'containerOnPageLoadAnimation']!),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                Padding(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 16.0, 0.0, 0.0),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        'Угаданных подряд нот:',
+                                        style: FlutterFlowTheme.of(context)
+                                            .labelSmall,
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
+                                            6.0, 0.0, 0.0, 0.0),
+                                        child: Text(
+                                          valueOrDefault<String>(
+                                            _model.gameNumber?.toString(),
+                                            '0',
+                                          ),
+                                          style: FlutterFlowTheme.of(context)
+                                              .labelSmall,
                                         ),
                                       ),
-                                    InkWell(
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    if (_model.startGame ?? true)
+                      Padding(
+                        padding: EdgeInsetsDirectional.fromSTEB(
+                            24.0, 16.0, 24.0, 0.0),
+                        child: InkWell(
+                          splashColor: Colors.transparent,
+                          focusColor: Colors.transparent,
+                          hoverColor: Colors.transparent,
+                          highlightColor: Colors.transparent,
+                          onTap: () async {
+                            setState(() {
+                              _model.startGame = false;
+                              _model.noteNumber =
+                                  random_data.randomInteger(1, 2);
+                            });
+                            if (_model.noteNumber == 1) {
+                              setState(() {
+                                _model.mp3 =
+                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/2nftemyqo81r/zvuk-notyi-do.mp3';
+                              });
+                            } else if (_model.noteNumber == 2) {
+                              setState(() {
+                                _model.mp3 =
+                                    'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/rnfeudx1z5kp/zvuk-notyi-re.mp3';
+                              });
+                            }
+                          },
+                          child: wrapWithModel(
+                            model: _model.buttonModel1,
+                            updateCallback: () => setState(() {}),
+                            child: ButtonWidget(
+                              text: 'Начать',
+                              btnColor:
+                                  FlutterFlowTheme.of(context).greenActive,
+                            ),
+                          ),
+                        ),
+                      ),
+                    Spacer(),
+                    Padding(
+                      padding:
+                          EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 1.0,
+                            height: 335.0,
+                            decoration: BoxDecoration(
+                              color: FlutterFlowTheme.of(context).lineColor,
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              width: double.infinity,
+                              height: 350.0,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        child: Container(
+                                          height: 220.0,
+                                          decoration: BoxDecoration(
+                                            color: _model.key == 1
+                                                ? Color(0xFFA9A9A9)
+                                                : Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 20.0,
+                                        height: 220.0,
+                                        decoration: BoxDecoration(
+                                          color: Colors.black,
+                                          border: Border.all(
+                                            color: Colors.black,
+                                            width: 1.0,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Expanded(
+                                    child: InkWell(
                                       splashColor: Colors.transparent,
                                       focusColor: Colors.transparent,
                                       hoverColor: Colors.transparent,
                                       highlightColor: Colors.transparent,
                                       onTap: () async {
-                                        _model.soundPlayer1 ??= AudioPlayer();
-                                        if (_model.soundPlayer1!.playing) {
-                                          await _model.soundPlayer1!.stop();
+                                        setState(() {
+                                          _model.key = 1;
+                                        });
+                                        await Future.delayed(
+                                            const Duration(milliseconds: 100));
+                                        _model.soundPlayer2 ??= AudioPlayer();
+                                        if (_model.soundPlayer2!.playing) {
+                                          await _model.soundPlayer2!.stop();
                                         }
-                                        _model.soundPlayer1!.setVolume(1.0);
-                                        _model.soundPlayer1!
-                                            .setUrl(_model.mp3!)
+                                        _model.soundPlayer2!.setVolume(1.0);
+                                        _model.soundPlayer2!
+                                            .setUrl(
+                                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/2nftemyqo81r/zvuk-notyi-do.mp3')
                                             .then((_) =>
-                                                _model.soundPlayer1!.play());
+                                                _model.soundPlayer2!.play());
+
+                                        if (_model.startGame!) {
+                                          setState(() {
+                                            _model.key = 0;
+                                          });
+                                        } else {
+                                          if (_model.key == _model.noteNumber) {
+                                            setState(() {
+                                              _model.key = 0;
+                                            });
+                                            await showDialog(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  title: Text('Правильно!'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext),
+                                                      child: Text('Дальше'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                            setState(() {
+                                              _model.noteNumber = random_data
+                                                  .randomInteger(1, 2);
+                                              _model.gameNumber =
+                                                  _model.gameNumber! + 1;
+                                            });
+                                          } else {
+                                            setState(() {
+                                              _model.key = 0;
+                                            });
+                                            await showDialog(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  title: Text('Не правильно'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext),
+                                                      child: Text('Ok'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                            setState(() {
+                                              _model.startGame = false;
+                                              _model.gameNumber = 0;
+                                            });
+                                          }
+
+                                          setState(() {
+                                            _model.key = 0;
+                                          });
+                                        }
                                       },
                                       child: Container(
-                                        width: 80.0,
-                                        height: 80.0,
+                                        width: double.infinity,
+                                        height: double.infinity,
                                         decoration: BoxDecoration(
-                                          color: Color(0xFFA3C8D8),
-                                          shape: BoxShape.circle,
+                                          color: _model.key == 1
+                                              ? Color(0xFFA9A9A9)
+                                              : Colors.white,
                                         ),
-                                        child: Icon(
-                                          FFIcons.kzondiconsPlayOutline,
-                                          color: FlutterFlowTheme.of(context)
-                                              .white,
-                                          size: 45.0,
-                                        ),
-                                      ),
-                                    ).animateOnPageLoad(animationsMap[
-                                        'containerOnPageLoadAnimation']!),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 16.0, 0.0, 0.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Угаданных подряд нот:',
-                                    style:
-                                        FlutterFlowTheme.of(context).labelSmall,
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
-                                        6.0, 0.0, 0.0, 0.0),
-                                    child: Text(
-                                      valueOrDefault<String>(
-                                        _model.gameNumber?.toString(),
-                                        '0',
-                                      ),
-                                      style: FlutterFlowTheme.of(context)
-                                          .labelSmall,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                if (_model.startGame ?? true)
-                  Padding(
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 24.0, 0.0),
-                    child: InkWell(
-                      splashColor: Colors.transparent,
-                      focusColor: Colors.transparent,
-                      hoverColor: Colors.transparent,
-                      highlightColor: Colors.transparent,
-                      onTap: () async {
-                        setState(() {
-                          _model.startGame = false;
-                          _model.noteNumber = random_data.randomInteger(1, 2);
-                        });
-                        if (_model.noteNumber == 1) {
-                          setState(() {
-                            _model.mp3 =
-                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/2nftemyqo81r/zvuk-notyi-do.mp3';
-                          });
-                        } else if (_model.noteNumber == 2) {
-                          setState(() {
-                            _model.mp3 =
-                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/rnfeudx1z5kp/zvuk-notyi-re.mp3';
-                          });
-                        }
-                      },
-                      child: wrapWithModel(
-                        model: _model.buttonModel,
-                        updateCallback: () => setState(() {}),
-                        child: ButtonWidget(
-                          text: 'Начать',
-                          btnColor: FlutterFlowTheme.of(context).greenActive,
-                        ),
-                      ),
-                    ),
-                  ),
-                Spacer(),
-                Padding(
-                  padding:
-                      EdgeInsetsDirectional.fromSTEB(16.0, 16.0, 16.0, 0.0),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: 1.0,
-                        height: 335.0,
-                        decoration: BoxDecoration(
-                          color: FlutterFlowTheme.of(context).lineColor,
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          width: double.infinity,
-                          height: 350.0,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                          ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.end,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      height: 220.0,
-                                      decoration: BoxDecoration(
-                                        color: _model.key == 1
-                                            ? Color(0xFFA9A9A9)
-                                            : Colors.white,
                                       ),
                                     ),
                                   ),
                                   Container(
-                                    width: 20.0,
-                                    height: 220.0,
+                                    width: double.infinity,
+                                    height: _model.key == 1 ? 5.0 : 15.0,
                                     decoration: BoxDecoration(
-                                      color: Colors.black,
+                                      color: FlutterFlowTheme.of(context)
+                                          .lineColor,
+                                      borderRadius: BorderRadius.circular(0.0),
                                       border: Border.all(
-                                        color: Colors.black,
+                                        color: FlutterFlowTheme.of(context)
+                                            .lineColor,
                                         width: 1.0,
                                       ),
                                     ),
                                   ),
                                 ],
                               ),
-                              Expanded(
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    setState(() {
-                                      _model.key = 1;
-                                    });
-                                    await Future.delayed(
-                                        const Duration(milliseconds: 100));
-                                    _model.soundPlayer2 ??= AudioPlayer();
-                                    if (_model.soundPlayer2!.playing) {
-                                      await _model.soundPlayer2!.stop();
-                                    }
-                                    _model.soundPlayer2!.setVolume(1.0);
-                                    _model.soundPlayer2!
-                                        .setUrl(
-                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/2nftemyqo81r/zvuk-notyi-do.mp3')
-                                        .then(
-                                            (_) => _model.soundPlayer2!.play());
-
-                                    if (_model.startGame!) {
-                                      setState(() {
-                                        _model.key = 0;
-                                      });
-                                    } else {
-                                      if (_model.key == _model.noteNumber) {
-                                        setState(() {
-                                          _model.key = 0;
-                                        });
-                                        await showDialog(
-                                          context: context,
-                                          builder: (alertDialogContext) {
-                                            return AlertDialog(
-                                              title: Text('Правильно!'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext),
-                                                  child: Text('Дальше'),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                        setState(() {
-                                          _model.noteNumber =
-                                              random_data.randomInteger(1, 2);
-                                          _model.gameNumber =
-                                              _model.gameNumber! + 1;
-                                        });
-                                      } else {
-                                        setState(() {
-                                          _model.key = 0;
-                                        });
-                                        await showDialog(
-                                          context: context,
-                                          builder: (alertDialogContext) {
-                                            return AlertDialog(
-                                              title: Text('Не правильно'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext),
-                                                  child: Text('Ok'),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                        setState(() {
-                                          _model.startGame = false;
-                                          _model.gameNumber = 0;
-                                        });
-                                      }
-
-                                      setState(() {
-                                        _model.key = 0;
-                                      });
-                                    }
-                                  },
-                                  child: Container(
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                    decoration: BoxDecoration(
-                                      color: _model.key == 1
-                                          ? Color(0xFFA9A9A9)
-                                          : Colors.white,
-                                    ),
-                                  ),
-                                ),
-                              ),
+                            ),
+                          ),
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
                               Container(
-                                width: double.infinity,
-                                height: _model.key == 1 ? 5.0 : 15.0,
+                                width: 1.0,
+                                height: 220.0,
                                 decoration: BoxDecoration(
-                                  color: FlutterFlowTheme.of(context).lineColor,
-                                  borderRadius: BorderRadius.circular(0.0),
+                                  color: Colors.black,
                                   border: Border.all(
-                                    color:
-                                        FlutterFlowTheme.of(context).lineColor,
+                                    color: Colors.black,
                                     width: 1.0,
                                   ),
                                 ),
                               ),
+                              Container(
+                                width: 1.0,
+                                height: 115.0,
+                                decoration: BoxDecoration(
+                                  color: FlutterFlowTheme.of(context).lineColor,
+                                ),
+                              ),
                             ],
                           ),
-                        ),
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Container(
-                            width: 1.0,
-                            height: 220.0,
-                            decoration: BoxDecoration(
-                              color: Colors.black,
-                              border: Border.all(
-                                color: Colors.black,
-                                width: 1.0,
+                          Expanded(
+                            child: Container(
+                              width: double.infinity,
+                              height: 350.0,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                children: [
+                                  Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        width: 20.0,
+                                        height: 220.0,
+                                        decoration: BoxDecoration(
+                                          color: Colors.black,
+                                          border: Border.all(
+                                            color: Colors.black,
+                                            width: 1.0,
+                                          ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Container(
+                                          width: 20.0,
+                                          height: 220.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                          ),
+                                        ),
+                                      ),
+                                      Container(
+                                        width: 20.0,
+                                        height: 220.0,
+                                        decoration: BoxDecoration(
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Expanded(
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        setState(() {
+                                          _model.key = 2;
+                                        });
+                                        _model.soundPlayer3 ??= AudioPlayer();
+                                        if (_model.soundPlayer3!.playing) {
+                                          await _model.soundPlayer3!.stop();
+                                        }
+                                        _model.soundPlayer3!.setVolume(1.0);
+                                        _model.soundPlayer3!
+                                            .setUrl(
+                                                'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/rnfeudx1z5kp/zvuk-notyi-re.mp3')
+                                            .then((_) =>
+                                                _model.soundPlayer3!.play());
+
+                                        await Future.delayed(
+                                            const Duration(milliseconds: 300));
+                                        if (!_model.startGame!) {
+                                          if (_model.key == _model.noteNumber) {
+                                            await showDialog(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  title: Text('Правильно!'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext),
+                                                      child: Text('Дальше'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                            setState(() {
+                                              _model.noteNumber = random_data
+                                                  .randomInteger(1, 2);
+                                              _model.gameNumber =
+                                                  _model.gameNumber! + 1;
+                                            });
+                                          } else {
+                                            await showDialog(
+                                              context: context,
+                                              builder: (alertDialogContext) {
+                                                return AlertDialog(
+                                                  title: Text('Не правильно'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () =>
+                                                          Navigator.pop(
+                                                              alertDialogContext),
+                                                      child: Text('Ok'),
+                                                    ),
+                                                  ],
+                                                );
+                                              },
+                                            );
+                                            setState(() {
+                                              _model.startGame = true;
+                                              _model.gameNumber = 0;
+                                            });
+                                          }
+                                        }
+                                        setState(() {
+                                          _model.key = 0;
+                                        });
+                                      },
+                                      child: Container(
+                                        width: double.infinity,
+                                        height: double.infinity,
+                                        decoration: BoxDecoration(
+                                          color: _model.key == 2
+                                              ? Color(0xFFA9A9A9)
+                                              : Colors.white,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
                           Container(
                             width: 1.0,
-                            height: 115.0,
+                            height: 350.0,
                             decoration: BoxDecoration(
-                              color: FlutterFlowTheme.of(context).lineColor,
+                              color: Colors.black,
                             ),
                           ),
-                        ],
-                      ),
-                      Expanded(
-                        child: Container(
-                          width: double.infinity,
-                          height: 350.0,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                          Expanded(
+                            child: Container(
+                              height: 350.0,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: 20.0,
+                                    height: 220.0,
+                                    decoration: BoxDecoration(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
-                          child: Column(
-                            mainAxisSize: MainAxisSize.max,
-                            children: [
-                              Row(
-                                mainAxisSize: MainAxisSize.min,
+                          Container(
+                            width: 1.0,
+                            height: 350.0,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              height: 350.0,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: 20.0,
+                                    height: 220.0,
+                                    decoration: BoxDecoration(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: 1.0,
+                            height: 350.0,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              height: 350.0,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -600,20 +821,6 @@ class _PianoWidgetState extends State<PianoWidget>
                                     height: 220.0,
                                     decoration: BoxDecoration(
                                       color: Colors.black,
-                                      border: Border.all(
-                                        color: Colors.black,
-                                        width: 1.0,
-                                      ),
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Container(
-                                      width: 20.0,
-                                      height: 220.0,
-                                      decoration: BoxDecoration(
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryBackground,
-                                      ),
                                     ),
                                   ),
                                   Container(
@@ -625,262 +832,113 @@ class _PianoWidgetState extends State<PianoWidget>
                                   ),
                                 ],
                               ),
-                              Expanded(
-                                child: InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    setState(() {
-                                      _model.key = 2;
-                                    });
-                                    _model.soundPlayer3 ??= AudioPlayer();
-                                    if (_model.soundPlayer3!.playing) {
-                                      await _model.soundPlayer3!.stop();
-                                    }
-                                    _model.soundPlayer3!.setVolume(1.0);
-                                    _model.soundPlayer3!
-                                        .setUrl(
-                                            'https://storage.googleapis.com/flutterflow-io-6f20.appspot.com/projects/shik-mobile-app-feklwx/assets/rnfeudx1z5kp/zvuk-notyi-re.mp3')
-                                        .then(
-                                            (_) => _model.soundPlayer3!.play());
-
-                                    await Future.delayed(
-                                        const Duration(milliseconds: 300));
-                                    if (!_model.startGame!) {
-                                      if (_model.key == _model.noteNumber) {
-                                        await showDialog(
-                                          context: context,
-                                          builder: (alertDialogContext) {
-                                            return AlertDialog(
-                                              title: Text('Правильно!'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext),
-                                                  child: Text('Дальше'),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                        setState(() {
-                                          _model.noteNumber =
-                                              random_data.randomInteger(1, 2);
-                                          _model.gameNumber =
-                                              _model.gameNumber! + 1;
-                                        });
-                                      } else {
-                                        await showDialog(
-                                          context: context,
-                                          builder: (alertDialogContext) {
-                                            return AlertDialog(
-                                              title: Text('Не правильно'),
-                                              actions: [
-                                                TextButton(
-                                                  onPressed: () =>
-                                                      Navigator.pop(
-                                                          alertDialogContext),
-                                                  child: Text('Ok'),
-                                                ),
-                                              ],
-                                            );
-                                          },
-                                        );
-                                        setState(() {
-                                          _model.startGame = true;
-                                          _model.gameNumber = 0;
-                                        });
-                                      }
-                                    }
-                                    setState(() {
-                                      _model.key = 0;
-                                    });
-                                  },
-                                  child: Container(
-                                    width: double.infinity,
-                                    height: double.infinity,
+                            ),
+                          ),
+                          Container(
+                            width: 1.0,
+                            height: 350.0,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                            ),
+                          ),
+                          Expanded(
+                            child: Container(
+                              height: 350.0,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: 20.0,
+                                    height: 220.0,
                                     decoration: BoxDecoration(
-                                      color: _model.key == 2
-                                          ? Color(0xFFA9A9A9)
-                                          : Colors.white,
+                                      color: Colors.black,
                                     ),
                                   ),
-                                ),
+                                  Container(
+                                    width: 20.0,
+                                    height: 220.0,
+                                    decoration: BoxDecoration(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
-                        ),
-                      ),
-                      Container(
-                        width: 1.0,
-                        height: 350.0,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          height: 350.0,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
+                          Container(
+                            width: 1.0,
+                            height: 350.0,
+                            decoration: BoxDecoration(
+                              color: Colors.black,
+                            ),
                           ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 20.0,
-                                height: 220.0,
-                                decoration: BoxDecoration(
-                                  color: Colors.black,
-                                ),
+                          Expanded(
+                            child: Container(
+                              height: 350.0,
+                              decoration: BoxDecoration(
+                                color: FlutterFlowTheme.of(context)
+                                    .secondaryBackground,
                               ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: 1.0,
-                        height: 350.0,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          height: 350.0,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 20.0,
-                                height: 220.0,
-                                decoration: BoxDecoration(
-                                  color: Colors.black,
-                                ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    width: 20.0,
+                                    height: 220.0,
+                                    decoration: BoxDecoration(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                      Container(
-                        width: 1.0,
-                        height: 350.0,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                        ),
+                    ),
+                  ],
+                ),
+              ),
+              Align(
+                alignment: AlignmentDirectional(0.0, 1.0),
+                child: Padding(
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 25.0),
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      if (FFAppState().currentLessonIndex == 5) {
+                        setState(() {
+                          FFAppState().currentLessonIndex =
+                              FFAppState().currentLessonIndex + 1;
+                        });
+                      }
+
+                      context.goNamed('Route');
+                    },
+                    child: wrapWithModel(
+                      model: _model.buttonModel2,
+                      updateCallback: () => setState(() {}),
+                      child: ButtonWidget(
+                        text: 'Завершить маршрут',
+                        btnColor: FlutterFlowTheme.of(context).greenActive,
                       ),
-                      Expanded(
-                        child: Container(
-                          height: 350.0,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 20.0,
-                                height: 220.0,
-                                decoration: BoxDecoration(
-                                  color: Colors.black,
-                                ),
-                              ),
-                              Container(
-                                width: 20.0,
-                                height: 220.0,
-                                decoration: BoxDecoration(
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: 1.0,
-                        height: 350.0,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          height: 350.0,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 20.0,
-                                height: 220.0,
-                                decoration: BoxDecoration(
-                                  color: Colors.black,
-                                ),
-                              ),
-                              Container(
-                                width: 20.0,
-                                height: 220.0,
-                                decoration: BoxDecoration(
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Container(
-                        width: 1.0,
-                        height: 350.0,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          height: 350.0,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.max,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 20.0,
-                                height: 220.0,
-                                decoration: BoxDecoration(
-                                  color: Colors.black,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

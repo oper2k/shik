@@ -1,3 +1,4 @@
+import '/backend/schema/structs/index.dart';
 import '/components/button_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -20,6 +21,8 @@ class Wrong1Model extends FlutterFlowModel {
   void dispose() {
     buttonModel.dispose();
   }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 

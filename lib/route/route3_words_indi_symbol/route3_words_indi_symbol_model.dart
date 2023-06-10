@@ -1,16 +1,33 @@
+import '/components/button_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
+import 'package:signature/signature.dart';
 
 class Route3WordsIndiSymbolModel extends FlutterFlowModel {
+  ///  State fields for stateful widgets in this page.
+
+  final unfocusNode = FocusNode();
+  // State field(s) for Signature widget.
+  SignatureController? signatureController;
+  // Model for button component.
+  late ButtonModel buttonModel;
+
   /// Initialization and disposal methods.
 
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    buttonModel = createModel(context, () => ButtonModel());
+  }
 
-  void dispose() {}
+  void dispose() {
+    unfocusNode.dispose();
+    signatureController?.dispose();
+    buttonModel.dispose();
+  }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 

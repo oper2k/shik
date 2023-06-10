@@ -5,11 +5,13 @@ import '/components/tab_bar_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'route_model.dart';
 export 'route_model.dart';
@@ -26,13 +28,110 @@ class _RouteWidgetState extends State<RouteWidget>
   late RouteModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final _unfocusNode = FocusNode();
 
   final animationsMap = {
-    'imageOnPageLoadAnimation': AnimationInfo(
+    'imageOnPageLoadAnimation1': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        VisibilityEffect(duration: 580.ms),
+        FadeEffect(
+          curve: Curves.easeInOut,
+          delay: 580.ms,
+          duration: 960.ms,
+          begin: 0.0,
+          end: 1.0,
+        ),
+      ],
+    ),
+    'stackOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: Offset(0.0, 0.0),
+          end: Offset(1.0, 1.0),
+        ),
+      ],
+    ),
+    'containerOnPageLoadAnimation1': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: Offset(0.0, 0.0),
+          end: Offset(1.0, 1.0),
+        ),
+      ],
+    ),
+    'iconOnPageLoadAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 900.ms,
+          begin: Offset(0.0, 0.0),
+          end: Offset(1.0, 1.0),
+        ),
+      ],
+    ),
+    'containerOnPageLoadAnimation2': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 1050.ms,
+          begin: Offset(0.0, 0.0),
+          end: Offset(1.0, 1.0),
+        ),
+      ],
+    ),
+    'containerOnPageLoadAnimation3': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 1260.ms,
+          begin: Offset(0.0, 0.0),
+          end: Offset(1.0, 1.0),
+        ),
+      ],
+    ),
+    'containerOnPageLoadAnimation4': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 1250.ms,
+          begin: Offset(0.0, 0.0),
+          end: Offset(1.0, 1.0),
+        ),
+      ],
+    ),
+    'containerOnPageLoadAnimation5': AnimationInfo(
+      trigger: AnimationTrigger.onPageLoad,
+      effects: [
+        ScaleEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 1450.ms,
+          begin: Offset(0.0, 0.0),
+          end: Offset(1.0, 1.0),
+        ),
+      ],
+    ),
+    'imageOnPageLoadAnimation2': AnimationInfo(
       loop: true,
       reverse: true,
       trigger: AnimationTrigger.onPageLoad,
+      applyInitialState: true,
       effects: [
         MoveEffect(
           curve: Curves.easeInOut,
@@ -40,6 +139,19 @@ class _RouteWidgetState extends State<RouteWidget>
           duration: 1200.ms,
           begin: Offset(0.0, 11.000000000000014),
           end: Offset(0.0, 0.0),
+        ),
+      ],
+    ),
+    'imageOnActionTriggerAnimation': AnimationInfo(
+      trigger: AnimationTrigger.onActionTrigger,
+      applyInitialState: true,
+      effects: [
+        RotateEffect(
+          curve: Curves.easeInOut,
+          delay: 0.ms,
+          duration: 600.ms,
+          begin: 0.0,
+          end: 2.0,
         ),
       ],
     ),
@@ -61,7 +173,7 @@ class _RouteWidgetState extends State<RouteWidget>
       }
       context.pushNamed(
         'NotAuthorized',
-        queryParams: {
+        queryParameters: {
           'activeTab': serializeParam(
             3,
             ParamType.int,
@@ -76,13 +188,19 @@ class _RouteWidgetState extends State<RouteWidget>
         },
       );
     });
+
+    setupAnimations(
+      animationsMap.values.where((anim) =>
+          anim.trigger == AnimationTrigger.onActionTrigger ||
+          !anim.applyInitialState),
+      this,
+    );
   }
 
   @override
   void dispose() {
     _model.dispose();
 
-    _unfocusNode.dispose();
     super.dispose();
   }
 
@@ -91,7 +209,7 @@ class _RouteWidgetState extends State<RouteWidget>
     context.watch<FFAppState>();
 
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(_unfocusNode),
+      onTap: () => FocusScope.of(context).requestFocus(_model.unfocusNode),
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
@@ -228,27 +346,52 @@ class _RouteWidgetState extends State<RouteWidget>
                                     ),
                               ),
                               Spacer(),
-                              Icon(
-                                FFIcons.kvector12,
-                                color: FlutterFlowTheme.of(context).white,
-                                size: 20.0,
-                              ),
-                              Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
-                                    8.0, 0.0, 0.0, 0.0),
-                                child: Text(
-                                  valueOrDefault<String>(
-                                    columnUsersRow?.rating?.toString(),
-                                    '0',
-                                  ),
-                                  style: FlutterFlowTheme.of(context)
-                                      .bodyMedium
-                                      .override(
-                                        fontFamily: 'Inter',
-                                        color:
-                                            FlutterFlowTheme.of(context).white,
-                                        fontWeight: FontWeight.normal,
+                              InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  context.pushNamed(
+                                    'Rate',
+                                    extra: <String, dynamic>{
+                                      kTransitionInfoKey: TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType: PageTransitionType.fade,
+                                        duration: Duration(milliseconds: 0),
                                       ),
+                                    },
+                                  );
+                                },
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Icon(
+                                      FFIcons.kvector12,
+                                      color:
+                                          FlutterFlowTheme.of(context).warning,
+                                      size: 20.0,
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                          8.0, 0.0, 0.0, 0.0),
+                                      child: Text(
+                                        valueOrDefault<String>(
+                                          columnUsersRow?.rating?.toString(),
+                                          '0',
+                                        ),
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyMedium
+                                            .override(
+                                              fontFamily: 'Inter',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .white,
+                                              fontWeight: FontWeight.normal,
+                                            ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
@@ -256,208 +399,437 @@ class _RouteWidgetState extends State<RouteWidget>
                         ),
                       ),
                     ),
-                  Align(
-                    alignment: AlignmentDirectional(1.0, -0.95),
-                    child: Padding(
-                      padding:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 32.0, 24.0, 0.0),
-                      child: InkWell(
-                        splashColor: Colors.transparent,
-                        focusColor: Colors.transparent,
-                        hoverColor: Colors.transparent,
-                        highlightColor: Colors.transparent,
-                        onTap: () async {
-                          context.pushNamed('Route1');
-                        },
-                        child: Container(
-                          width: 84.0,
-                          height: 41.0,
-                          decoration: BoxDecoration(
-                            color: FlutterFlowTheme.of(context)
-                                .secondaryBackground,
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          child: Align(
-                            alignment: AlignmentDirectional(0.0, 0.0),
-                            child: Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
-                                  6.0, 6.0, 6.0, 6.0),
-                              child: Text(
-                                'Начать!',
-                                style: FlutterFlowTheme.of(context)
-                                    .bodyMedium
-                                    .override(
-                                      fontFamily: 'Inter',
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
+                  Flexible(
                     child: SingleChildScrollView(
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
-                                58.0, 8.0, 40.0, 34.0),
-                            child: Stack(
-                              alignment: AlignmentDirectional(0.0, 0.0),
-                              children: [
-                                Align(
-                                  alignment: AlignmentDirectional(1.0, 0.0),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(0.0),
-                                    child: Image.asset(
-                                      'assets/images/head.webp',
-                                      width: 131.0,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ).animateOnPageLoad(animationsMap[
-                                      'imageOnPageLoadAnimation']!),
-                                ),
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.asset(
-                                    'assets/images/Group_51300.png',
-                                    width: double.infinity,
-                                    fit: BoxFit.contain,
+                          Align(
+                            alignment: AlignmentDirectional(1.0, -0.95),
+                            child: Padding(
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 32.0, 24.0, 0.0),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  context.pushNamed(
+                                    'Route1',
+                                    queryParameters: {
+                                      'usersRow': serializeParam(
+                                        columnUsersRow,
+                                        ParamType.SupabaseRow,
+                                      ),
+                                    }.withoutNulls,
+                                  );
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: FlutterFlowTheme.of(context)
+                                        .secondaryBackground,
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Align(
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  6.0, 6.0, 6.0, 6.0),
+                                          child: Text(
+                                            'Начать!',
+                                            style: FlutterFlowTheme.of(context)
+                                                .bodyMedium
+                                                .override(
+                                                  fontFamily: 'Inter',
+                                                  fontSize: 18.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
-                                Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: [
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Align(
-                                          alignment:
-                                              AlignmentDirectional(0.0, -1.0),
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 0.0, 16.0, 0.0),
-                                            child: InkWell(
-                                              splashColor: Colors.transparent,
-                                              focusColor: Colors.transparent,
-                                              hoverColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
-                                              onTap: () async {
-                                                context.pushNamed('Piano');
-                                              },
-                                              child: Container(
-                                                width: 94.0,
-                                                height: 154.0,
-                                                decoration: BoxDecoration(),
+                              ),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsetsDirectional.fromSTEB(
+                                26.0, 16.0, 26.0, 100.0),
+                            child: Container(
+                              width: 300.0,
+                              height: 500.0,
+                              child: Stack(
+                                children: [
+                                  Padding(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 35.0, 0.0, 0.0),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: Image.asset(
+                                        'assets/images/bg.png',
+                                        width: double.infinity,
+                                        height: 500.0,
+                                        fit: BoxFit.contain,
+                                      ),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'imageOnPageLoadAnimation1']!),
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(1.0, -1.0),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        context.pushNamed(
+                                          'Route1',
+                                          queryParameters: {
+                                            'usersRow': serializeParam(
+                                              columnUsersRow,
+                                              ParamType.SupabaseRow,
+                                            ),
+                                          }.withoutNulls,
+                                        );
+                                      },
+                                      child: Stack(
+                                        alignment:
+                                            AlignmentDirectional(0.0, 0.0),
+                                        children: [
+                                          Container(
+                                            width: 80.0,
+                                            height: 80.0,
+                                            decoration: BoxDecoration(
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .greenActive,
+                                              shape: BoxShape.circle,
+                                              border: Border.all(
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryBackground,
+                                              ),
+                                            ),
+                                            child: Padding(
+                                              padding: EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 6.0, 0.0),
+                                              child: Icon(
+                                                FFIcons.ksubwayMusic,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .primaryBackground,
+                                                size: 45.0,
                                               ),
                                             ),
                                           ),
-                                        ),
-                                        InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            context.pushNamed('Route1');
-                                          },
-                                          child: Container(
-                                            width: 110.0,
-                                            height: 166.0,
-                                            decoration: BoxDecoration(),
+                                          CircularPercentIndicator(
+                                            percent: functions.progressBar(
+                                                FFAppState()
+                                                    .currentLessonIndex
+                                                    .toDouble(),
+                                                5.0)!,
+                                            radius: 46.0,
+                                            lineWidth: 8.0,
+                                            animation: true,
+                                            progressColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .primary,
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .accent4,
+                                          ),
+                                        ],
+                                      ),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'stackOnPageLoadAnimation']!),
+                                  ),
+                                  Align(
+                                    alignment:
+                                        AlignmentDirectional(-0.2, -0.75),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        if (FFAppState().currentLessonIndex >
+                                            0) {
+                                          context.pushNamed(
+                                            'Route2',
+                                            queryParameters: {
+                                              'usersRow': serializeParam(
+                                                columnUsersRow,
+                                                ParamType.SupabaseRow,
+                                              ),
+                                            }.withoutNulls,
+                                          );
+                                        } else {
+                                          return;
+                                        }
+                                      },
+                                      child: Container(
+                                        width: 80.0,
+                                        height: 80.0,
+                                        decoration: BoxDecoration(
+                                          color:
+                                              FFAppState().currentLessonIndex >
+                                                      0
+                                                  ? FlutterFlowTheme.of(context)
+                                                      .greenActive
+                                                  : Color(0xFFD0D0D0),
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
                                           ),
                                         ),
-                                      ],
-                                    ),
-                                    Align(
-                                      alignment: AlignmentDirectional(0.0, 0.7),
-                                      child: InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
-                                          context.pushNamed('Route2');
-                                        },
-                                        child: Container(
-                                          width: double.infinity,
-                                          height: 83.0,
-                                          decoration: BoxDecoration(),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 6.0, 0.0),
+                                          child: Icon(
+                                            FFIcons.ksubwayMusic,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            size: 45.0,
+                                          ).animateOnPageLoad(animationsMap[
+                                              'iconOnPageLoadAnimation']!),
                                         ),
                                       ),
-                                    ),
-                                    Align(
-                                      alignment: AlignmentDirectional(0.0, 0.2),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 60.0, 0.0, 0.0),
-                                        child: InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            context.pushNamed(
-                                                'Route3WordsIndiSymbol');
-                                          },
-                                          child: Container(
-                                            width: double.infinity,
-                                            height: 85.0,
-                                            decoration: BoxDecoration(),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'containerOnPageLoadAnimation1']!),
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(-0.8, -0.1),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        if (FFAppState().currentLessonIndex >
+                                            1) {
+                                          context.pushNamed(
+                                              'Route3WordsIndiSymbol');
+                                        } else {
+                                          return;
+                                        }
+                                      },
+                                      child: Container(
+                                        width: 80.0,
+                                        height: 80.0,
+                                        decoration: BoxDecoration(
+                                          color:
+                                              FFAppState().currentLessonIndex >
+                                                      1
+                                                  ? FlutterFlowTheme.of(context)
+                                                      .greenActive
+                                                  : Color(0xFFD0D0D0),
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 6.0, 0.0),
+                                          child: Icon(
+                                            FFIcons.ksubwayMusic,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            size: 45.0,
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    Align(
-                                      alignment:
-                                          AlignmentDirectional(0.0, -0.35),
-                                      child: Padding(
-                                        padding: EdgeInsetsDirectional.fromSTEB(
-                                            0.0, 20.0, 0.0, 0.0),
-                                        child: InkWell(
-                                          splashColor: Colors.transparent,
-                                          focusColor: Colors.transparent,
-                                          hoverColor: Colors.transparent,
-                                          highlightColor: Colors.transparent,
-                                          onTap: () async {
-                                            context.pushNamed('Route7Lite');
-                                          },
-                                          child: Container(
-                                            width: double.infinity,
-                                            height: 86.0,
-                                            decoration: BoxDecoration(),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'containerOnPageLoadAnimation2']!),
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(-0.2, 1.2),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        if (FFAppState().currentLessonIndex >
+                                            4) {
+                                          context.pushNamed('Piano');
+                                        } else {
+                                          return;
+                                        }
+                                      },
+                                      child: Container(
+                                        width: 80.0,
+                                        height: 80.0,
+                                        decoration: BoxDecoration(
+                                          color:
+                                              FFAppState().currentLessonIndex >
+                                                      4
+                                                  ? FlutterFlowTheme.of(context)
+                                                      .greenActive
+                                                  : Color(0xFFD0D0D0),
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 6.0, 0.0),
+                                          child: Icon(
+                                            FFIcons.ksubwayMusic,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            size: 45.0,
                                           ),
                                         ),
                                       ),
-                                    ),
-                                    Align(
-                                      alignment:
-                                          AlignmentDirectional(0.0, -0.35),
-                                      child: InkWell(
-                                        splashColor: Colors.transparent,
-                                        focusColor: Colors.transparent,
-                                        hoverColor: Colors.transparent,
-                                        highlightColor: Colors.transparent,
-                                        onTap: () async {
+                                    ).animateOnPageLoad(animationsMap[
+                                        'containerOnPageLoadAnimation3']!),
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(0.0, 0.3),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        if (FFAppState().currentLessonIndex >
+                                            2) {
+                                          context.pushNamed('Route7Lite');
+                                        } else {
+                                          return;
+                                        }
+                                      },
+                                      child: Container(
+                                        width: 80.0,
+                                        height: 80.0,
+                                        decoration: BoxDecoration(
+                                          color:
+                                              FFAppState().currentLessonIndex >
+                                                      2
+                                                  ? FlutterFlowTheme.of(context)
+                                                      .greenActive
+                                                  : Color(0xFFD0D0D0),
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 6.0, 0.0),
+                                          child: Icon(
+                                            FFIcons.ksubwayMusic,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            size: 45.0,
+                                          ),
+                                        ),
+                                      ),
+                                    ).animateOnPageLoad(animationsMap[
+                                        'containerOnPageLoadAnimation4']!),
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(0.9, 0.8),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        if (FFAppState().currentLessonIndex >
+                                            3) {
                                           context.pushNamed('Route5');
-                                        },
-                                        child: Container(
-                                          width: double.infinity,
-                                          height: 86.0,
-                                          decoration: BoxDecoration(),
+                                        } else {
+                                          return;
+                                        }
+                                      },
+                                      child: Container(
+                                        width: 80.0,
+                                        height: 80.0,
+                                        decoration: BoxDecoration(
+                                          color:
+                                              FFAppState().currentLessonIndex >
+                                                      3
+                                                  ? FlutterFlowTheme.of(context)
+                                                      .greenActive
+                                                  : Color(0xFFD0D0D0),
+                                          shape: BoxShape.circle,
+                                          border: Border.all(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsetsDirectional.fromSTEB(
+                                                  0.0, 0.0, 6.0, 0.0),
+                                          child: Icon(
+                                            FFIcons.ksubwayMusic,
+                                            color: FlutterFlowTheme.of(context)
+                                                .primaryBackground,
+                                            size: 45.0,
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                    ).animateOnPageLoad(animationsMap[
+                                        'containerOnPageLoadAnimation5']!),
+                                  ),
+                                  Align(
+                                    alignment: AlignmentDirectional(1.4, -0.3),
+                                    child: InkWell(
+                                      splashColor: Colors.transparent,
+                                      focusColor: Colors.transparent,
+                                      hoverColor: Colors.transparent,
+                                      highlightColor: Colors.transparent,
+                                      onTap: () async {
+                                        if (animationsMap[
+                                                'imageOnActionTriggerAnimation'] !=
+                                            null) {
+                                          await animationsMap[
+                                                  'imageOnActionTriggerAnimation']!
+                                              .controller
+                                              .forward(from: 0.0);
+                                        }
+                                        setState(() {
+                                          FFAppState().currentLessonIndex = 0;
+                                        });
+                                      },
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(0.0),
+                                        child: Image.asset(
+                                          'assets/images/head.webp',
+                                          width: 131.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    )
+                                        .animateOnPageLoad(animationsMap[
+                                            'imageOnPageLoadAnimation2']!)
+                                        .animateOnActionTrigger(
+                                          animationsMap[
+                                              'imageOnActionTriggerAnimation']!,
+                                        ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ],

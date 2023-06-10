@@ -1,14 +1,26 @@
+import '/auth/supabase_auth/auth_util.dart';
+import '/backend/schema/structs/index.dart';
+import '/backend/supabase/supabase.dart';
 import '/components/button_widget.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'right1_model.dart';
 export 'right1_model.dart';
 
 class Right1Widget extends StatefulWidget {
-  const Right1Widget({Key? key}) : super(key: key);
+  const Right1Widget({
+    Key? key,
+    required this.quizTextDataType,
+    required this.usersRow,
+  }) : super(key: key);
+
+  final QuizTextStruct? quizTextDataType;
+  final UsersRow? usersRow;
 
   @override
   _Right1WidgetState createState() => _Right1WidgetState();
@@ -27,6 +39,27 @@ class _Right1WidgetState extends State<Right1Widget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => Right1Model());
+
+    // On component load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      await UsersTable().update(
+        data: {
+          'rating': valueOrDefault<int>(
+            valueOrDefault<int>(
+                  widget.usersRow?.rating,
+                  0,
+                ) +
+                15,
+            0,
+          ),
+        },
+        matchingRows: (rows) => rows.eq(
+          'id',
+          currentUserUid,
+        ),
+      );
+      HapticFeedback.vibrate();
+    });
   }
 
   @override
@@ -65,14 +98,30 @@ class _Right1WidgetState extends State<Right1Widget> {
                 Padding(
                   padding: EdgeInsetsDirectional.fromSTEB(0.0, 8.0, 0.0, 0.0),
                   child: Text(
-                    'Ответ: композитор',
+                    'Ответ: ${() {
+                      if (widget.quizTextDataType?.correctAnswer == 1) {
+                        return widget.quizTextDataType?.answer1;
+                      } else if (widget.quizTextDataType?.correctAnswer == 2) {
+                        return widget.quizTextDataType?.answer2;
+                      } else if (widget.quizTextDataType?.correctAnswer == 3) {
+                        return widget.quizTextDataType?.answer3;
+                      } else if (widget.quizTextDataType?.correctAnswer == 4) {
+                        return widget.quizTextDataType?.answer4;
+                      } else {
+                        return 'не указан';
+                      }
+                    }()}',
                     style: FlutterFlowTheme.of(context).bodyMedium,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 42.0, 0.0, 0.0),
+                  padding:
+                      EdgeInsetsDirectional.fromSTEB(16.0, 42.0, 16.0, 0.0),
                   child: Text(
-                    ' Композитор – автор, создатель музыкальных произведений.',
+                    valueOrDefault<String>(
+                      widget.quizTextDataType?.correctDefinition,
+                      'Правильный ответ',
+                    ),
                     textAlign: TextAlign.center,
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Inter',
@@ -96,7 +145,7 @@ class _Right1WidgetState extends State<Right1Widget> {
                         padding:
                             EdgeInsetsDirectional.fromSTEB(6.0, 0.0, 0.0, 0.0),
                         child: Text(
-                          '+1',
+                          '+15',
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Inter',
@@ -116,7 +165,7 @@ class _Right1WidgetState extends State<Right1Widget> {
                     hoverColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onTap: () async {
-                      Navigator.pop(context);
+                      Navigator.pop(context, true);
                     },
                     child: wrapWithModel(
                       model: _model.buttonModel,

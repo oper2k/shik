@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 class InterestingModel extends FlutterFlowModel {
   ///  State fields for stateful widgets in this page.
 
+  final unfocusNode = FocusNode();
   // Model for backButton component.
   late BackButtonModel backButtonModel;
 
@@ -19,8 +20,11 @@ class InterestingModel extends FlutterFlowModel {
   }
 
   void dispose() {
+    unfocusNode.dispose();
     backButtonModel.dispose();
   }
+
+  /// Action blocks are added here.
 
   /// Additional helper methods are added here.
 
